@@ -270,12 +270,12 @@
   <button class="btn-tone-toggle" onclick="toggleTonePanel()">🎵 ฝึกวรรณยุกต์</button>
 </div>
 <div id="tonePanel" class="tone-panel">
-  <button class="btn-tone" onclick="speakTone(0)">Ngang<br><span>a</span></button>
-  <button class="btn-tone" onclick="speakTone(1)">Huyền<br><span>à</span></button>
-  <button class="btn-tone" onclick="speakTone(2)">Hỏi<br><span>ả</span></button>
-  <button class="btn-tone" onclick="speakTone(3)">Sắc<br><span>á</span></button>
-  <button class="btn-tone" onclick="speakTone(4)">Ngã<br><span>ã</span></button>
-  <button class="btn-tone" onclick="speakTone(5)">Nặng<br><span>ạ</span></button>
+  <button class="btn-tone" onclick="speakTone(0)">Ngang (a)<br><span id="toneVariant0">-</span></button>
+  <button class="btn-tone" onclick="speakTone(1)">Huyền (àX<br><span id="toneVariant1">-</span></button>
+  <button class="btn-tone" onclick="speakTone(2)">Hỏi (à)<br><span id="toneVariant2">-</span></button>
+  <button class="btn-tone" onclick="speakTone(3)">Sắc ()<br><span id="toneVariant3">-</span></button>
+  <button class="btn-tone" onclick="speakTone(4)">Ngã (á)<br><span id="toneVariant4">-</span></button>
+  <button class="btn-tone" onclick="speakTone(5)">Nặng (ạ)<br><span id="toneVariant5">-</span></button>
 </div>
 <div class="btn-row secondary">
   <button class="btn-shuffle" onclick="shuffleCards()">สุ่ม</button>
@@ -696,6 +696,7 @@ function render(){
 
   counter.textContent = `${idx+1} / ${currentCards.length}`;
   progressFill.style.width = `${((idx+1)/currentCards.length)*100}%`;
+  updateTonePanel();
 }
 
 // ตารางสระ+วรรณยุกต์ครบ 6 เสียง: [ngang, huyền, hỏi, sắc, ngã, nặng]
@@ -743,6 +744,17 @@ function applyTone(word, toneIdx){
 
   tokens[0] = chars.join('');
   return tokens.join(' ');
+}
+
+function updateTonePanel(){
+  if(currentCards.length===0) return;
+  const word = currentCards[idx].viet;
+  if(!word) return;
+  for(let i=0; i<6; i++){
+    const variant = applyTone(word, i);
+    const el = document.getElementById('toneVariant'+i);
+    if(el) el.textContent = variant;
+  }
 }
 
 let vietVoice = null;
