@@ -356,6 +356,134 @@ const dictation2 = [
   ["Việt Nam","เหวียด นาม","เวียดนาม"],
 ];
 
+// สระ+ตัวสะกด (สระเดี่ยวกับพยัญชนะท้าย): [รูปสะกด, คำอ่าน, ตัวอย่างคำ]
+const vowelFinal = [
+  ["ac","อ๊าก","bác, các, lác, khác"],
+  ["at","อ๊าด","hát, phát, tát, lát"],
+  ["ach","แอ๊ก","bách, gạch, tách, sách"],
+  ["au","เอา","đau, sau, mau, lau"],
+  ["am","อาม","cam, làm, dám, giam"],
+  ["ao","อาว","bao, lao, cháo, đào"],
+  ["an","อาน","lan, bàn, đàn, ngan"],
+  ["ai","อาย","gai, tài, mai, ai"],
+  ["ang","อาง","sang, nàng, mạng, trang"],
+  ["ay","ไอ","bảy, tay, cay, dày"],
+  ["anh","แอง","nhanh, cành, chanh, xanh"],
+  ["ap","อ๊าบ","náp, đạp, sáp, chạp"],
+  ["ăc","อั๊ก","mắc, lắc, giặc, tắc"],
+  ["ăng","อัง","rằng, trắng, nắng, vắng"],
+  ["ăm","อัม","đăm, hăm, lăm, chăm"],
+  ["ăp","อั๊บ","nắp, sắp, lắp, gặp"],
+  ["ăn","อัน","ăn, chăn, dặn, ngắn"],
+  ["ăt","อั๊ต","giặt, đắt, bắt, cắt"],
+  ["âc","เอิ๊ก","thấc, bậc, chấc, giấc"],
+  ["âng","เอิง","dâng, tầng, nâng, sâng"],
+  ["âm","เอิม","âm, cấm, đâm, thầm"],
+  ["âp","เอิบ","lập, sập, khập, tấp"],
+  ["ân","เอิน","gần, lần, hần, giận"],
+  ["ât","เอิ๊ต","tất, ngất, chật, cật"],
+  ["âu","เอิว","đâu, câu, mẫu, lâu"],
+  ["ec","แอ๊ก","méc, chéc, phéc, séc"],
+  ["eng","แอง","leng, beng, veng"],
+  ["em","แอม","xem, lem, đem, ném"],
+  ["ep","แอ๊บ","ép, đẹp, hẹp, phép"],
+  ["en","แอน","đen, quen, hẹn, bèn"],
+  ["et","แอ๊ด","bét, kẹt, rét, tét"],
+  ["eo","แอว","kèo, leo, đèo, béo"],
+  ["êch","เอ๊ก","ếch, bếch, lệch, trếch"],
+  ["êp","เอ๊บ","xếp, nếp, bếp, sếp"],
+  ["êm","เอ็ม","đêm, thềm, mềm, đệm"],
+  ["êt","เอ๊ด","tết, hết, dệt, vết"],
+  ["ên","เอิน","tên, đến, bên, quên"],
+  ["ênh","เอิ่ง","bệnh, kênh, lệnh, mệnh"],
+  ["êu","เอว","rêu, đều, mêu, sếu"],
+  ["ich","อิ๊ก","đích, xích, tích, kịch"],
+  ["inh","อิง","xinh, bình, sinh, linh"],
+  ["im","อิม","mỉm, tìm, chim, kim"],
+  ["ip","อิ๊บ","síp, típ, khíp, chíp"],
+  ["in","อิน","tin, kin, xịn, pin"],
+  ["it","อิ๊ด","ít, hít, nhịt, kịt"],
+  ["iu","อิว","dịu, hiu, miu, tiu"],
+  ["oc","อ๊อก","mọc, dọc, lọc, sóc"],
+  ["on","ออน","con, lon, mòn, nón"],
+  ["ong","ออง","bong, trong, sòng, ngóng"],
+  ["op","อ๊อบ","bóp, họp, chóp, sóp"],
+  ["om","ออม","bom, lom, gom, xóm"],
+  ["ot","อ๊อด","mót, lót, sót, khọt"],
+  ["oi","ออย","sói, hỏi, giỏi, coi"],
+  ["ôc","อ๊ก","cốc, lốc, sốc, độc"],
+  ["ông","อง","sông, trống, không, bông"],
+  ["ôm","โอม","ôm, sôm, mốm, cốm"],
+  ["ôp","โอ๊บ","hộp, cốp, lốp, chộp"],
+  ["ôn","โอน","hôn, trộn, thôn, dồn"],
+  ["ôt","โอ๊ด","tốt, chốt, rốt, một"],
+  ["ôi","โอย","tôi, trôi, hội, mỗi"],
+  ["ơm","เอิม","thơm, đơm, sớm, bơm"],
+  ["ơp","เอิ๊บ","khớp, lớp, xớp, sớp"],
+  ["ơn","เอิน","hơn, đơn, lớn, hờn"],
+  ["ơt","เอิ๊ด","rớt, chớt, lớt, đợt"],
+  ["ơi","เอย","ơi, trời, mời, chơi"],
+  ["uc","อุ๊ก","lúc, chục, rúc, nhúc"],
+  ["ung","อุง","dùng, cũng, khung, súng"],
+  ["um","อูม","thum, bùm, đùm, khum"],
+  ["up","อุ๊บ","sụp, chụp, lụp, húp"],
+  ["un","อูน","hun, run, đun, vun"],
+  ["ut","อุ๊ด","rút, hút, đút, but"],
+  ["ui","อุย","vui, đùi, lùi, mùi"],
+  ["ưc","อึ๊ก","thức, thực, mực, bực"],
+  ["ưt","อึ๊ด","bút, rứt, mứt"],
+  ["ưm","อึม","lưm, rưm"],
+  ["ưu","อิว","cứu, sửu"],
+  ["ưng","อึง","đứng, mừng, vừng, lưng"],
+  ["ưi","อือย","gửi, chửi, ngửi"],
+];
+
+// สระประสมกับพยัญชนะท้าย: [รูปสะกด, คำอ่าน, ตัวอย่างคำ]
+const compoundVowelFinal = [
+  ["iêc","เอี๊ยก","tiếc, thiếc, chiếc, miếc"],
+  ["iêng","เอียง","tiếng, riêng, miếng, siêng"],
+  ["iêm","เอี๋ยม","kiếm, diểm, chiêm, biếm"],
+  ["iêp","เอี๊ยบ","điệp, nghiệp, thiệp, kiếp"],
+  ["iên","เอียน","tiến, phiến, miến, thiện"],
+  ["iêt","เอี๊ยด","diệt, thiết, triết, liệt"],
+  ["ươc","เอือ๊ก","thước, nước, được, rước"],
+  ["ương","เอือง","sương, tưởng, trưởng, hướng"],
+  ["ươm","เอือม","sườm, nườm, gườm, hườm"],
+  ["ươp","เอือ๊บ","ướp, cướp, sướp, nướp"],
+  ["ươn","เอือน","mượn, cườn, vườn, hươn"],
+  ["ươt","เอือ๊ด","ướt, mướt, suốt, lượt"],
+  ["uôc","อวก","thuốc, suốc, ruốc, luộc"],
+  ["uông","อวง","suông, chuông, xuống, ruộng"],
+  ["uôm","อวม","luôm, chuôm, buồm"],
+  ["uôt","อวด","tuốt, ruột, luốt, nhuốt"],
+  ["uôn","อวน","muốn, luôn, suôn, chuôn"],
+];
+
+// เสียงเลื่อนกับสระเดี่ยว: [รูปสะกด, คำอ่าน, ตัวอย่างคำ]
+const glideVowels = [
+  ["oa","อวา","loa, hoa, toả, xoà"],
+  ["oă","อวะ","khoắc, hoặc, loắc"],
+  ["oe","แอว","hoe, toe, xoè, khoe"],
+  ["oi","ออย","soi, nói, gọi, đòi"],
+  ["ua","อัว","mua, của, đũa, thua"],
+  ["uê","อูเว","huế, quê, tuế, khuê"],
+  ["ui","อุย","vui, chui, xui, núi"],
+  ["uy","อูวี","quý, tùy, duy, khuy"],
+];
+
+// เสียงสระประสม 3 ตัว: [รูปสะกด, คำอ่าน, ตัวอย่างคำ]
+const triphthongs = [
+  ["iêu/yêu","เอียว","yêu, siêu, tiểu, diều"],
+  ["oai","อวาย","khoai, thoai, ngoải, xoài"],
+  ["oay","อเวย","loay, xoay, hoay"],
+  ["uôi","อวย","đuôi, chuối, suối, cuối"],
+  ["uây","อูเหวย","quẩy, khuẩy"],
+  ["uya","อูเวีย","khuya"],
+  ["uyê","อูเวีย","khuyên, tuyên, duyên, luyện"],
+  ["ươi","เอือย","cưới, tươi, lười, người"],
+  ["ươu","เอือว","hươu, rượu, trươu"],
+];
+  
 // รวมข้อมูลทั้งหมดเป็น flashcard: {cat, front, back}
 let allCards = [];
 
@@ -393,8 +521,28 @@ dictation2.forEach(([viet,pron,meaning])=>{
   allCards.push({cat:"Chính tả 2", front:pron, back, viet});
 });
 
+vowelFinal.forEach(([spell,thai,example])=>{
+  const back = `คำอ่าน: <b>${thai}</b><br>ตัวอย่าง: ${example}`;
+  allCards.push({cat:"สระ+ตัวสะกด", front:spell, back, viet:spell});
+});
+
+compoundVowelFinal.forEach(([spell,thai,example])=>{
+  const back = `คำอ่าน: <b>${thai}</b><br>ตัวอย่าง: ${example}`;
+  allCards.push({cat:"สระประสม+ตัวสะกด", front:spell, back, viet:spell});
+});
+
+glideVowels.forEach(([spell,thai,example])=>{
+  const back = `คำอ่าน: <b>${thai}</b><br>ตัวอย่าง: ${example}`;
+  allCards.push({cat:"เสียงเลื่อน", front:spell, back, viet:spell});
+});
+
+triphthongs.forEach(([spell,thai,example])=>{
+  const back = `คำอ่าน: <b>${thai}</b><br>ตัวอย่าง: ${example}`;
+  allCards.push({cat:"สระประสม 3 ตัว", front:spell, back, viet:spell});
+});
+
 // Logic
-const categories = ["ทั้งหมด","พยัญชนะเดี่ยว","พยัญชนะประสม","สระเดี่ยว","สระประสม","วรรณยุกต์","Chính tả 2"];
+const categories = ["ทั้งหมด","พยัญชนะเดี่ยว","พยัญชนะประสม","สระเดี่ยว","สระประสม","วรรณยุกต์","สระ+ตัวสะกด","สระประสม+ตัวสะกด","เสียงเลื่อน","สระประสม 3 ตัว","Chính tả 2"];
 // const categories = ["Chính tả 2"];
 let currentCards = [...allCards];
 let idx = 0;
