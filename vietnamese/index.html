@@ -281,6 +281,7 @@
   <button class="btn-shuffle" onclick="shuffleCards()">สุ่ม</button>
   <button class="btn-reset" onclick="resetOrder()">เรียงใหม่</button>
 </div>
+<audio id="ttsAudio" style="display:none;"></audio>
 
 <script>
 
@@ -772,37 +773,40 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = loadVietVoice;
 }
 
+function playVietnamese(text){
+  const audio = document.getElementById('ttsAudio');
+  const url = 'https://translate.google.com/translate_tts?ie=UTF-8&q='
+            + encodeURIComponent(text)
+            + '&tl=vi&client=tw-ob';
+  audio.src = url;
+  audio.play().catch(()=>{
+    // สำรอง: ถ้า Google TTS ใช้ไม่ได้ ให้กลับไปใช้เสียงเครื่อง
+    fallbackSpeak(text);
+  });
+}
+
+function fallbackSpeak(text){
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'vi-VN';
+  utter.rate = 0.85;
+  if (vietVoice) utter.voice = vietVoice;
+  speechSynthesis.speak(utter);
+}
+
 function speakWord(){
   if(currentCards.length===0) return;
   const word = currentCards[idx].viet;
   if(!word) return;
-
-  speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(word);
-  utter.lang = 'vi-VN';
-  utter.rate = 0.85;
-
-  if (vietVoice) {
-    utter.voice = vietVoice;
-  } else {
-    alert('เครื่องนี้ไม่มีเสียงภาษาเวียดนามติดตั้งไว้ อาจอ่านออกเสียงไม่ถูกต้อง');
-  }
-
-  speechSynthesis.speak(utter);
+  playVietnamese(word);
 }
 
 function speakTone(toneIdx){
   if(currentCards.length===0) return;
   const word = currentCards[idx].viet;
   if(!word) return;
-
   const variant = applyTone(word, toneIdx);
-  speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(variant);
-  utter.lang = 'vi-VN';
-  utter.rate = 0.85;
-  if (vietVoice) utter.voice = vietVoice;
-  speechSynthesis.speak(utter);
+  playVietnamese(variant);
 }
 
 function toggleTonePanel(){
