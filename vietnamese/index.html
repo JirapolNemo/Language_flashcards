@@ -580,9 +580,14 @@ triphthongs.forEach(([spell,thai,example])=>{
   allCards.push({cat:"สระประสม 3 ตัว", front:spell, back, viet:spell});
 });
 
+// dictation3.forEach(([viet,pron,breakdown,meaning])=>{
+//   const back = `คำเวียดนาม: <b>${viet}</b><br>แยกคำ: ${breakdown}<br>คำแปล: ${meaning}`;
+//   allCards.push({cat:"Chính tả 3", front:pron, back, viet});
+// });
+// [คำเวียดนาม, คำอ่านสำเนียงเหนือ, แปลทีละคำ, คำแปล]
 dictation3.forEach(([viet,pron,breakdown,meaning])=>{
-  const back = `คำเวียดนาม: <b>${viet}</b><br>แยกคำ: ${breakdown}<br>คำแปล: ${meaning}`;
-  allCards.push({cat:"Chính tả 3", front:pron, back, viet});
+  const back = `คำเวียดนาม: <b>${viet}</b><br>คำอ่าน: ${pron}<br>แยกคำ: ${breakdown}`;
+  allCards.push({cat:"Chính tả 3", front:meaning, back, viet});
 });
   
 // Logic
