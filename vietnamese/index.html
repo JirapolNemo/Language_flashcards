@@ -797,10 +797,18 @@ function playVietnamese(text){
   const url = 'https://translate.google.com/translate_tts?ie=UTF-8&q='
             + encodeURIComponent(text)
             + '&tl=vi&client=gtx';
+  
+  audio.onerror = null;
+
+  audio.onerror = function(){
+    console.log('Audio failed to load/play, falling back');
+    fallbackSpeak(text);
+  };
+
   audio.src = url;
   audio.load();
   audio.play().catch((err)=>{
-    console.log('Google TTS failed:', err);
+    console.log('Google TTS play() rejected:', err);
     fallbackSpeak(text);
   });
 }
