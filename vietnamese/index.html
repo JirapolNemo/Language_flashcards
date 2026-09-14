@@ -284,7 +284,7 @@
 <audio id="ttsAudio" style="display:none;" referrerpolicy="no-referrer"></audio>
 
 <script>
-
+const GOOGLE_TTS_API_KEY = 'AIzaSyDSXz_gA2A5b3ZK9dgusI02OelIdyAvrxA';
 // พยัญชนะเดี่ยว: [ตัวอักษร, เสียงอ่าน, เสียงเทียบไทย, พยัญชนะท้าย หรือ null]
 const consonants = [
   ["b","เบ่อ","บ",null],
@@ -792,25 +792,36 @@ if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = loadVietVoice;
 }
 
-function playVietnamese(text){
+async function playVietnamese(text){
   const audio = document.getElementById('ttsAudio');
-  const url = 'https://translate.google.com/translate_tts?ie=UTF-8&q='
-            + encodeURIComponent(text)
-            + '&tl=vi&client=gtx';
-  
-  audio.onerror = null;
-
-  audio.onerror = function(){
-    console.log('Audio failed to load/play, falling back');
+  try{
+    const response = await fetch(
+      `https://texttospeech.googleapis.com/v1/text:synthesize?key=${GOOGLE_TTS_API_KEY}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          input: { text: text },
+          voice: { languageCode: 'vi-VN', name: 'vi-VN-Wavenet-A' },
+          audioConfig: { audioEncoding: 'MP3', speakingRate: 0.9 }
+        })
+      }
+    );
+    const data = await response.json();
+    if(!data.audioContent){
+      console.log('Google Cloud TTS error:', data);
+      fallbackSpeak(text);
+      return;
+    }
+    audio.src = 'data:audio/mp3;base64,' + data.audioContent;
+    audio.play().catch((err)=>{
+      console.log('Play rejected:', err);
+      fallbackSpeak(text);
+    });
+  } catch(err){
+    console.log('Google Cloud TTS request failed:', err);
     fallbackSpeak(text);
-  };
-
-  audio.src = url;
-  audio.load();
-  audio.play().catch((err)=>{
-    console.log('Google TTS play() rejected:', err);
-    fallbackSpeak(text);
-  });
+  }
 }
 
 function fallbackSpeak(text){
