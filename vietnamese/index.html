@@ -99,6 +99,8 @@
     font-size:13px; line-height:1.4; padding:10px 6px;
   }
   .btn-tone span{ font-size:20px; font-weight:800; color:var(--lacquer); }
+  .btn-dictation{ grid-column:1 / -1; background:var(--card-bg); border:1.5px solid var(--lacquer); color:var(--lacquer); }
+  .btn-dictation.active{ background:var(--lacquer); color:#fff; border-color:var(--lacquer); }
   .btn-shuffle{ background:var(--jade); color:#fff; }
   .btn-reset{ background:var(--card-bg); border:1.5px solid var(--line); color:#9b9384; }
   @media (max-width:380px){ .front-text{ font-size:15vw !important; } }
@@ -146,6 +148,9 @@
 </div>
 <div class="btn-row">
   <button class="btn-tone-toggle" onclick="toggleTonePanel()">ฝึกวรรณยุกต์</button>
+</div>
+<div class="btn-row">
+  <button id="dictationBtn" class="btn-dictation" onclick="toggleDictationMode()">โหมด Chính tả</button>
 </div>
 <div id="tonePanel" class="tone-panel">
   <button class="btn-tone" onclick="speakTone(0)">Ngang<br><span id="toneVariant0">-</span></button>
@@ -604,6 +609,14 @@ let currentCards = [...allCards];
 let idx = 0;
 let flipped = false;
 let currentChapter = "ทั้งหมด";
+let dictationMode = false;
+
+function toggleDictationMode(){
+  dictationMode = !dictationMode;
+  const btn = document.getElementById('dictationBtn');
+  btn.classList.toggle('active', dictationMode);
+  render();
+}
 
 const filterSelect = document.getElementById('filterSelect');
 categories.forEach(c=>{
@@ -684,9 +697,14 @@ function render(){
   } else {
     frontText.style.display = "block";
     backContent.style.display = "none";
-    frontText.textContent = c.front;
-    frontText.style.fontSize = frontFontSize(c.front) + "px";
-    flipHint.textContent = "แตะเพื่อดูคำตอบ";
+    if(dictationMode){
+      frontText.textContent = "Chính tả";
+      frontText.style.fontSize = "40px";
+    } else {
+      frontText.textContent = c.front;
+      frontText.style.fontSize = frontFontSize(c.front) + "px";
+    }
+    flipHint.textContent = dictationMode ? "กดฟังเสียงแล้วเขียนตามที่ได้ยิน (แตะเพื่อดูเฉลย)" : "แตะเพื่อดูคำตอบ";
   }
 
   counter.textContent = `${idx+1} / ${currentCards.length}`;
