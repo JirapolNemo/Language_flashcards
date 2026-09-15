@@ -30,203 +30,78 @@
     align-items:center;
     padding:20px 14px 32px;
   }
-  header{
-    width:100%;
-    max-width:520px;
-    text-align:center;
-    margin-bottom:14px;
-  }
-  header .kicker{
-    font-size:12px;
-    letter-spacing:0.08em;
-    color:var(--jade);
-    font-weight:600;
-  }
-  header h1{
-    font-size:22px;
-    margin:4px 0 0;
-    font-weight:700;
-    color:var(--lacquer-dark);
-  }
-  .controls-top{
-    width:100%;
-    max-width:520px;
-    display:flex;
-    gap:8px;
-    margin-bottom:16px;
-  }
+  header{ width:100%; max-width:520px; text-align:center; margin-bottom:14px; }
+  header .kicker{ font-size:12px; letter-spacing:0.08em; color:var(--jade); font-weight:600; }
+  header h1{ font-size:22px; margin:4px 0 0; font-weight:700; color:var(--lacquer-dark); }
+  .controls-top{ width:100%; max-width:520px; display:flex; gap:8px; margin-bottom:12px; }
   select{
-    flex:1;
-    padding:11px 12px;
-    border-radius:10px;
-    border:1.5px solid var(--line);
-    background:var(--card-bg);
-    font-size:15px;
-    color:var(--ink);
+    flex:1; padding:11px 12px; border-radius:10px; border:1.5px solid var(--line);
+    background:var(--card-bg); font-size:15px; color:var(--ink); font-family:inherit;
+  }
+  .chapter-filter{
+    display:none; flex-wrap:wrap; gap:6px;
+    width:100%; max-width:520px; margin-bottom:14px;
+  }
+  .chip{
+    padding:7px 14px; border-radius:999px; border:1.5px solid var(--line);
+    background:var(--card-bg); font-size:13px; color:var(--ink); cursor:pointer;
     font-family:inherit;
   }
+  .chip.active{ background:var(--lacquer); color:#fff; border-color:var(--lacquer); }
   .progress{
-    width:100%;
-    max-width:520px;
-    height:4px;
-    background:var(--line);
-    border-radius:4px;
-    overflow:hidden;
-    margin-bottom:18px;
+    width:100%; max-width:520px; height:4px; background:var(--line);
+    border-radius:4px; overflow:hidden; margin-bottom:18px;
   }
-  .progress-fill{
-    height:100%;
-    background:linear-gradient(90deg,var(--jade),var(--gold));
-    transition:width .25s ease;
-  }
-  .card-wrap{
-    width:100%;
-    max-width:520px;
-    perspective:1200px;
-    margin-bottom:8px;
-  }
+  .progress-fill{ height:100%; background:linear-gradient(90deg,var(--jade),var(--gold)); transition:width .25s ease; }
+  .card-wrap{ width:100%; max-width:520px; perspective:1200px; margin-bottom:8px; }
   .card{
-    position:relative;
-    width:100%;
-    min-height:280px;
-    border-radius:20px;
-    background:var(--card-bg);
-    border:1.5px solid var(--line);
+    position:relative; width:100%; min-height:280px; border-radius:20px;
+    background:var(--card-bg); border:1.5px solid var(--line);
     box-shadow:0 6px 24px rgba(107,22,32,0.08);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:32px 24px;
-    text-align:center;
-    cursor:pointer;
-    user-select:none;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:32px 24px; text-align:center; cursor:pointer; user-select:none;
     transition:transform .12s ease;
   }
   .card:active{ transform:scale(0.985); }
   .card::before{
-    content:"";
-    position:absolute;
-    top:14px; left:14px; right:14px; bottom:14px;
-    border:1px solid var(--gold);
-    border-radius:14px;
-    opacity:0.35;
-    pointer-events:none;
+    content:""; position:absolute; top:14px; left:14px; right:14px; bottom:14px;
+    border:1px solid var(--gold); border-radius:14px; opacity:0.35; pointer-events:none;
   }
-  .cat-label{
-    font-size:12.5px;
-    color:var(--lacquer);
-    font-weight:700;
-    letter-spacing:0.03em;
-    margin-bottom:14px;
-  }
-  .front-text{
-    font-weight:800;
-    color:var(--ink);
-    line-height:1;
-    word-break:break-word;
-  }
-  .back-content{
-    display:none;
-    width:100%;
-  }
-  .back-content .front-echo{
-    font-size:15px;
-    color:#8a8578;
-    margin-bottom:10px;
-  }
-  .back-line{
-    font-size:19px;
-    line-height:1.7;
-    color:var(--ink);
-  }
+  .cat-label{ font-size:12.5px; color:var(--lacquer); font-weight:700; letter-spacing:0.03em; margin-bottom:14px; }
+  .chapter-label{ font-size:11px; color:var(--jade); font-weight:600; margin-bottom:6px; }
+  .front-text{ font-weight:800; color:var(--ink); line-height:1; word-break:break-word; }
+  .back-content{ display:none; width:100%; }
+  .back-content .front-echo{ font-size:15px; color:#8a8578; margin-bottom:10px; }
+  .back-line{ font-size:19px; line-height:1.7; color:var(--ink); }
   .back-line b{ color:var(--lacquer-dark); }
-  .flip-hint{
-    margin-top:16px;
-    font-size:12px;
-    color:#a39c8a;
-  }
-  .counter{
-    text-align:center;
-    font-size:13px;
-    color:#9b9384;
-    margin:10px 0 20px;
-  }
+  .flip-hint{ margin-top:16px; font-size:12px; color:#a39c8a; }
+  .counter{ text-align:center; font-size:13px; color:#9b9384; margin:10px 0 20px; }
   .btn-row{
-    width:100%;
-    max-width:520px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-bottom:10px;
+    width:100%; max-width:520px; display:grid; grid-template-columns:1fr 1fr;
+    gap:10px; margin-bottom:10px;
   }
-  .btn-row.secondary{
-    grid-template-columns:1fr 1fr;
-  }
+  .btn-row.secondary{ grid-template-columns:1fr 1fr; }
   button{
-    font-family:inherit;
-    font-size:15px;
-    font-weight:600;
-    padding:14px 10px;
-    border-radius:12px;
-    border:none;
-    cursor:pointer;
-    transition:opacity .15s;
+    font-family:inherit; font-size:15px; font-weight:600; padding:14px 10px;
+    border-radius:12px; border:none; cursor:pointer; transition:opacity .15s;
   }
   button:active{ opacity:0.7; }
-  .btn-nav{
-    background:var(--card-bg);
-    border:1.5px solid var(--line);
-    color:var(--ink);
-  }
-  .btn-flip{
-    grid-column:1 / -1;
-    background:var(--lacquer);
-    color:#fff;
-  }
-  .btn-speak{
-  grid-column:1 / -1;
-  background:var(--gold);
-  color:#fff;
-  }
-  .btn-tone-toggle{
-    grid-column:1 / -1;
-    background:#7a5c9e;
-    color:#fff;
-  }
+  .btn-nav{ background:var(--card-bg); border:1.5px solid var(--line); color:var(--ink); }
+  .btn-flip{ grid-column:1 / -1; background:var(--lacquer); color:#fff; }
+  .btn-speak{ grid-column:1 / -1; background:var(--gold); color:#fff; }
+  .btn-tone-toggle{ grid-column:1 / -1; background:#7a5c9e; color:#fff; }
   .tone-panel{
-    display:none;
-    width:100%;
-    max-width:520px;
-    grid-template-columns:repeat(3, 1fr);
-    gap:8px;
-    margin-bottom:10px;
+    display:none; width:100%; max-width:520px; grid-template-columns:repeat(3, 1fr);
+    gap:8px; margin-bottom:10px;
   }
   .btn-tone{
-    background:var(--card-bg);
-    border:1.5px solid var(--line);
-    color:var(--ink);
-    font-size:13px;
-    line-height:1.4;
-    padding:10px 6px;
+    background:var(--card-bg); border:1.5px solid var(--line); color:var(--ink);
+    font-size:13px; line-height:1.4; padding:10px 6px;
   }
-  .btn-tone span{
-    font-size:20px;
-    font-weight:800;
-    color:var(--lacquer);
-  }
-  .btn-shuffle{
-    background:var(--jade);
-    color:#fff;
-  }
-  .btn-reset{
-    background:var(--card-bg);
-    border:1.5px solid var(--line);
-    color:#9b9384;
-  }
-  @media (max-width:380px){
-    .front-text{ font-size:15vw !important; }
-  }
+  .btn-tone span{ font-size:20px; font-weight:800; color:var(--lacquer); }
+  .btn-shuffle{ background:var(--jade); color:#fff; }
+  .btn-reset{ background:var(--card-bg); border:1.5px solid var(--line); color:#9b9384; }
+  @media (max-width:380px){ .front-text{ font-size:15vw !important; } }
 </style>
 </head>
 <body>
@@ -240,12 +115,15 @@
   <select id="filterSelect"></select>
 </div>
 
+<div id="chapterFilter" class="chapter-filter"></div>
+
 <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
 
 <div class="card-wrap">
   <div class="card" id="card" onclick="flipCard()">
+    <div class="chapter-label" id="chapterLabel"></div>
     <div class="cat-label" id="catLabel"></div>
-    <div class="front-text" id="frontText" style="font-size:52px;"></div>
+    <div class="front-text" id="frontText" style="font-size:50px;"></div>
     <div class="back-content" id="backContent">
       <div class="front-echo" id="frontEcho"></div>
       <div class="back-line" id="backLine"></div>
@@ -270,12 +148,12 @@
   <button class="btn-tone-toggle" onclick="toggleTonePanel()">ฝึกวรรณยุกต์</button>
 </div>
 <div id="tonePanel" class="tone-panel">
-  <button class="btn-tone" onclick="speakTone(0)">Ngang (a)<br><span id="toneVariant0">-</span></button>
-  <button class="btn-tone" onclick="speakTone(1)">Huyền (à)<br><span id="toneVariant1">-</span></button>
-  <button class="btn-tone" onclick="speakTone(2)">Hỏi (ả)<br><span id="toneVariant2">-</span></button>
-  <button class="btn-tone" onclick="speakTone(3)">Sắc (á)<br><span id="toneVariant3">-</span></button>
-  <button class="btn-tone" onclick="speakTone(4)">Ngã (ã)<br><span id="toneVariant4">-</span></button>
-  <button class="btn-tone" onclick="speakTone(5)">Nặng (ạ)<br><span id="toneVariant5">-</span></button>
+  <button class="btn-tone" onclick="speakTone(0)">Ngang<br><span id="toneVariant0">-</span></button>
+  <button class="btn-tone" onclick="speakTone(1)">Huyền<br><span id="toneVariant1">-</span></button>
+  <button class="btn-tone" onclick="speakTone(2)">Hỏi<br><span id="toneVariant2">-</span></button>
+  <button class="btn-tone" onclick="speakTone(3)">Sắc<br><span id="toneVariant3">-</span></button>
+  <button class="btn-tone" onclick="speakTone(4)">Ngã<br><span id="toneVariant4">-</span></button>
+  <button class="btn-tone" onclick="speakTone(5)">Nặng<br><span id="toneVariant5">-</span></button>
 </div>
 <div class="btn-row secondary">
   <button class="btn-shuffle" onclick="shuffleCards()">สุ่ม</button>
@@ -285,302 +163,386 @@
 
 <script>
 const GOOGLE_TTS_API_KEY = 'AIzaSyDSXz_gA2A5b3ZK9dgusI02OelIdyAvrxA';
-// พยัญชนะเดี่ยว: [ตัวอักษร, เสียงอ่าน, เสียงเทียบไทย, พยัญชนะท้าย หรือ null]
+
+// ============================================================
+// หมวดเสียง/สัทศาสตร์ (ของเดิม)
+// ============================================================
 const consonants = [
-  ["b","เบ่อ","บ",null],
-  ["c","เก่อ","ก","/ก/"],
-  ["d","เส่อ*","ซ/ส*",null],
-  ["đ","เด่อ","ด",null],
-  ["g","เก่อ*","ก",null],
-  ["h","เห่อ","ห/ฮ",null],
-  ["k","เก่อ","ก",null],
-  ["l","เหล่อ","ล",null],
-  ["m","เหม่อ","ม","/ม/"],
-  ["n","เหน่อ","น","/น/"],
-  ["p","เป่อ","ป","/บ/"],
-  ["q","เกว่อ","กว",null],
-  ["r","เหร่อ/เส่อ*","ซ/ส*",null],
-  ["s","เส่อ","ซ/ส",null],
-  ["t","เต่อ","ต","/ด/"],
-  ["v","เหว่อ*","ว",null],
-  ["x","เส่อ","ซ/ส",null],
+  ["b","เบ่อ","บ",null],["c","เก่อ","ก","/ก/"],["d","เส่อ*","ซ/ส*",null],
+  ["đ","เด่อ","ด",null],["g","เก่อ*","ก",null],["h","เห่อ","ห/ฮ",null],
+  ["k","เก่อ","ก",null],["l","เหล่อ","ล",null],["m","เหม่อ","ม","/ม/"],
+  ["n","เหน่อ","น","/น/"],["p","เป่อ","ป","/บ/"],["q","เกว่อ","กว",null],
+  ["r","เหร่อ/เส่อ*","ซ/ส*",null],["s","เส่อ","ซ/ส",null],["t","เต่อ","ต","/ด/"],
+  ["v","เหว่อ*","ว",null],["x","เส่อ","ซ/ส",null],
 ];
-
-// พยัญชนะประสม: [ตัวอักษร, เสียงอ่าน, เสียงเทียบไทย, พยัญชนะท้าย หรือ null]
 const compoundConsonants = [
-  ["ch","เจ่อ","จ (พ.ต้น) / ก (พ.ท้าย)","/ก/"],
-  ["gh","เก่อ*","ก*",null],
-  ["gi","เส่อ*","ซ/ส*",null],
-  ["kh","เข่อ","ข/ค",null],
-  ["ng/ngh","เหง่อ","ง","/ง/"],
-  ["nh","เหญ่อ (ขึ้นจมูก)","ญ (ขึ้นจมูก)","/ง/, /ญ/ขึ้นจมูก"],
-  ["ph","เฝ่อ","ฝ/ฟ",null],
-  ["th","เถ่อ","ถ/ท",null],
-  ["tr","เจ่อ","จ",null],
+  ["ch","เจ่อ","จ (พ.ต้น) / ก (พ.ท้าย)","/ก/"],["gh","เก่อ*","ก*",null],
+  ["gi","เส่อ*","ซ/ส*",null],["kh","เข่อ","ข/ค",null],
+  ["ng/ngh​(e,ê,i)","เหง่อ","ง","/ง/"],["nh","เหญ่อ (ขึ้นจมูก)","ญ (ขึ้นจมูก)","/ง/, /ญ/ขึ้นจมูก"],
+  ["ph","เฝ่อ","ฝ/ฟ",null],["th","เถ่อ","ถ/ท",null],["tr","เจ่อ","จ",null],
 ];
-
-// สระเดี่ยว: [รูปสระ, คำอ่าน, note หรือ null]
 const singleVowels = [
-  ["-a","อา",null],
-  ["-ă","อ๋า",null],
-  ["-â","เอ๋อ",null],
-  ["-e","แอ",null],
-  ["-ê","เอ",null],
-  ["-i","อี",null],
-  ["-y","อี",null],
-  ["-o","ออ",null],
-  ["-ô","โอ",null],
-  ["-ơ","เออ",null],
-  ["-u","อู",null],
-  ["-ư","อือ",null],
+  ["-a","อา",null],["-ă","อ๋า","สระอาเสียงสั้น"],["-â","เอ๋อ","สระเออเสียงสั้น"],["-e","แอ",null],
+  ["-ê","เอ",null],["-i","อี","อีสั้น"],["-y","อี","อียาว"],["-o","ออ","หุบปากตอนจบคำ"],
+  ["-ô","โอ","หุบปากตอนจบคำ"],["-ơ","เออ",null],["-u","อู","หุบปากตอนจบคำ"],["-ư","อือ",null],
 ];
-
-// สระประสม: [รูปสระ, คำอ่าน, note]
 const compoundVowels = [
-  ["-ia","เอีย","ไม่มีตัวสะกด"],
-  ["-ya","เอีย","นาน ๆ โผล่มาที เช่น khuya"],
-  ["-iê","เอีย","มีตัวสะกด"],
-  ["-yê","เอีย","มีตัวสะกด ไม่มีพยัญชนะต้น"],
-  ["-ua","อัว","ไม่มีตัวสะกด"],
-  ["-uô","อัว","มีตัวสะกด"],
-  ["-uâ","อัว","มีตัวสะกด"],
-  ["-ưa","เอือ","ไม่มีตัวสะกด"],
-  ["-ươ","เอือ","มีตัวสะกด"],
+  ["-ia","เอีย","ไม่มีตัวสะกด"],["-ya","เอีย","นาน ๆ โผล่มาที เช่น khuya"],
+  ["-iê","เอีย","มีตัวสะกด"],["-yê","เอีย","มีตัวสะกด ไม่มีพยัญชนะต้น"],
+  ["-ua","อัว","ไม่มีตัวสะกด"],["-uô","อัว","มีตัวสะกด"],["-uâ","อัว","มีตัวสะกด"],
+  ["-ưa","เอือ","ไม่มีตัวสะกด"],["-ươ","เอือ","มีตัวสะกด"],
 ];
-
-// วรรณยุกต์: [ชื่อวรรณยุกต์, ลักษณะเสียง, ตัวอย่าง]
 const tones = [
-  ["Ngang (ไม่มีเครื่องหมาย)","สามัญ","a"],
-  ["Huyền ( ` )","กลางลง","à"],
-  ["Hỏi ( ˀ )","กลางขึ้นแล้วต่ำลง","ả"],
-  ["Sắc ( ´ )","กลางสูง","á"],
-  ["Ngã ( ~ )","หยุดกลางเสียงแล้วสูงขึ้น","ã"],
-  ["Nặng ( . )","ต่ำลงแล้วหยุดท้ายเสียง","ạ"],
+  ["Ngang (ไม่มีเครื่องหมาย)","สามัญ","a"],["Huyền ( ` )","กลางลง","à"],
+  ["Hỏi ( ˀ )","กลางขึ้นแล้วต่ำลง","ả"],["Sắc ( ´ )","กลางสูง","á"],
+  ["Ngã ( ~ )","หยุดกลางเสียงแล้วสูงขึ้น","ã"],["Nặng ( . )","ต่ำลงแล้วหยุดท้ายเสียง","ạ"],
 ];
-
-// Chính tả ครั้งที่ 2: [คำเวียดนาม, คำอ่าน, คำแปล]
-const dictation2 = [
-  // --- ตามในหนังสือที่ลิสต์มาให้ ---
-  ["phải","ไฟ้","ถูก, ต้อง, ขวา"],
-  ["người","เหงื่อย","คน"],
-  ["nước","เนื๊อก","ประเทศ, น้ำ"],
-  ["Vâng","เวิง","ค่ะ/ครับ (คำตอบรับ)"],
-  ["tôi","โตย","ฉัน, ผม"],
-  ["nào","หน่าว","ไหน"],
-  ["đến từ","เด๊น ตื่อ","มาจาก"],
-  ["đây","เดย","นี่"],
-  ["phải không","ไฟ้ คอม (คง หุบปาก)","...ใช่ไหม"],
-  ["Đúng rồi","ดุ๊ง โซ่ย","ถูกแล้ว/ใช่แล้ว"],
-  ["nói","น๋อย","พูด"],
-  ["tiếng","เตี๋ยง","ภาษา"],
-  // --- ชื่อประเทศ ---
-  ["Úc","อุ๊ก","ออสเตรเลีย"],
-  ["Campuchia","กัม-ปู-เจีย","กัมพูชา"],
-  ["Trung Quốc","จุง ก๊วก","จีน"], 
-  ["Anh","อัญ","อังกฤษ"],
-  ["Pháp","ฟ้าบ","ฝรั่งเศส"],
-  ["Đức","ดึ๊ก","เยอรมนี"],
-  ["Ấn Độ","เอิ๊น โด่","อินเดีย"],
-  ["Ý","อี๊","อิตาลี"],
-  ["Nhật Bản","เญิด บ๋าน","ญี่ปุ่น"],
-  ["Hàn Quốc","ห่าน ก๊วก","เกาหลี (ใต้)"],
-  ["Lào","หล่าว","ลาว"],
-  ["Nga","งา","รัสเซีย"],
-  ["Tây Ban Nha","เตย บาน ญา","สเปน"],
-  ["Thụy Sĩ","ถวี ซี๊","สวิตเซอร์แลนด์"],
-  ["Thái Lan","ท้าย ลาน","ไทย"],
-  ["Mỹ","หมี๊","สหรัฐอเมริกา"],
-  ["Hoa Kỳ","ฮวา กี่","สหรัฐอเมริกา (ทางการ)"],
-  ["Việt Nam","เหวียด นาม","เวียดนาม"],
-];
-
-// สระ+ตัวสะกด (สระเดี่ยวกับพยัญชนะท้าย): [รูปสะกด, คำอ่าน, ตัวอย่างคำ]
 const vowelFinal = [
-  ["ac","อ๊าก","bác, các, lác, khác"],
-  ["at","อ๊าด","hát, phát, tát, lát"],
-  ["ach","แอ๊ก","bách, gạch, tách, sách"],
-  ["au","เอา","đau, sau, mau, lau"],
-  ["am","อาม","cam, làm, dám, giam"],
-  ["ao","อาว","bao, lao, cháo, đào"],
-  ["an","อาน","lan, bàn, đàn, ngan"],
-  ["ai","อาย","gai, tài, mai, ai"],
-  ["ang","อาง","sang, nàng, mạng, trang"],
-  ["ay","ไอ","bảy, tay, cay, dày"],
-  ["anh","แอง","nhanh, cành, chanh, xanh"],
-  ["ap","อ๊าบ","náp, đạp, sáp, chạp"],
-  ["ăc","อั๊ก","mắc, lắc, giặc, tắc"],
-  ["ăng","อัง","rằng, trắng, nắng, vắng"],
-  ["ăm","อัม","đăm, hăm, lăm, chăm"],
-  ["ăp","อั๊บ","nắp, sắp, lắp, gặp"],
-  ["ăn","อัน","ăn, chăn, dặn, ngắn"],
-  ["ăt","อั๊ต","giặt, đắt, bắt, cắt"],
-  ["âc","เอิ๊ก","thấc, bậc, chấc, giấc"],
-  ["âng","เอิง","dâng, tầng, nâng, sâng"],
-  ["âm","เอิม","âm, cấm, đâm, thầm"],
-  ["âp","เอิบ","lập, sập, khập, tấp"],
-  ["ân","เอิน","gần, lần, hần, giận"],
-  ["ât","เอิ๊ต","tất, ngất, chật, cật"],
+  //สระ A (อา)
+  ["ac","อ๊าก","bác, các, lác, khác"],["at","อ๊าด","hát, phát, tát, lát"],
+  ["ach","แอ๊ก","bách, gạch, tách, sách"],["au","เอา","đau, sau, mau, lau"],
+  ["am","อาม","cam, làm, dám, giam"],["ao","อาว","bao, lao, cháo, đào"],
+  ["an","อาน","lan, bàn, đàn, ngan"],["ai","อาย","gai, tài, mai, ai"],
+  ["ang","อาง","sang, nàng, mạng, trang"],["ay","ไอ","bảy, tay, cay, dày"],
+  ["anh","แอง","nhanh, cành, chanh, xanh"],["ap","อ๊าบ","náp, đạp, sáp, chạp"],
+  //สระ Ă (อ๋า)
+  ["ăc","อั๊ก","mắc, lắc, giặc, tắc"],["ăng","อัง","rằng, trắng, nắng, vắng"],
+  ["ăm","อัม","đăm, hăm, lăm, chăm"],["ăp","อั๊บ","nắp, sắp, lắp, gặp"],
+  ["ăn","อัน","ăn, chăn, dặn, ngắn"],["ăt","อั๊ต","giặt, đắt, bắt, cắt"],
+  //สระ Ă (เอ๋อ)
+  ["âc","เอิ๊ก","thấc, bậc, chấc, giấc"],["âng","เอิง","dâng, tầng, nâng, sâng"],
+  ["âm","เอิม","âm, cấm, đâm, thầm"],["âp","เอิ๊บ","lập, sập, khập, tấp"],
+  ["ân","เอิน","gần, lần, hần, giận"],["ât","เอิ๊ต","tất, ngất, chật, cật"],
   ["âu","เอิว","đâu, câu, mẫu, lâu"],
+  //สระ E (แอ)
   ["ec","แอ๊ก","méc, chéc, phéc, séc"],
-  ["eng","แอง","leng, beng, veng"],
-  ["em","แอม","xem, lem, đem, ném"],
-  ["ep","แอ๊บ","ép, đẹp, hẹp, phép"],
-  ["en","แอน","đen, quen, hẹn, bèn"],
-  ["et","แอ๊ด","bét, kẹt, rét, tét"],
-  ["eo","แอว","kèo, leo, đèo, béo"],
-  ["êch","เอ๊ก","ếch, bếch, lệch, trếch"],
-  ["êp","เอ๊บ","xếp, nếp, bếp, sếp"],
-  ["êm","เอ็ม","đêm, thềm, mềm, đệm"],
-  ["êt","เอ๊ด","tết, hết, dệt, vết"],
-  ["ên","เอิน","tên, đến, bên, quên"],
-  ["ênh","เอิ่ง","bệnh, kênh, lệnh, mệnh"],
+  ["eng","แอง","leng, beng, veng"],["em","แอม","xem, lem, đem, ném"],
+  ["ep","แอ๊บ","ép, đẹp, hẹp, phép"],["en","แอน","đen, quen, hẹn, bèn"],
+  ["et","แอ๊ด","bét, kẹt, rét, tét"],["eo","แอว","kèo, leo, đèo, béo"],
+  //สระ Ê (เอ)
+  ["êch","เอ๊ก","ếch, bếch, lệch, trếch"],["êp","เอ๊บ","xếp, nếp, bếp, sếp"],
+  ["êm","เอ็ม","đêm, thềm, mềm, đệm"],["êt","เอ๊ต","tết, hết, dệt, vết"],
+  ["ên","เอ็น","tên, đến, bên, quên"],["ênh","เอ็ง","bệnh, kênh, lệnh, mệnh"],
   ["êu","เอว","rêu, đều, mêu, sếu"],
+  //สระ I (อี)
   ["ich","อิ๊ก","đích, xích, tích, kịch"],
-  ["inh","อิง","xinh, bình, sinh, linh"],
-  ["im","อิม","mỉm, tìm, chim, kim"],
-  ["ip","อิ๊บ","síp, típ, khíp, chíp"],
-  ["in","อิน","tin, kin, xịn, pin"],
-  ["it","อิ๊ด","ít, hít, nhịt, kịt"],
-  ["iu","อิว","dịu, hiu, miu, tiu"],
-  ["oc","อ๊อก","mọc, dọc, lọc, sóc"],
-  ["on","ออน","con, lon, mòn, nón"],
-  ["ong","ออง","bong, trong, sòng, ngóng"],
-  ["op","อ๊อบ","bóp, họp, chóp, sóp"],
-  ["om","ออม","bom, lom, gom, xóm"],
-  ["ot","อ๊อด","mót, lót, sót, khọt"],
+  ["inh","อิง","xinh, bình, sinh, linh"],["im","อีม","mỉm, tìm, chim, kim"],
+  ["ip","อี๊บ","síp, típ, khíp, chíp"],["in","อีน","tin, kin, xịn, pin"],
+  ["it","อี๊ด","ít, hít, nhịt, kịt"],["iu","อิว","dịu, hiu, miu, tiu"],
+  //สระ O (ออ) 
+  ["oc","อ๊อก","mọc, dọc, lọc, sóc"],["on","ออน","con, lon, mòn, nón"],
+  ["ong","ออง","bong, trong, sòng, ngóng"],["op","อ๊อบ","bóp, họp, chóp, sóp"],
+  ["om","ออม","bom, lom, gom, xóm"],["ot","อ๊อด","mót, lót, sót, khọt"],
   ["oi","ออย","sói, hỏi, giỏi, coi"],
+  //สระ Ô (โอ) 
   ["ôc","อ๊ก","cốc, lốc, sốc, độc"],
-  ["ông","อง","sông, trống, không, bông"],
-  ["ôm","โอม","ôm, sôm, mốm, cốm"],
-  ["ôp","โอ๊บ","hộp, cốp, lốp, chộp"],
-  ["ôn","โอน","hôn, trộn, thôn, dồn"],
-  ["ôt","โอ๊ด","tốt, chốt, rốt, một"],
-  ["ôi","โอย","tôi, trôi, hội, mỗi"],
-  ["ơm","เอิม","thơm, đơm, sớm, bơm"],
-  ["ơp","เอิ๊บ","khớp, lớp, xớp, sớp"],
-  ["ơn","เอิน","hơn, đơn, lớn, hờn"],
-  ["ơt","เอิ๊ด","rớt, chớt, lớt, đợt"],
+  ["ông","อง","sông, trống, không, bông"],["ôm","โอม","ôm, sôm, mốm, cốm"],
+  ["ôp","โอ๊บ","hộp, cốp, lốp, chộp"],["ôn","โอน","hôn, trộn, thôn, dồn"],
+  ["ôt","โอ๊ด","tốt, chốt, rốt, một"],["ôi","โอย","tôi, trôi, hội, mỗi"],
+  //สระ Ơ (เออ)
+  ["ơm","เอิม","thơm, đơm, sớm, bơm"],["ơp","เอิ๊บ","khớp, lớp, xớp, sớp"],
+  ["ơn","เอิน","hơn, đơn, lớn, hờn"],["ơt","เอิ๊ด","rớt, chớt, lớt, đợt"],
   ["ơi","เอย","ơi, trời, mời, chơi"],
+  //สระ U (อู) 
   ["uc","อุ๊ก","lúc, chục, rúc, nhúc"],
-  ["ung","อุง","dùng, cũng, khung, súng"],
-  ["um","อูม","thum, bùm, đùm, khum"],
-  ["up","อุ๊บ","sụp, chụp, lụp, húp"],
-  ["un","อูน","hun, run, đun, vun"],
-  ["ut","อุ๊ด","rút, hút, đút, but"],
-  ["ui","อุย","vui, đùi, lùi, mùi"],
-  ["ưc","อึ๊ก","thức, thực, mực, bực"],
-  ["ưt","อึ๊ด","bút, rứt, mứt"],
-  ["ưm","อึม","lưm, rưm"],
-  ["ưu","อิว","cứu, sửu"],
-  ["ưng","อึง","đứng, mừng, vừng, lưng"],
-  ["ưi","อือย","gửi, chửi, ngửi"],
+  ["ung","อุง","dùng, cũng, khung, súng"],["um","อูม","thum, bùm, đùm, khum"],
+  ["up","อู๊บ","sụp, chụp, lụp, húp"],["un","อูน","hun, run, đun, vun"],
+  ["ut","อู๊ด","rút, hút, đút, bút"],["ui","อุย","vui, đùi, lùi, mùi"],
+  // /สระ Ư (อือ)
+  ["ưc","อึ๊ก","thức, thực, mực, bực"],["ưt","อึ๊ด","bút, rứt, mứt"],
+  ["ưm","อืม","lưm, rưm"],["ưu","อืว","cứu, sửu"],
+  ["ưng","อึง","đứng, mừng, vừng, lưng"],["ưi","อึย","gửi, chửi, ngửi"],
 ];
-
-// สระประสมกับพยัญชนะท้าย: [รูปสะกด, คำอ่าน, ตัวอย่างคำ]
 const compoundVowelFinal = [
-  ["iêc","เอี๊ยก","tiếc, thiếc, chiếc, miếc"],
-  ["iêng","เอียง","tiếng, riêng, miếng, siêng"],
-  ["iêm","เอี๋ยม","kiếm, diểm, chiêm, biếm"],
-  ["iêp","เอี๊ยบ","điệp, nghiệp, thiệp, kiếp"],
-  ["iên","เอียน","tiến, phiến, miến, thiện"],
-  ["iêt","เอี๊ยด","diệt, thiết, triết, liệt"],
-  ["ươc","เอือ๊ก","thước, nước, được, rước"],
-  ["ương","เอือง","sương, tưởng, trưởng, hướng"],
-  ["ươm","เอือม","sườm, nườm, gườm, hườm"],
-  ["ươp","เอือ๊บ","ướp, cướp, sướp, nướp"],
-  ["ươn","เอือน","mượn, cườn, vườn, hươn"],
-  ["ươt","เอือ๊ด","ướt, mướt, suốt, lượt"],
-  ["uôc","อวก","thuốc, suốc, ruốc, luộc"],
-  ["uông","อวง","suông, chuông, xuống, ruộng"],
-  ["uôm","อวม","luôm, chuôm, buồm"],
-  ["uôt","อวด","tuốt, ruột, luốt, nhuốt"],
+  //สระประสม IÊ (เอีย)
+  ["iêc","เอี๊ยก","tiếc, thiếc, chiếc, miếc"],["iêng","เอียง","tiếng, riêng, miếng, siêng"],
+  ["iêm","เอียม","kiếm, diểm, chiêm, biếm"],["iêp","เอี๊ยบ","điệp, nghiệp, thiệp, kiếp"],
+  ["iên","เอียน","tiến, phiến, miến, thiện"],["iêt","เอี๊ยด","diệt, thiết, triết, liệt"],
+  //สระประสม ƯƠ (เอือ)
+  ["ươc","เอื๊อก","thước, nước, được, rước"],["ương","เอือง","sương, tưởng, trưởng, hướng"],
+  ["ươm","เอือม","sườm, nườm, gườm, hườm"],["ươp","เอื๊อบ","ướp, cướp, sướp, nướp"],
+  ["ươn","เอือน","mượn, cườn, vườn, hươn"],["ươt","เอื๊อด","ướt, mướt, suốt, lượt"],
+  //สระประสม UÔ 
+  ["uôc","อ๊วก","thuốc, suốc, ruốc, luộc"],["uông","อวง","suông, chuông, xuống, ruộng"],
+  ["uôm","อวม","luôm, chuôm, buồm"],["uôt","อ๊วด","tuốt, ruột, luốt, nhuốt"],
   ["uôn","อวน","muốn, luôn, suôn, chuôn"],
 ];
-
-// เสียงเลื่อนกับสระเดี่ยว: [รูปสะกด, คำอ่าน, ตัวอย่างคำ]
 const glideVowels = [
-  ["oa","อวา","loa, hoa, toả, xoà"],
-  ["oă","อวะ","khoắc, hoặc, loắc"],
-  ["oe","แอว","hoe, toe, xoè, khoe"],
-  ["oi","ออย","soi, nói, gọi, đòi"],
-  ["ua","อัว","mua, của, đũa, thua"],
-  ["uê","อูเว","huế, quê, tuế, khuê"],
-  ["ui","อุย","vui, chui, xui, núi"],
-  ["uy","อูวี","quý, tùy, duy, khuy"],
+  ["oa","อวา","loa, hoa, toả, xoà"],["oă","อวะ","khoắc, hoặc, loắc"],
+  ["oe","อแว","hoe, toe, xoè, khoe"],["oi","ออย","soi, nói, gọi, đòi"],
+  ["ua","อัว","mua, của, đũa, thua"],["uê","อูเว","huế, quê, tuế, khuê"],
+  ["ui","อุย","vui, chui, xui, núi"],["uy","อูวี","quý, tùy, duy, khuy"],
 ];
-
-// เสียงสระประสม 3 ตัว: [รูปสะกด, คำอ่าน, ตัวอย่างคำ]
 const triphthongs = [
-  ["iêu/yêu","เอียว","yêu, siêu, tiểu, diều"],
-  ["oai","อวาย","khoai, thoai, ngoải, xoài"],
-  ["oay","อเวย","loay, xoay, hoay"],
-  ["uôi","อวย","đuôi, chuối, suối, cuối"],
-  ["uây","อูเหวย","quẩy, khuẩy"],
-  ["uya","อูเวีย","khuya"],
-  ["uyê","อูเวีย","khuyên, tuyên, duyên, luyện"],
-  ["ươi","เอือย","cưới, tươi, lười, người"],
+  ["iêu/yêu","เอียว","yêu, siêu, tiểu, diều"],["oai","อวาย","khoai, thoai, ngoải, xoài"],
+  ["oay","อวัย","loay, xoay, hoay"],["uôi","อวย","đuôi, chuối, suối, cuối"],
+  ["uây","อูเว็ย","quẩy, khuẩy"],["uya","อูเวีย","khuya"],
+  ["uyê","อูเวีย","khuyên, tuyên, duyên, luyện"],["ươi","เอือย","cưới, tươi, lười, người"],
   ["ươu","เอือว","hươu, rượu, trươu"],
 ];
 
-// Chính tả ครั้งที่ 3: [คำเวียดนาม, คำอ่านสำเนียงเหนือ, แปลทีละคำ, คำแปล] — ศัพท์บทที่ 4 (อาชีพ)
-const dictation3 = [
-  ["sinh viên", "ซิง เวียน", "sinh = เรียน + viên = บุคลากร", "นักศึกษา"],
-  ["học", "ฮ็อก", "học = เรียน", "เรียน"],
-  ["Khoa", "ควา", "Khoa = คณะ / แผนก", "คณะ"],
-  ["mấy", "เม้ย", "mấy = กี่ / เท่าไร", "กี่, เท่าไร"],
-  ["năm", "นัม", "năm = ปี", "ปี"],
-  ["thứ", "ทื้อ", "thứ = ลำดับที่", "(ลำดับ) ที่"],
-  ["ngành", "ง่าง", "ngành = สาขา / แขนง", "สาขา"],
-  ["rồi", "โซ่ย", "rồi = แล้ว", "แล้ว"],
-  ["đi làm", "ดี ล่าม", "đi = ไป + làm = ทำ(งาน)", "ไปทำงาน"],
-  ["nghề", "เหง่", "nghề = อาชีพ / งานช่าง", "อาชีพ"],
-  ["giáo viên", "เซ้า เวียน", "giáo = สอน + viên = บุคลากร", "ครู"],
-  ["dạy", "ซ่าย", "dạy = สอน", "สอน"],
-  ["công việc", "โกง เวียก", "công = กิจการ + việc = งาน", "การงาน, งาน"],
-  ["dược sĩ", "เซือก สี่", "dược = ยา + sĩ = ผู้รู้", "เภสัชกร"],
-  ["ở", "เอ่อ", "ở = อยู่ / ที่", "อยู่, ที่"],
-  ["bệnh viện", "แบ่ง เวียน", "bệnh = โรค + viện = สถานที่", "โรงพยาบาล"],
-    // --- คำเพิ่มเติมจากตัวบทสนทนา (ไม่ได้อยู่ในตารางคำศัพท์) ---
-  ["Chào", "จ่าว", "Chào = ทักทาย", "สวัสดี"],
-  ["Bạn", "บั่น", "Bạn = คุณ, เพื่อน", "คุณ"],
-  ["đi đâu đấy", "ดี เดิว เด๊ย", "đi = ไป + đâu = ไหน + đấy = น่ะ", "ไปไหนน่ะ (สำนวนทักทาย)"],
-  ["đang", "ดาง", "đang = คำช่วยกริยา แสดงกำลังทำ", "กำลัง (กำลังทำอยู่)"],
-  ["là", "ล่า", "là = เป็น/คือ", "เป็น, คือ"],
-  ["làm", "ล่าม", "làm = ทำ", "ทำ"],
-  ["đấy", "เด๊ย", "đấy = คำลงท้ายเน้นความ", "...น่ะ, ...ล่ะ"],
-  ["còn", "ก่อน", "còn = ส่วน...ล่ะ (ถามกลับ)", "ส่วน, แล้ว...ล่ะ"],
-  ["một", "โมด", "một = หนึ่ง", "หนึ่ง"],
-  ["tiếng Anh", "เตี๋ยง อาง", "tiếng = ภาษา + Anh = อังกฤษ", "ภาษาอังกฤษ"],
-  ["tiếng Trung", "เตี๋ยง จุง", "tiếng = ภาษา + Trung = จีน", "ภาษาจีน"],
-  ["Chính trị", "จิ๊ง จิ่", "Chính = เที่ยงตรง, หลัก, สำคัญ + trị = การเมือง, ปกครอง, จัดการ, รักษา", "รัฐศาสตร์"],
-  ["Ngữ Văn", "งื๋อ วัน", "Ngữ = ภาษา, คำพูด + Văn = วรรณคดี", "อักษรศาสตร์"],
-  ["thứ nhất", "ทื้อ เญิ๊ด", "thứ = ที่ + nhất = หนึ่ง", "ที่หนึ่ง"],
-  ["thứ tư", "ทื้อ ตือ", "thứ = ที่ + tư = สี่", "ที่สี่"],
-  // ["giáo viên", "เซ้า เวียน", "giáo = สอน + viên = บุคลากร", "ครู"],
-  // ["học sinh", "ฮ็อก ซิง", "học = เรียน + sinh = ผู้เรียน", "นักเรียน"],
-  // ["sinh viên", "ซิง เวียน", "sinh = เรียน + viên = บุคลากร", "นักศึกษา"],
-  // ["bác sĩ", "บ๊าก สี่", "bác = ผู้ทรงคุณวุฒิ + sĩ = ผู้รู้", "หมอ"],
-  // ["y tá", "อี ต้า", "y = การแพทย์ + tá = ผู้ช่วย", "พยาบาล"],
-  // ["dược sĩ", "เซือก สี่", "dược = ยา + sĩ = ผู้รู้", "เภสัชกร"],
-  // ["kỹ sư", "กี๋ ซือ", "kỹ = เทคนิค + sư = ผู้เชี่ยวชาญ", "วิศวกร"],
-  // ["luật sư", "หลวด ซือ", "luật = กฎหมาย + sư = ผู้เชี่ยวชาญ", "ทนายความ, นักกฎหมาย"],
-  // ["công an", "โกง อาน", "công = สาธารณะ + an = สงบ", "ตำรวจ"],
-  // ["nhân viên văn phòng", "เญิน เวียน วัน ฟ่อง", "nhân viên = พนักงาน + văn phòng = สำนักงาน", "พนักงานออฟฟิศ"],
-  // ["nhân viên kế toán", "เญิน เวียน เก้ ต๊วน", "nhân viên = พนักงาน + kế toán = บัญชี", "พนักงานบัญชี"],
-  // ["thư ký", "เทือ กื้อ", "thư = หนังสือ + ký = บันทึก", "เลขานุการ"],
-  // ["nông dân", "โนง ซึน", "nông = เกษตร + dân = ประชาชน", "เกษตรกร"],
-  // ["đầu bếp", "เดิ่ว เบ๊บ", "đầu = หัวหน้า + bếp = ครัว", "เชฟ"],
-  // ["người bán hàng", "เหงื่อย บ๊าน ฮ่าง", "người = คน + bán = ขาย + hàng = สินค้า", "พ่อค้า แม่ค้า"],
-  // ["ca sĩ", "กา สี่", "ca = ร้องเพลง + sĩ = นัก/ผู้เชี่ยวชาญ", "นักร้อง"],
-  // ["diễn viên", "เซี๋ยน เวียน", "diễn = แสดง + viên = บุคลากร", "นักแสดง"],
-  // ["nhà báo", "ญ่า เบ๋า", "nhà = สำนัก/ผู้เชี่ยวชาญ + báo = ข่าว", "นักข่าว"],
-  // ["phóng viên", "ฟ่อง เวียน", "phóng = ส่ง/ปล่อยข่าว + viên = บุคลากร", "นักข่าว (ผู้สื่อข่าว)"],
-  // ["hướng dẫn viên", "เฮื้อง ซั๋น เวียน", "hướng dẫn = แนะนำ/นำทาง + viên = บุคลากร", "มัคคุเทศก์"],
-  // ["kiến trúc sư", "เกี๊ยน จุ๊ก ซือ", "kiến trúc = สถาปัตยกรรม + sư = ผู้เชี่ยวชาญ", "สถาปนิก"],
-  // ["nhà kinh doanh", "ญ่า กิง ซวน", "nhà = ผู้เชี่ยวชาญ + kinh doanh = ธุรกิจ", "นักธุรกิจ"],
+// ============================================================
+// คำศัพท์ แยกตามบท: [คำเวียดนาม, คำอ่าน, คำแปล, โน้ต]
+// ============================================================
+const vocabBai1 = [
+  ["xin chào","ซิน จ่าว","สวัสดี","ใช้ทางการ/คนไม่คุ้นเคย"],
+  ["chào","จ่าว","สวัสดี","ใช้ไม่ทางการ"],
+  ["cảm ơn","ก๋าม เอิน","ขอบคุณ",""],
+  ["bạn","บั่น","คุณ, เพื่อน",""],
+  ["khỏe","ขวย","สบายดี",""],
+  ["bình thường","บิ่ง เทื่อง","ปกติ, เรื่อยๆ",""],
+  ["mệt","เหมด","เหนื่อย",""],
+  ["gì","หยี่","อะไร",""],
+  ["rất vui","เหยิ๊ด วุย","ยินดีมาก",""],
+  ["cũng","กุ๊ง","เช่นกัน, ด้วยเหมือนกัน",""],
+  ["tên","เตน","ชื่อ",""],
+  ["gặp","กั๊บ","พบ, เจอ",""],
+  ["được","เดื๊อก","ได้",""],
+  ["Rất vui được gặp bạn","เหยิ๊ด วุย เดื๊อก กั๊บ บั่น","ยินดีที่ได้รู้จัก",""],
+  ["Hẹn gặp lại","แหะ กั๊บ ไหล่","แล้วเจอกันใหม่",""],
+  ["tạm biệt","ต๊าม เบี๊ยด","ลาก่อน","ใช้ตอนจากลานาน"],
+  ["Xin lỗi","ซิน โหล่ย","ขอโทษ",""],
+  ["có","ก๊อ","มี / ใช่","โครงสร้าง có...không?"],
+  ["hiểu","เหี๋ยว","เข้าใจ",""],
+  ["đẹp","แด๊บ","สวย",""],
+  ["nóng","หน่อง","ร้อน",""],
+  ["nhớ","เหญอ","จำได้",""],
+  ["thầy","เท่ย","ครู (ผู้ชาย)",""],
+  ["cô giáo","โก เจ๋า","ครู (ผู้หญิง)",""],
+  ["viết","เวี๊ยด","เขียน",""],
+  ["đến","เด๊น","ถึง, มา",""],
+  ["bài học","บ่าย ฮ็อก","บทเรียน",""],
+  ["lớp","เหลิ๊บ","ห้องเรียน, ชั้นเรียน",""],
+  ["phở","เฝอ","เฝอ (ก๋วยเตี๋ยวเวียดนาม)",""],
+  ["cơm","เกิม","ข้าว",""],
+  ["nem nướng","แนม เนื๊อง","แหนมเนือง",""],
+  ["chúng em","จุ๊ง แอม","พวกเรา","นักเรียนใช้เรียกตัวเอง"],
+  ["xin tự giới thiệu","ซิน ตื่อ เยย๋ เที้ยว","ขอแนะนำตัว",""],
+  ["giới thiệu","เยย๋ เที้ยว","แนะนำ",""],
+  ["Không có gì","คง ก๊อ หยี่","ไม่เป็นไร","ใช้ตอบขอบคุณ"],
+  ["Không sao","คง เซา","ไม่เป็นไร","ใช้ตอบขอโทษ"],
+  ["mình/tớ","มิ่ง/เตอ","ฉัน, เรา","ใช้กับเพื่อนสนิท"],
+  ["em","แอม","หนู, น้อง",""],
+  ["chị","จิ","พี่ (ผู้หญิง)",""],
+  ["anh","อาง","พี่ (ผู้ชาย)",""],
+  ["cô","โก","ครู/อา (ผู้หญิง)",""],
+  ["cậu","เกิ่า","เธอ, แก",""],
+  ["ấy","เอ๋ย","(ต่อท้ายแทนบุรุษที่ 3)","เช่น bạn ấy, chị ấy"],
+  ["nó","โน่","มัน","ใช้กับสัตว์/สิ่งของ/ไม่เป็นทางการ"],
+  ["con","กอน","ลูก",""],
+  ["cháu","เจ่า","หลาน",""],
+  ["chú","จู๋","อา (ผู้ชาย)",""],
+  ["bác","บ๊าก","ลุง, ป้า",""],
+  ["bà","บ่า","ย่า, ยาย",""],
+  ["ông","โอง","ปู่, ตา",""],
+  ["cụ","กู๋","ทวด",""],
+  ["họ","โฮ่","นามสกุล",""],
+  ["tên đệm","เตน เดม","ชื่อกลาง",""],
+  ["không","คง","ศูนย์",""],
+  ["một","โมด","หนึ่ง",""],
+  ["hai","ฮาย","สอง",""],
+  ["ba","บา","สาม",""],
+  ["bốn","โบ๋น","สี่",""],
+  ["năm","นัม","ห้า","แปลว่า \"ปี\" ได้ด้วย"],
+  ["sáu","เซ่า","หก",""],
+  ["bảy","บ๋าย","เจ็ด",""],
+  ["tám","ต๊าม","แปด",""],
+  ["chín","จิ๋น","เก้า",""],
+  ["mười","เหมื่อย","สิบ",""],
+  ["mươi","เมือย","(หลักสิบ ต่อท้ายเลข 2-9)",""],
+  ["trăm","ตรัม","ร้อย",""],
+  ["nghìn/ngàn","เงิ่น/หง่าน","พัน",""],
+  ["triệu","ตรี๊ยว","ล้าน",""],
+  ["ai","อาย","ใคร",""],
+  ["đâu","เดิว","ไหน",""],
+  ["uống cà phê","อวง กา เฟ","ดื่มกาแฟ",""],
+  ["xem phim","แซม ฟิม","ดูหนัง",""],
+  ["nghe nhạc","เหงะ ญัก","ฟังเพลง",""],
+  ["đi du lịch","ดี ยู หลิ๊ก","ไปเที่ยว (ต่างเมือง)",""],
+  ["đi chơi","ดี เจย","ไปเที่ยว (ใกล้ๆ)",""],
+  ["đọc sách","ด็อก ซ๊าก","อ่านหนังสือ",""],
+  ["chơi thể thao","เจย เท๋อ เทา","เล่นกีฬา",""],
+  ["đi học","ดี ฮ็อก","ไปเรียน",""],
+  ["uống nước","อวง เนื๊อก","ดื่มน้ำ",""],
+  ["chơi game","เจย เกม","เล่นเกม",""],
+  ["ăn cơm","อาน กอม","กินข้าว",""],
 ];
-  
-// รวมข้อมูลทั้งหมดเป็น flashcard: {cat, front, back}
+
+const vocabBai3 = [
+  ["phải","ไฟ้","ถูก, ต้อง, ขวา",""],
+  ["người","เหงื่อย","คน",""],
+  ["nước","เนื๊อก","ประเทศ, น้ำ",""],
+  ["Vâng","เวิง","ค่ะ/ครับ (คำตอบรับ)",""],
+  ["tôi","โตย","ฉัน, ผม",""],
+  ["nào","หน่าว","ไหน",""],
+  ["đến từ","เด๊น ตื่อ","มาจาก",""],
+  ["đây","เดย","นี่",""],
+  ["phải không","ไฟ้ คอม","...ใช่ไหม",""],
+  ["Đúng rồi","ดุ๊ง โซ่ย","ถูกแล้ว/ใช่แล้ว",""],
+  ["nói","น๋อย","พูด",""],
+  ["tiếng","เตี๋ยง","ภาษา",""],
+  ["Úc","อุ๊ก","ออสเตรเลีย",""],
+  ["Campuchia","กัม-ปู-เจีย","กัมพูชา",""],
+  ["Trung Quốc","จุง ก๊วก","จีน",""],
+  ["Anh","อัญ","อังกฤษ",""],
+  ["Pháp","ฟ้าบ","ฝรั่งเศส",""],
+  ["Đức","ดึ๊ก","เยอรมนี",""],
+  ["Ấn Độ","เอิ๊น โด่","อินเดีย",""],
+  ["Ý","อี๊","อิตาลี",""],
+  ["Nhật Bản","เญิด บ๋าน","ญี่ปุ่น",""],
+  ["Hàn Quốc","ห่าน ก๊วก","เกาหลี (ใต้)",""],
+  ["Lào","หล่าว","ลาว",""],
+  ["Nga","งา","รัสเซีย",""],
+  ["Tây Ban Nha","เตย บาน ญา","สเปน",""],
+  ["Thụy Sĩ","ถวี ซี๊","สวิตเซอร์แลนด์",""],
+  ["Thái Lan","ท้าย ลาน","ไทย",""],
+  ["Mỹ","หมี๊","สหรัฐอเมริกา",""],
+  ["Hoa Kỳ","ฮวา กี่","สหรัฐอเมริกา (ทางการ)",""],
+  ["Việt Nam","เหวียด นาม","เวียดนาม",""],
+];
+
+const vocabBai4 = [
+  ["sinh viên","ซิง เวียน","นักศึกษา","sinh = เรียน + viên = บุคลากร"],
+  ["học","ฮ็อก","เรียน","học = เรียน"],
+  ["Khoa","ควา","คณะ","Khoa = คณะ / แผนก"],
+  ["mấy","เม้ย","กี่, เท่าไร","mấy = กี่ / เท่าไร"],
+  ["năm","นัม","ปี","năm = ปี"],
+  ["thứ","ทื้อ","(ลำดับ) ที่","thứ = ลำดับที่"],
+  ["ngành","ง่าง","สาขา","ngành = สาขา / แขนง"],
+  ["rồi","โซ่ย","แล้ว","rồi = แล้ว"],
+  ["đi làm","ดี ล่าม","ไปทำงาน","đi = ไป + làm = ทำ(งาน)"],
+  ["nghề","เหง่","อาชีพ","nghề = อาชีพ / งานช่าง"],
+  ["giáo viên","เซ้า เวียน","ครู","giáo = สอน + viên = บุคลากร"],
+  ["dạy","ซ่าย","สอน","dạy = สอน"],
+  ["công việc","โกง เวียก","การงาน, งาน","công = กิจการ + việc = งาน"],
+  ["dược sĩ","เซือก สี่","เภสัชกร","dược = ยา + sĩ = ผู้รู้"],
+  ["ở","เอ่อ","อยู่, ที่","ở = อยู่ / ที่"],
+  ["bệnh viện","แบ่ง เวียน","โรงพยาบาล","bệnh = โรค + viện = สถานที่"],
+  ["Chào","จ่าว","สวัสดี","Chào = ทักทาย"],
+  ["Bạn","บั่น","คุณ","Bạn = คุณ, เพื่อน"],
+  ["đi đâu đấy","ดี เดิว เด๊ย","ไปไหนน่ะ","đi = ไป + đâu = ไหน + đấy = น่ะ"],
+  ["đang","ดาง","กำลัง","คำช่วยกริยา แสดงกำลังทำ"],
+  ["là","ล่า","เป็น, คือ","là = เป็น/คือ"],
+  ["làm","ล่าม","ทำ","làm = ทำ"],
+  ["đấy","เด๊ย","...น่ะ, ...ล่ะ","คำลงท้ายเน้นความ"],
+  ["còn","ก่อน","ส่วน, แล้ว...ล่ะ","còn = ส่วน...ล่ะ (ถามกลับ)"],
+  ["một","โมด","หนึ่ง","một = หนึ่ง"],
+  ["tiếng Anh","เตี๋ยง อาง","ภาษาอังกฤษ","tiếng = ภาษา + Anh = อังกฤษ"],
+  ["tiếng Trung","เตี๋ยง จุง","ภาษาจีน","tiếng = ภาษา + Trung = จีน"],
+  ["Chính trị","จิ๊ง จิ่","รัฐศาสตร์","Chính = เที่ยงตรง, หลัก + trị = การเมือง, ปกครอง"],
+  ["Ngữ Văn","งื๋อ วัน","อักษรศาสตร์","Ngữ = ภาษา, คำพูด + Văn = วรรณคดี"],
+  ["thứ nhất","ทื้อ เญิ๊ด","ที่หนึ่ง","thứ = ที่ + nhất = หนึ่ง"],
+  ["thứ tư","ทื้อ ตือ","ที่สี่","thứ = ที่ + tư = สี่"],
+  ["học sinh","ฮ็อก ซิง","นักเรียน","học = เรียน + sinh = ผู้เรียน"],
+  ["bác sĩ","บ๊าก สี่","หมอ","bác = ผู้ทรงคุณวุฒิ + sĩ = ผู้รู้"],
+  ["y tá","อี ต้า","พยาบาล","y = การแพทย์ + tá = ผู้ช่วย"],
+  ["kỹ sư","กี๋ ซือ","วิศวกร","kỹ = เทคนิค + sư = ผู้เชี่ยวชาญ"],
+  ["luật sư","หลวด ซือ","ทนายความ, นักกฎหมาย","luật = กฎหมาย + sư = ผู้เชี่ยวชาญ"],
+  ["công an","โกง อาน","ตำรวจ","công = สาธารณะ + an = สงบ"],
+  ["nhân viên văn phòng","เญิน เวียน วัน ฟ่อง","พนักงานออฟฟิศ","nhân viên = พนักงาน + văn phòng = สำนักงาน"],
+  ["nhân viên kế toán","เญิน เวียน เก้ ต๊วน","พนักงานบัญชี","nhân viên = พนักงาน + kế toán = บัญชี"],
+  ["thư ký","เทือ กื้อ","เลขานุการ","thư = หนังสือ + ký = บันทึก"],
+  ["nông dân","โนง ซึน","เกษตรกร","nông = เกษตร + dân = ประชาชน"],
+  ["đầu bếp","เดิ่ว เบ๊บ","เชฟ","đầu = หัวหน้า + bếp = ครัว"],
+  ["người bán hàng","เหงื่อย บ๊าน ฮ่าง","พ่อค้า แม่ค้า","người = คน + bán = ขาย + hàng = สินค้า"],
+  ["ca sĩ","กา สี่","นักร้อง","ca = ร้องเพลง + sĩ = นัก/ผู้เชี่ยวชาญ"],
+  ["diễn viên","เซี๋ยน เวียน","นักแสดง","diễn = แสดง + viên = บุคลากร"],
+  ["nhà báo","ญ่า เบ๋า","นักข่าว","nhà = สำนัก + báo = ข่าว"],
+  ["phóng viên","ฟ่อง เวียน","นักข่าว (ผู้สื่อข่าว)","phóng = ส่ง/ปล่อยข่าว + viên = บุคลากร"],
+  ["hướng dẫn viên","เฮื้อง ซั๋น เวียน","มัคคุเทศก์","hướng dẫn = แนะนำ/นำทาง + viên = บุคลากร"],
+  ["kiến trúc sư","เกี๊ยน จุ๊ก ซือ","สถาปนิก","kiến trúc = สถาปัตยกรรม + sư = ผู้เชี่ยวชาญ"],
+  ["nhà kinh doanh","ญ่า กิง ซวน","นักธุรกิจ","nhà = ผู้เชี่ยวชาญ + kinh doanh = ธุรกิจ"],
+  ["phi công","ฟี โกง","นักบิน",""],
+  ["quốc tịch","ก๊วก ติ๊ก","สัญชาติ",""],
+  ["nơi làm việc","เนย ล่าม เหวียก","ที่ทำงาน",""],
+  ["người giúp việc","เหงื่อย ยุ๊บ เหวียก","คนใช้/แม่บ้าน",""],
+  ["nhà đầu tư","ญ่า เดิ่า เตือ","นักลงทุน",""],
+  ["thất nghiệp","เทิ๊ด เหงี๊ยบ","ตกงาน",""],
+  ["đợi","เดย","รอ",""],
+  ["khoa Ngữ Văn","ควา เงื่อ วัน","คณะอักษรศาสตร์",""],
+  ["khoa Chính trị","ควา จิ๊ง จิ่","คณะรัฐศาสตร์",""],
+  ["khoa Truyền thông","ควา จุ่เยน โทง","คณะนิเทศศาสตร์",""],
+  ["khoa Luật","ควา หลวด","คณะนิติศาสตร์",""],
+  ["khoa Mỹ thuật","ควา หมี๋ ทวด","คณะศิลปกรรมศาสตร์",""],
+  ["khoa Giáo dục","ควา เจ๋า หยุก","คณะครุศาสตร์",""],
+  ["khoa Điều dưỡng","ควา เดี่ยว เยื่อง","คณะพยาบาลศาสตร์",""],
+  ["khoa Khoa học tự nhiên","ควา ควา ฮ็อก ตื่อ เญียน","คณะวิทยาศาสตร์",""],
+  ["khoa Kỹ thuật","ควา กี๋ ทวด","คณะวิศวกรรมศาสตร์",""],
+  ["khoa Tâm lý học","ควา เติม หลี๋ ฮ็อก","คณะจิตวิทยา",""],
+  ["khoa Y","ควา อี","คณะแพทยศาสตร์",""],
+  ["khoa Nha khoa","ควา ญา ควา","คณะทันตแพทยศาสตร์",""],
+  ["khoa Dược","ควา เยื๊อก","คณะเภสัชศาสตร์",""],
+  ["khoa Thú y","ควา ทู๋ อี","คณะสัตวแพทยศาสตร์",""],
+  ["khoa Kinh tế","ควา กิง เต๊","คณะเศรษฐศาสตร์",""],
+  ["khoa Khoa học Sức khỏe","ควา ควา ฮ็อก ซึ๊ก ขวย","คณะสหเวชศาสตร์",""],
+  ["khoa Thương mại và Kế toán","ควา เทื่อง หมั่ย วา แก๊ ต๊วน","คณะพาณิชยศาสตร์และการบัญชี",""],
+  ["khoa Kiến trúc","ควา เกี๊ยน จุ๊ก","คณะสถาปัตยกรรมศาสตร์",""],
+];
+
+const vocabBai5 = [
+  ["trường học","เจื่อง ฮ็อก","โรงเรียน",""],
+  ["nhà vệ sinh","ญ่า แหว่ ซิง","ห้องน้ำ",""],
+  ["thư viện","เทือ เวียน","ห้องสมุด",""],
+  ["sân bay","เซิน บาย","สนามบิน",""],
+  ["bệnh viện","แบ่ง เวียน","โรงพยาบาล",""],
+  ["nhà ga","ญ่า กา","สถานีรถไฟ",""],
+  ["siêu thị","เซียว ถิ่","ซูเปอร์มาร์เก็ต",""],
+  ["bảo tàng","เบ๋า ตั่ง","พิพิธภัณฑ์",""],
+  ["chợ","เจอ๋","ตลาด",""],
+  ["trường đại học","เจื่อง ดั่ย ฮ็อก","มหาวิทยาลัย",""],
+  ["nhà hàng","ญ่า ฮ่าง","ร้านอาหาร",""],
+  ["hiệu sách","เหี่ยว ซ๊าก","ร้านหนังสือ",""],
+  ["quán cà phê","ก๊วน กา เฟ","ร้านกาแฟ",""],
+  ["hiệu thuốc","เหี่ยว เทื๊อก","ร้านขายยา",""],
+  ["công viên","โกง เวียน","สวนสาธารณะ",""],
+  ["bưu điện","บิว เดี่ยน","ไปรษณีย์",""],
+  ["nhà","ญ่า","บ้าน",""],
+  ["chùa","จั่ว","วัด",""],
+  ["ngân hàng","เงิน ฮ่าง","ธนาคาร",""],
+  ["khách sạn","ค๊าก ซั่น","โรงแรม",""],
+  ["trong","จอง","ใน",""],
+  ["dưới","ยื๋อย","ใต้",""],
+  ["trên","เจน","บน, เหนือ",""],
+  ["giữa","เยื๋อ","ระหว่าง",""],
+  ["bên trái","เบน ไต่","ด้านซ้าย(มือ)",""],
+  ["cạnh","ก๋าง","ข้าง",""],
+  ["trước","เจื๊อก","หน้า",""],
+  ["sau","เซา","หลัง",""],
+  ["đối diện","โด่ย เหยียน","ตรงข้าม (+กับ)",""],
+  ["bên phải","เบน ไฟ่","ด้านขวา(มือ)",""],
+  ["sống","โซ่ง","อาศัยอยู่, มีชีวิตอยู่",""],
+  ["ở đâu","เอ่อ เดิว","อยู่ที่ไหน",""],
+  ["quận","ก๊วน","เขต",""],
+  ["gần","เกิ่น","ใกล้",""],
+  ["xa","ซา","ไกล",""],
+  ["để","เด๋อ","เพื่อ",""],
+  ["đọc","ด็อก","อ่าน",""],
+  ["sách","ซ๊าก","หนังสือ",""],
+  ["với","เวย","กับ",""],
+  ["phố","โฟ๋","ถนน",""],
+  ["sẽ","เซ๋","จะ",""],
+  ["về","เหว่","กลับ",""],
+  ["mua","มัว","ซื้อ",""],
+  ["mua sắm","มัว ซั่ม","ซื้อของ",""],
+  ["đồ ăn","โด๊ อาน","ของกิน",""],
+  ["thích","ทิ๊ก","ชอบ",""],
+  ["địa chỉ","เดีย จี๋","ที่อยู่",""],
+  ["số nhà","โซ๋ ญ่า","บ้านเลขที่",""],
+  ["phường","เฟื่อง","แขวง",""],
+  ["thành phố","ท่าง โฟ๋","เมือง/จังหวัด",""],
+  ["tỉnh","ตี๋ง","จังหวัด",""],
+];
+
+const vocabByChapter = [
+  { chapter: "บทที่ 1-2", data: vocabBai1 },
+  { chapter: "บทที่ 3", data: vocabBai3 },
+  { chapter: "บทที่ 4", data: vocabBai4 },
+  { chapter: "บทที่ 5", data: vocabBai5 },
+];
+
+// ============================================================
+// รวมข้อมูลทั้งหมดเป็น flashcard: {cat, chapter, front, back, viet}
+// ============================================================
 let allCards = [];
 
 consonants.forEach(([letter,pron,thai,final])=>{
@@ -588,71 +550,59 @@ consonants.forEach(([letter,pron,thai,final])=>{
   if(final) back += `<br>พยัญชนะท้าย: ${final}`;
   allCards.push({cat:"พยัญชนะเดี่ยว", front:letter, back, viet:letter});
 });
-
 compoundConsonants.forEach(([letter,pron,thai,final])=>{
   let back = `เสียงอ่าน: ${pron}<br>เสียงเทียบไทย: <b>${thai}</b>`;
   if(final) back += `<br>พยัญชนะท้าย: ${final}`;
   allCards.push({cat:"พยัญชนะประสม", front:letter, back, viet:letter});
 });
-
 singleVowels.forEach(([vowel,thai,note])=>{
   let back = `คำอ่าน: <b>${thai}</b>`;
   if(note) back += `<br>Note: ${note}`;
   allCards.push({cat:"สระเดี่ยว", front:vowel, back, viet:vowel});
 });
-
 compoundVowels.forEach(([vowel,thai,note])=>{
   let back = `คำอ่าน: <b>${thai}</b>`;
   if(note) back += `<br>Note: ${note}`;
   allCards.push({cat:"สระประสม", front:vowel, back, viet:vowel});
 });
-
 tones.forEach(([name,desc,example])=>{
   const back = `ชื่อวรรณยุกต์: <b>${name}</b><br>ลักษณะเสียง: ${desc}`;
   allCards.push({cat:"วรรณยุกต์", front:example, back, viet:example});
 });
-
-dictation2.forEach(([viet,pron,meaning])=>{
-  const back = `คำเวียดนาม: <b>${viet}</b><br>คำแปล: ${meaning}`;
-  allCards.push({cat:"Chính tả 2", front:pron, back, viet});
-});
-
 vowelFinal.forEach(([spell,thai,example])=>{
   const back = `คำอ่าน: <b>${thai}</b><br>ตัวอย่าง: ${example}`;
   allCards.push({cat:"สระ+ตัวสะกด", front:spell, back, viet:spell});
 });
-
 compoundVowelFinal.forEach(([spell,thai,example])=>{
   const back = `คำอ่าน: <b>${thai}</b><br>ตัวอย่าง: ${example}`;
   allCards.push({cat:"สระประสม+ตัวสะกด", front:spell, back, viet:spell});
 });
-
 glideVowels.forEach(([spell,thai,example])=>{
   const back = `คำอ่าน: <b>${thai}</b><br>ตัวอย่าง: ${example}`;
   allCards.push({cat:"เสียงเลื่อน", front:spell, back, viet:spell});
 });
-
 triphthongs.forEach(([spell,thai,example])=>{
   const back = `คำอ่าน: <b>${thai}</b><br>ตัวอย่าง: ${example}`;
   allCards.push({cat:"สระประสม 3 ตัว", front:spell, back, viet:spell});
 });
 
-// dictation3.forEach(([viet,pron,breakdown,meaning])=>{
-//   const back = `คำเวียดนาม: <b>${viet}</b><br>แยกคำ: ${breakdown}<br>คำแปล: ${meaning}`;
-//   allCards.push({cat:"Chính tả 3", front:pron, back, viet});
-// });
-// [คำเวียดนาม, คำอ่านสำเนียงเหนือ, แปลทีละคำ, คำแปล]
-dictation3.forEach(([viet,pron,breakdown,meaning])=>{
-  const back = `คำเวียดนาม: <b>${viet}</b><br>คำอ่าน: ${pron}<br>แยกคำ: ${breakdown}`;
-  allCards.push({cat:"Chính tả 3", front:meaning, back, viet});
+// หมวดคำศัพท์รวม (แยกตามบทด้วย field chapter)
+vocabByChapter.forEach(({chapter, data})=>{
+  data.forEach(([viet,pron,meaning,note])=>{
+    let back = `คำเวียดนาม: <b>${viet}</b><br>คำแปล: ${meaning}`;
+    if(note) back += `<br>โน้ต: ${note}`;
+    allCards.push({cat:"คำศัพท์", chapter, front:pron, back, viet});
+  });
 });
-  
+
+// ============================================================
 // Logic
-const categories = ["ทั้งหมด","พยัญชนะเดี่ยว","พยัญชนะประสม","สระเดี่ยว","สระประสม","วรรณยุกต์","สระ+ตัวสะกด","สระประสม+ตัวสะกด","เสียงเลื่อน","สระประสม 3 ตัว","Chính tả 2","Chính tả 3"];
-// const categories = ["Chính tả 2"];
+// ============================================================
+const categories = ["ทั้งหมด","พยัญชนะเดี่ยว","พยัญชนะประสม","สระเดี่ยว","สระประสม","วรรณยุกต์","สระ+ตัวสะกด","สระประสม+ตัวสะกด","เสียงเลื่อน","สระประสม 3 ตัว","คำศัพท์"];
 let currentCards = [...allCards];
 let idx = 0;
 let flipped = false;
+let currentChapter = "ทั้งหมด";
 
 const filterSelect = document.getElementById('filterSelect');
 categories.forEach(c=>{
@@ -660,24 +610,46 @@ categories.forEach(c=>{
   opt.value = c; opt.textContent = c;
   filterSelect.appendChild(opt);
 });
+
 filterSelect.addEventListener('change', ()=>{
   const f = filterSelect.value;
+  currentChapter = "ทั้งหมด";
   currentCards = f === "ทั้งหมด" ? [...allCards] : allCards.filter(c=>c.cat===f);
   idx = 0; flipped = false;
+  renderChapterFilter();
   render();
 });
 
+function renderChapterFilter(){
+  const container = document.getElementById('chapterFilter');
+  if(filterSelect.value !== "คำศัพท์"){
+    container.style.display = "none";
+    container.innerHTML = "";
+    return;
+  }
+  container.style.display = "flex";
+  const chapters = ["ทั้งหมด", ...vocabByChapter.map(v=>v.chapter)];
+  container.innerHTML = chapters.map(ch=>
+    `<button class="chip${ch===currentChapter?' active':''}" onclick="filterByChapter('${ch}')">${ch}</button>`
+  ).join('');
+}
+
+function filterByChapter(chapter){
+  currentChapter = chapter;
+  const vocabCards = allCards.filter(c=>c.cat==="คำศัพท์");
+  currentCards = chapter === "ทั้งหมด" ? vocabCards : vocabCards.filter(c=>c.chapter===chapter);
+  idx = 0; flipped = false;
+  renderChapterFilter();
+  render();
+}
+
 function frontFontSize(text){
-  const len = text.length;
-  // if(len<=3) return 56;
-  // if(len<=8) return 38;
-  // if(len<=15) return 27;
   return 50;
 }
 
 function render(){
-  const card = document.getElementById('card');
   const catLabel = document.getElementById('catLabel');
+  const chapterLabel = document.getElementById('chapterLabel');
   const frontText = document.getElementById('frontText');
   const backContent = document.getElementById('backContent');
   const frontEcho = document.getElementById('frontEcho');
@@ -688,6 +660,7 @@ function render(){
 
   if(currentCards.length===0){
     catLabel.textContent = "";
+    chapterLabel.textContent = "";
     frontText.textContent = "ไม่มีการ์ดในหมวดนี้";
     frontText.style.fontSize = "22px";
     backContent.style.display = "none";
@@ -699,6 +672,7 @@ function render(){
 
   const c = currentCards[idx];
   catLabel.textContent = c.cat;
+  chapterLabel.textContent = c.chapter || "";
 
   if(flipped){
     frontText.style.display = "none";
@@ -719,49 +693,37 @@ function render(){
   updateTonePanel();
 }
 
-// ตารางสระ+วรรณยุกต์ครบ 6 เสียง: [ngang, huyền, hỏi, sắc, ngã, nặng]
+// ============================================================
+// วรรณยุกต์ / ฝึกฟังเสียง
+// ============================================================
 const toneTable = {
-  'a':['a','à','ả','á','ã','ạ'],
-  'ă':['ă','ằ','ẳ','ắ','ẵ','ặ'],
-  'â':['â','ầ','ẩ','ấ','ẫ','ậ'],
-  'e':['e','è','ẻ','é','ẽ','ẹ'],
-  'ê':['ê','ề','ể','ế','ễ','ệ'],
-  'i':['i','ì','ỉ','í','ĩ','ị'],
-  'o':['o','ò','ỏ','ó','õ','ọ'],
-  'ô':['ô','ồ','ổ','ố','ỗ','ộ'],
-  'ơ':['ơ','ờ','ở','ớ','ỡ','ợ'],
-  'u':['u','ù','ủ','ú','ũ','ụ'],
-  'ư':['ư','ừ','ử','ứ','ữ','ự'],
-  'y':['y','ỳ','ỷ','ý','ỹ','ỵ'],
+  'a':['a','à','ả','á','ã','ạ'],'ă':['ă','ằ','ẳ','ắ','ẵ','ặ'],
+  'â':['â','ầ','ẩ','ấ','ẫ','ậ'],'e':['e','è','ẻ','é','ẽ','ẹ'],
+  'ê':['ê','ề','ể','ế','ễ','ệ'],'i':['i','ì','ỉ','í','ĩ','ị'],
+  'o':['o','ò','ỏ','ó','õ','ọ'],'ô':['ô','ồ','ổ','ố','ỗ','ộ'],
+  'ơ':['ơ','ờ','ở','ớ','ỡ','ợ'],'u':['u','ù','ủ','ú','ũ','ụ'],
+  'ư':['ư','ừ','ử','ứ','ữ','ự'],'y':['y','ỳ','ỷ','ý','ỹ','ỵ'],
 };
-const toneNames = ['Ngang','Huyền','Hỏi','Sắc','Ngã','Nặng'];
-
-// map ย้อนกลับ: ตัวอักษรใดๆ (มีวรรณยุกต์หรือไม่ก็ตาม) -> [สระฐาน, index วรรณยุกต์]
 const charToBase = {};
 Object.entries(toneTable).forEach(([base, variants])=>{
   variants.forEach((ch, i)=>{ charToBase[ch] = [base, i]; });
 });
 
-// สร้างคำแปรผันตามวรรณยุกต์ที่เลือก (ใช้กับพยางค์แรกที่เจอสระมีวรรณยุกต์)
 function applyTone(word, toneIdx){
   const tokens = word.split(' ');
   const firstToken = tokens[0];
   const chars = [...firstToken];
-
-  // หาตำแหน่งสระตัวสุดท้ายในพยางค์แรกที่อยู่ในตาราง
   let targetIdx = -1;
   for(let i = chars.length - 1; i >= 0; i--){
     const lower = chars[i].toLowerCase();
     if(charToBase[lower]){ targetIdx = i; break; }
   }
-  if(targetIdx === -1) return word; // ไม่เจอสระที่รู้จัก คืนคำเดิม
-
+  if(targetIdx === -1) return word;
   const lowerChar = chars[targetIdx].toLowerCase();
   const [base] = charToBase[lowerChar];
   let newChar = toneTable[base][toneIdx];
   if(chars[targetIdx] !== lowerChar) newChar = newChar.toUpperCase();
   chars[targetIdx] = newChar;
-
   tokens[0] = chars.join('');
   return tokens.join(' ');
 }
@@ -778,22 +740,30 @@ function updateTonePanel(){
 }
 
 let vietVoice = null;
-
 function loadVietVoice(){
   const voices = speechSynthesis.getVoices();
   vietVoice = voices.find(v => v.lang === 'vi-VN')
            || voices.find(v => v.lang.startsWith('vi'))
            || null;
 }
-
-// โหลดทันทีถ้ามีอยู่แล้ว และโหลดซ้ำเมื่อรายชื่อเสียงพร้อม
 loadVietVoice();
 if (speechSynthesis.onvoiceschanged !== undefined) {
   speechSynthesis.onvoiceschanged = loadVietVoice;
 }
 
+function fallbackSpeak(text){
+  speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'vi-VN';
+  utter.rate = 0.85;
+  if (vietVoice) utter.voice = vietVoice;
+  speechSynthesis.speak(utter);
+}
+
 async function playVietnamese(text){
   const audio = document.getElementById('ttsAudio');
+  audio.onerror = null;
+  audio.onerror = function(){ fallbackSpeak(text); };
   try{
     const response = await fetch(
       `https://texttospeech.googleapis.com/v1/text:synthesize?key=${GOOGLE_TTS_API_KEY}`,
@@ -809,28 +779,14 @@ async function playVietnamese(text){
     );
     const data = await response.json();
     if(!data.audioContent){
-      console.log('Google Cloud TTS error:', data);
       fallbackSpeak(text);
       return;
     }
     audio.src = 'data:audio/mp3;base64,' + data.audioContent;
-    audio.play().catch((err)=>{
-      console.log('Play rejected:', err);
-      fallbackSpeak(text);
-    });
+    audio.play().catch(()=>{ fallbackSpeak(text); });
   } catch(err){
-    console.log('Google Cloud TTS request failed:', err);
     fallbackSpeak(text);
   }
-}
-
-function fallbackSpeak(text){
-  speechSynthesis.cancel();
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'vi-VN';
-  utter.rate = 0.85;
-  if (vietVoice) utter.voice = vietVoice;
-  speechSynthesis.speak(utter);
 }
 
 function speakWord(){
@@ -839,7 +795,6 @@ function speakWord(){
   if(!word) return;
   playVietnamese(word);
 }
-
 function speakTone(toneIdx){
   if(currentCards.length===0) return;
   const word = currentCards[idx].viet;
@@ -847,32 +802,31 @@ function speakTone(toneIdx){
   const variant = applyTone(word, toneIdx);
   playVietnamese(variant);
 }
-
 function toggleTonePanel(){
   const panel = document.getElementById('tonePanel');
   panel.style.display = panel.style.display === 'grid' ? 'none' : 'grid';
 }
-  
+
+// ============================================================
+// นำทาง
+// ============================================================
 function flipCard(){
   if(currentCards.length===0) return;
   flipped = !flipped;
   render();
 }
-
 function nextCard(){
   if(currentCards.length===0) return;
   idx = (idx+1) % currentCards.length;
   flipped = false;
   render();
 }
-
 function prevCard(){
   if(currentCards.length===0) return;
   idx = (idx-1+currentCards.length) % currentCards.length;
   flipped = false;
   render();
 }
-
 function shuffleCards(){
   for(let i=currentCards.length-1;i>0;i--){
     const j = Math.floor(Math.random()*(i+1));
@@ -881,19 +835,22 @@ function shuffleCards(){
   idx = 0; flipped = false;
   render();
 }
-
 function resetOrder(){
   const f = filterSelect.value;
+  if(f === "คำศัพท์"){
+    filterByChapter(currentChapter);
+    return;
+  }
   currentCards = f === "ทั้งหมด" ? [...allCards] : allCards.filter(c=>c.cat===f);
   idx = 0; flipped = false;
   render();
 }
 
+renderChapterFilter();
 render();
 // ---------------------------------------------------------------------------
 // ทำโดย นีโม่ ถ้าเขียนตรงไหนผิดก็บอกได้
 // ---------------------------------------------------------------------------
-
 </script>
 </body>
 </html>
