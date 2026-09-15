@@ -595,9 +595,9 @@ triphthongs.forEach(([spell,thai,example])=>{
 // หมวดคำศัพท์รวม (แยกตามบทด้วย field chapter)
 vocabByChapter.forEach(({chapter, data})=>{
   data.forEach(([viet,pron,meaning,note])=>{
-    let back = `คำเวียดนาม: <b>${viet}</b><br>คำแปล: ${meaning}`;
+    let back = `คำอ่าน: <b>${pron}</b><br>คำแปล: ${meaning}`;
     if(note) back += `<br>โน้ต: ${note}`;
-    allCards.push({cat:"คำศัพท์", chapter, front:pron, back, viet});
+    allCards.push({cat:"คำศัพท์", chapter, front:viet, back, viet});
   });
 });
 
