@@ -6,7 +6,9 @@
 <title>Flashcard ภาษาจีน</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&family=Noto+Sans+SC:wght@500;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap" rel="stylesheet">
+<!-- ฟอนต์ตัวบรรจง (楷体) แบบลายมือ เหมือนในหนังสือเรียน — โหลดได้เมื่อเปิดจาก GitHub Pages -->
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
 <style>
   :root{
     --bg:#fdf6ec; --card:#ffffff; --ink:#2b2320; --accent:#c0392b; --accent2:#1e6f5c;
@@ -75,7 +77,11 @@
   }
   .cat-tag span{ background:var(--soft); padding:3px 10px; border-radius:12px; }
   .front-text{ font-size:56px; font-weight:800; color:var(--accent); line-height:1.15; word-break:break-word; }
-  .front-text.hz{ font-family:'Noto Serif SC','Noto Sans SC',serif; font-weight:900; color:var(--ink); letter-spacing:4px; }
+  /* ฟอนต์ตัวจีน: เปลี่ยนได้ด้วยปุ่ม ฟอนต์ */
+  :root{ --hzfont:'Noto Sans SC',sans-serif; --hzweight:500; }
+  :root[data-hz="serif"]{ --hzfont:'Noto Serif SC',serif; --hzweight:500; }
+  :root[data-hz="kai"]{ --hzfont:'LXGW WenKai','KaiTi','STKaiti','Kaiti SC','BiauKai','Noto Serif SC',serif; --hzweight:400; }
+  .front-text.hz{ font-family:var(--hzfont); font-weight:var(--hzweight); color:var(--ink); letter-spacing:4px; }
   .flip-hint{ position:absolute; bottom:12px; font-size:12px; color:var(--muted); }
 
   /* pinyin back */
@@ -86,7 +92,8 @@
   /* vocab back */
   .scroll{ width:100%; overflow-y:auto; text-align:left; padding-right:4px; flex:1; }
   .v-top{ text-align:center; margin-bottom:10px; }
-  .v-hz{ font-family:'Noto Serif SC',serif; font-weight:900; font-size:30px; }
+  .v-hz{ font-family:var(--hzfont); font-weight:var(--hzweight); font-size:32px; }
+  .tts-msg{ font-size:12px; color:var(--muted); text-align:center; min-height:16px; margin-bottom:6px; }
   .v-trad{ font-size:13px; color:var(--muted); margin-left:6px; font-family:'Noto Sans SC',sans-serif; font-weight:500; }
   .v-py{ font-size:22px; font-weight:700; color:var(--accent); margin-top:2px; }
   .v-th{ font-size:16px; color:var(--accent2); font-weight:600; }
@@ -165,8 +172,10 @@
     <button class="ctrl" id="shuffleBtn">สุ่ม</button>
     <button class="ctrl" id="resetBtn">เรียงใหม่</button>
   </div>
+  <div class="tts-msg" id="ttsMsg"></div>
   <div class="controls" id="extraRow">
-    <button class="ctrl" id="reverseBtn" style="grid-column:1 / 3">โหมดกลับด้าน (ไทย → จีน)</button>
+    <button class="ctrl" id="reverseBtn" style="grid-column:1 / 3">โหมดกลับด้าน</button>
+    <button class="ctrl" id="fontBtn">ฟอนต์: 黑体</button>
     <button class="ctrl" id="matrixBtn">ตารางเสียง</button>
   </div>
 </div>
@@ -754,7 +763,8 @@ function renderChips(){
   $('chips').querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ sub=b.dataset.sub; load(); }));
   $('reverseBtn').classList.toggle('hidden', group!=="vocab");
   $('matrixBtn').classList.toggle('hidden', group!=="pinyin");
-  $('reverseBtn').style.gridColumn = "1 / 4";
+  $('reverseBtn').style.gridColumn = "1 / 3";
+  $('fontBtn').classList.toggle('hidden', group!=="vocab");
   if(group==="pinyin") $('matrixBtn').style.gridColumn = "1 / 4";
 }
 
@@ -796,7 +806,7 @@ function render(){
     $('catFront').textContent = tag; $('catBack').textContent = tag;
     if(reverse){
       f.className = "front-text"; f.style.fontSize = "30px"; f.style.color = "var(--ink)";
-      f.innerHTML = `${c.mean}${c.pos?`<div style="font-size:14px;color:var(--muted);margin-top:8px">${c.pos}</div>`:""}`;
+      f.textContent = c.mean;
     } else {
       f.className = "front-text hz"; f.style.color = ""; f.style.fontSize = frontSize(c.hz)+"px";
       f.textContent = c.hz;
@@ -823,23 +833,75 @@ function shuffleCards(){
   idx=0; render();
 }
 
-/* ================= TTS ================= */
+/* ================= TTS =================
+   เหมือนแอปเวียดนาม: ใช้ Google Cloud Text-to-Speech ก่อน
+   ถ้าไม่มี key / เรียกไม่ได้ ค่อยใช้เสียงของเบราว์เซอร์ (Web Speech API) แทน
+   วาง API key ของคุณในบรรทัดข้างล่าง (อย่าลืมตั้ง restriction ใน Google Cloud ให้ใช้ได้เฉพาะโดเมน github.io ของคุณ) */
+const GOOGLE_TTS_API_KEY = 'AIzaSyDSXz_gA2A5b3ZK9dgusI02OelIdyAvrxA';
+const GOOGLE_TTS_VOICE = { languageCode:'cmn-CN', name:'cmn-CN-Wavenet-A' };  // A,D = เสียงผู้หญิง · B,C = เสียงผู้ชาย
+const ttsCache = {};
+const ttsAudio = new Audio();
+
 let zhVoice = null;
 function loadVoices(){
   const v = speechSynthesis.getVoices();
-  zhVoice = v.find(x=>x.lang==='zh-CN') || v.find(x=>x.lang && x.lang.replace('_','-').startsWith('zh-CN')) || v.find(x=>x.lang && x.lang.startsWith('zh')) || null;
+  const zh = v.filter(x=>x.lang && x.lang.replace('_','-').toLowerCase().startsWith('zh'));
+  zhVoice = zh.find(x=>/zh-cn/i.test(x.lang.replace('_','-')) && /google|natural|online/i.test(x.name))
+         || zh.find(x=>/zh-cn/i.test(x.lang.replace('_','-')))
+         || zh.find(x=>!/hk|tw/i.test(x.lang)) || zh[0] || null;
 }
 if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
-function speak(text){
-  if(!text || !('speechSynthesis' in window)) return;
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang='zh-CN'; u.rate=0.8; if(zhVoice) u.voice=zhVoice;
-  speechSynthesis.cancel(); speechSynthesis.speak(u);
+
+function ttsMsg(t){ $('ttsMsg').textContent = t || ""; }
+
+function fallbackSpeak(text){
+  if(!('speechSynthesis' in window)){ ttsMsg('เบราว์เซอร์นี้ไม่รองรับการอ่านออกเสียง'); return; }
+  if(!zhVoice) loadVoices();
+  if(!zhVoice){ ttsMsg('ไม่พบเสียงภาษาจีนในเครื่องนี้ · ใส่ Google TTS key หรือเพิ่มภาษาจีนในเครื่อง'); }
+  speechSynthesis.cancel();
+  // Chrome บางเวอร์ชันจะเงียบถ้าเรียก speak() ต่อจาก cancel() ทันที เลยเว้นจังหวะนิดหนึ่ง
+  setTimeout(()=>{
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'zh-CN'; u.rate = 0.8;
+    if(zhVoice) u.voice = zhVoice;
+    speechSynthesis.speak(u);
+  }, 80);
+}
+
+async function speak(text){
+  if(!text) return;
+  ttsMsg('');
+  if(!GOOGLE_TTS_API_KEY){ fallbackSpeak(text); return; }
+  try{
+    if(!ttsCache[text]){
+      const res = await fetch(`https://texttospeech.googleapis.com/v1/text:synthesize?key=${GOOGLE_TTS_API_KEY}`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ input:{text}, voice:GOOGLE_TTS_VOICE, audioConfig:{audioEncoding:'MP3', speakingRate:0.85} })
+      });
+      const data = await res.json();
+      if(!data.audioContent) throw new Error('no audio');
+      ttsCache[text] = 'data:audio/mp3;base64,' + data.audioContent;
+    }
+    ttsAudio.src = ttsCache[text];
+    await ttsAudio.play();
+  }catch(err){
+    fallbackSpeak(text);
+  }
 }
 function speakCurrent(){
   const c = currentCards[idx]; if(!c) return;
   if(c.type==="vocab") speak(c.hz.replace(/…/g,''));
   else if(c.speak) speak(c.speak);
+}
+
+/* ================= FONT ================= */
+const fonts = [["sans","黑体"],["serif","宋体"],["kai","楷体"]];
+let fontIdx = 0;
+try{ fontIdx = Math.max(0, fonts.findIndex(f=>f[0]===localStorage.getItem('hzfont'))); }catch(e){}
+function applyFont(){
+  document.documentElement.dataset.hz = fonts[fontIdx][0];
+  $('fontBtn').textContent = 'ฟอนต์: ' + fonts[fontIdx][1];
+  try{ localStorage.setItem('hzfont', fonts[fontIdx][0]); }catch(e){}
 }
 
 /* ================= MATRIX ================= */
@@ -868,6 +930,7 @@ $('resetBtn').addEventListener('click', load);
 $('listenBtn').addEventListener('click', speakCurrent);
 $('reverseBtn').addEventListener('click', ()=>{ reverse=!reverse; $('reverseBtn').classList.toggle('on', reverse); render(); });
 $('matrixBtn').addEventListener('click', ()=>showMatrix(true));
+$('fontBtn').addEventListener('click', ()=>{ fontIdx=(fontIdx+1)%fonts.length; applyFont(); });
 $('matrixBackBtn').addEventListener('click', ()=>showMatrix(false));
 document.addEventListener('keydown', e=>{
   if(e.target.tagName==='SELECT') return;
@@ -877,6 +940,7 @@ document.addEventListener('keydown', e=>{
   else if(e.key==='s') speakCurrent();
 });
 
+applyFont();
 load();
 </script>
 </body>
