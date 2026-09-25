@@ -2,299 +2,155 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Flashcard พินอิน จีน</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Flashcard ภาษาจีน</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;700;800&family=Noto+Sans+SC:wght@500;700&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#fdf6ec;
-    --card:#ffffff;
-    --ink:#2b2320;
-    --accent:#c0392b;
-    --accent2:#1e6f5c;
-    --muted:#8a7f76;
-    --line:#e7ddd0;
+    --bg:#fdf6ec; --card:#ffffff; --ink:#2b2320; --accent:#c0392b; --accent2:#1e6f5c;
+    --muted:#8a7f76; --line:#e7ddd0; --soft:#f6ede0; --chip:#ffffff; --shadow:rgba(0,0,0,0.08);
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top, 0px);
+    padding-bottom:env(safe-area-inset-bottom, 0px);
   }
-  *{box-sizing:border-box;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1c1917; --card:#27231f; --ink:#f1ebe4; --accent:#ec7a6c; --accent2:#5cc4a6;
+      --muted:#a39a90; --line:#3b352f; --soft:#312b26; --chip:#27231f; --shadow:rgba(0,0,0,0.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1c1917; --card:#27231f; --ink:#f1ebe4; --accent:#ec7a6c; --accent2:#5cc4a6;
+    --muted:#a39a90; --line:#3b352f; --soft:#312b26; --chip:#27231f; --shadow:rgba(0,0,0,0.35);
+  }
+  html{ scroll-padding-top:env(safe-area-inset-top, 0px); }
+  *,*::before,*::after{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
   body{
-    margin:0;
-    font-family:'Sarabun','Noto Sans SC','Segoe UI',sans-serif;
-    background:var(--bg);
-    color:var(--ink);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:16px;
-    min-height:100vh;
+    margin:0; font-family:'Sarabun','Noto Sans SC','Segoe UI',sans-serif;
+    background:var(--bg); color:var(--ink);
+    display:flex; flex-direction:column; align-items:center;
+    padding:16px 14px 28px; min-height:100%;
   }
-  header{
-    text-align:center;
-    margin-bottom:10px;
-  }
-  header h1{
-    font-size:1.4rem;
-    margin:0;
-    letter-spacing:1px;
-  }
-  header h1 .cn{
-    font-family:'Noto Sans SC',sans-serif;
-    color:var(--accent);
-    font-weight:700;
-  }
-  header p{
-    margin:2px 0 0;
-    color:var(--muted);
-    font-size:0.85rem;
-  }
-  .toolbar{
-    display:flex;
-    gap:8px;
-    margin:10px 0;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  select, .pillbtn{
-    font-family:inherit;
-    font-size:0.85rem;
-    padding:8px 14px;
-    border-radius:20px;
-    border:1px solid var(--line);
-    background:#fff;
-    color:var(--ink);
-  }
-  .pillbtn.active{
-    background:var(--accent);
-    color:#fff;
-    border-color:var(--accent);
-  }
-  .progress-wrap{
-    width:100%;
-    max-width:420px;
-    height:6px;
-    background:var(--line);
-    border-radius:4px;
-    overflow:hidden;
-    margin:6px 0 16px;
-  }
-  .progress-bar{
-    height:100%;
-    background:var(--accent2);
-    width:0%;
-    transition:width .2s;
-  }
-  /* Flashcard */
-  .stage{
-    width:100%;
-    max-width:420px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-  }
-  .card{
-    width:100%;
-    height:280px;
-    perspective:1200px;
-    cursor:pointer;
-    margin-bottom:14px;
-  }
-  .card-inner{
-    position:relative;
-    width:100%;
-    height:100%;
-    transition:transform .5s;
-    transform-style:preserve-3d;
-  }
-  .card.flipped .card-inner{
-    transform:rotateY(180deg);
-  }
-  .face{
-    position:absolute;
-    width:100%;
-    height:100%;
-    backface-visibility:hidden;
-    border-radius:18px;
-    background:var(--card);
-    box-shadow:0 6px 18px rgba(0,0,0,0.08);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:18px;
-    text-align:center;
-    border:1px solid var(--line);
-  }
-  .face .cat-tag{
-    position:absolute;
-    top:12px;
-    left:14px;
-    font-size:0.7rem;
-    color:var(--muted);
-    background:var(--bg);
-    padding:3px 10px;
-    border-radius:12px;
-  }
-  .front-text{
-    font-size:56px;
-    font-weight:800;
-    color:var(--accent);
-  }
-  .back .cn-word{
-    font-family:'Noto Sans SC',sans-serif;
-    font-size:34px;
-    font-weight:700;
-    margin-bottom:6px;
-  }
-  .back .th-sound{
-    font-size:20px;
-    font-weight:600;
-    color:var(--accent2);
-    margin-bottom:8px;
-  }
-  .back .th-desc{
-    font-size:14px;
-    color:var(--ink);
-    line-height:1.5;
-    max-height:130px;
-    overflow-y:auto;
-    padding:0 4px;
-  }
-  .back{
-    transform:rotateY(180deg);
-  }
-  .controls{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:center;
-    margin-bottom:10px;
-  }
-  button.ctrl{
-    font-family:inherit;
-    font-size:0.85rem;
-    padding:10px 16px;
-    border-radius:12px;
-    border:none;
-    background:#fff;
-    box-shadow:0 2px 6px rgba(0,0,0,0.08);
-    color:var(--ink);
-    cursor:pointer;
-  }
-  button.ctrl.primary{
-    background:var(--accent);
-    color:#fff;
-  }
-  button.ctrl.listen{
-    background:var(--accent2);
-    color:#fff;
-  }
-  .counter{
-    color:var(--muted);
-    font-size:0.8rem;
-    margin-bottom:6px;
-  }
-  /* Matrix view */
-  .matrix-wrap{
-    width:100%;
-    max-width:900px;
-    overflow-x:auto;
-    background:#fff;
-    border-radius:14px;
-    padding:12px;
-    box-shadow:0 4px 14px rgba(0,0,0,0.06);
-  }
-  table.pinyin-matrix{
-    border-collapse:collapse;
-    font-size:0.78rem;
-    width:100%;
-  }
-  table.pinyin-matrix th, table.pinyin-matrix td{
-    border:1px solid var(--line);
-    padding:5px 6px;
-    text-align:center;
-    white-space:nowrap;
-  }
-  table.pinyin-matrix th{
-    background:#f6ede0;
-    position:sticky;
-    top:0;
-  }
-  table.pinyin-matrix td.valid{
-    color:var(--ink);
-    background:#fff;
-  }
-  table.pinyin-matrix td.empty{
-    background:#f4f1ee;
-    color:#d8d0c6;
-  }
-  table.pinyin-matrix td.pending{
-    background:#fff7e0;
-    color:#c9a227;
-    font-size:0.7rem;
-  }
-  .matrix-note{
-    font-size:0.78rem;
-    color:var(--muted);
-    margin-top:8px;
-    line-height:1.5;
-  }
-  .legend{
-    display:flex;
-    gap:14px;
-    flex-wrap:wrap;
-    font-size:0.75rem;
-    color:var(--muted);
-    margin-bottom:8px;
-  }
-  .legend span{
-    display:inline-flex;
-    align-items:center;
-    gap:4px;
-  }
-  .swatch{
-    width:12px;height:12px;border-radius:3px;display:inline-block;
-  }
-  .sw-valid{background:#fff;border:1px solid var(--line);}
-  .sw-empty{background:#f4f1ee;border:1px solid var(--line);}
-  .sw-pending{background:#fff7e0;border:1px solid var(--line);}
+  .cn, .hz{ font-family:'Noto Sans SC',sans-serif; }
+  header{ text-align:center; margin-bottom:10px; }
+  header h1{ font-size:1.4rem; margin:0; letter-spacing:1px; }
+  header h1 .cn{ color:var(--accent); font-weight:700; }
+  header p{ margin:2px 0 0; color:var(--muted); font-size:0.85rem; }
 
-  footer{
-    margin-top:20px;
-    font-size:0.72rem;
-    color:var(--muted);
-    text-align:center;
+  .wrap{ width:100%; max-width:460px; }
+  select{
+    width:100%; font-family:inherit; font-size:15px; padding:11px 12px; border-radius:12px;
+    border:1.5px solid var(--line); background:var(--chip); color:var(--ink);
   }
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 4px; }
+  .chip{
+    font-family:inherit; font-size:13px; padding:7px 13px; border-radius:999px;
+    border:1.5px solid var(--line); background:var(--chip); color:var(--ink); cursor:pointer;
+  }
+  .chip.active{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .chip .cn{ font-weight:700; margin-right:3px; }
+  .chip:focus-visible, button:focus-visible, select:focus-visible, .card:focus-visible{ outline:3px solid var(--accent2); outline-offset:2px; }
+
+  .progress-wrap{ height:6px; background:var(--line); border-radius:4px; overflow:hidden; margin:12px 0 6px; }
+  .progress-bar{ height:100%; background:var(--accent2); width:0%; transition:width .2s; }
+  .counter{ color:var(--muted); font-size:0.8rem; margin-bottom:8px; text-align:center; }
+
+  .card{ width:100%; height:430px; perspective:1200px; cursor:pointer; margin-bottom:14px; }
+  .card.short{ height:300px; }
+  .card-inner{ position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d; }
+  .card.flipped .card-inner{ transform:rotateY(180deg); }
+  @media (prefers-reduced-motion: reduce){ .card-inner{ transition:none; } }
+  .face{
+    position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    border-radius:18px; background:var(--card); box-shadow:0 6px 18px var(--shadow);
+    border:1px solid var(--line); padding:18px; text-align:center;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+  }
+  .back{ transform:rotateY(180deg); justify-content:flex-start; padding-top:40px; }
+  .cat-tag{
+    position:absolute; top:12px; left:14px; right:14px; text-align:left;
+    font-size:0.7rem; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .cat-tag span{ background:var(--soft); padding:3px 10px; border-radius:12px; }
+  .front-text{ font-size:56px; font-weight:800; color:var(--accent); line-height:1.15; word-break:break-word; }
+  .front-text.hz{ font-family:'Noto Serif SC','Noto Sans SC',serif; font-weight:900; color:var(--ink); letter-spacing:4px; }
+  .flip-hint{ position:absolute; bottom:12px; font-size:12px; color:var(--muted); }
+
+  /* pinyin back */
+  .b-cn{ font-family:'Noto Sans SC',sans-serif; font-size:34px; font-weight:700; margin-bottom:6px; }
+  .b-th{ font-size:20px; font-weight:600; color:var(--accent2); margin-bottom:8px; }
+  .b-desc{ font-size:14px; line-height:1.6; overflow-y:auto; padding:0 4px; }
+
+  /* vocab back */
+  .scroll{ width:100%; overflow-y:auto; text-align:left; padding-right:4px; flex:1; }
+  .v-top{ text-align:center; margin-bottom:10px; }
+  .v-hz{ font-family:'Noto Serif SC',serif; font-weight:900; font-size:30px; }
+  .v-trad{ font-size:13px; color:var(--muted); margin-left:6px; font-family:'Noto Sans SC',sans-serif; font-weight:500; }
+  .v-py{ font-size:22px; font-weight:700; color:var(--accent); margin-top:2px; }
+  .v-th{ font-size:16px; color:var(--accent2); font-weight:600; }
+  .v-mean{ font-size:19px; font-weight:700; margin-top:6px; }
+  .pos{ display:inline-block; font-size:12px; font-weight:600; color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:0 6px; margin-right:6px; vertical-align:2px; }
+  .sec{ border-top:1px dashed var(--line); padding:8px 0 6px; font-size:14px; line-height:1.65; }
+  .sec h4{ margin:0 0 2px; font-size:12px; color:var(--muted); font-weight:700; }
+  .ex{ margin:3px 0; }
+  .ex .cn{ font-weight:700; }
+  .ex .t{ color:var(--muted); display:block; font-size:13px; }
+
+  .controls{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:8px; }
+  button.ctrl{
+    font-family:inherit; font-size:0.9rem; font-weight:600; padding:12px 8px; border-radius:12px; border:1.5px solid var(--line);
+    background:var(--chip); color:var(--ink); cursor:pointer;
+  }
+  button.ctrl.primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.ctrl.listen{ background:var(--accent2); border-color:var(--accent2); color:#fff; }
+  button.ctrl.on{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+  button.ctrl:active{ opacity:.7; }
+
+  .matrix-wrap{
+    width:100%; max-width:900px; overflow-x:auto; background:var(--card);
+    border-radius:14px; padding:12px; box-shadow:0 4px 14px var(--shadow);
+  }
+  table.pinyin-matrix{ border-collapse:collapse; font-size:0.78rem; width:100%; }
+  table.pinyin-matrix th, table.pinyin-matrix td{ border:1px solid var(--line); padding:5px 6px; text-align:center; white-space:nowrap; }
+  table.pinyin-matrix th{ background:var(--soft); position:sticky; top:0; }
+  table.pinyin-matrix td.valid{ cursor:pointer; }
+  table.pinyin-matrix td.empty{ background:var(--soft); color:var(--line); }
+  .matrix-note{ font-size:0.78rem; color:var(--muted); margin-top:8px; line-height:1.5; }
+  footer{ margin-top:18px; font-size:0.72rem; color:var(--muted); text-align:center; }
+  .hidden{ display:none !important; }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>拼音 <span class="cn">Flashcard</span></h1>
-  <p>PĪNYĪN · เทียบเสียงไทย สำหรับติวสอบฟัง</p>
+  <h1>中文 <span class="cn">Flashcard</span></h1>
+  <p>พินอินและคำศัพท์ภาษาจีน</p>
 </header>
 
-<div class="toolbar">
-  <select id="categorySelect"></select>
-  <button class="pillbtn" id="viewToggleBtn">ตารางประสมเสียง</button>
+<div class="wrap">
+  <select id="groupSelect" aria-label="เลือกหมวด">
+    <option value="vocab">词汇 คำศัพท์</option>
+    <option value="pinyin">拼音 ระบบเสียงพินอิน</option>
+  </select>
+  <div class="chips" id="chips"></div>
 </div>
 
-<!-- FLASHCARD VIEW -->
-<div class="stage" id="flashcardView">
+<div class="wrap" id="flashcardView">
   <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
-  <div class="counter" id="counterText">1 / 1</div>
+  <div class="counter" id="counterText"></div>
 
-  <div class="card" id="card">
+  <div class="card" id="card" tabindex="0" role="button" aria-label="พลิกการ์ด">
     <div class="card-inner">
       <div class="face front">
-        <div class="cat-tag" id="catTagFront"></div>
-        <div class="front-text" id="frontText">a</div>
+        <div class="cat-tag"><span id="catFront"></span></div>
+        <div class="front-text" id="frontText"></div>
+        <div class="flip-hint">แตะเพื่อดูคำตอบ</div>
       </div>
-      <div class="face back">
-        <div class="cat-tag" id="catTagBack"></div>
-        <div class="cn-word" id="backCn"></div>
-        <div class="th-sound" id="backThSound"></div>
-        <div class="th-desc" id="backDesc"></div>
+      <div class="face back" id="backFace">
+        <div class="cat-tag"><span id="catBack"></span></div>
+        <div id="backBody" class="scroll"></div>
       </div>
     </div>
   </div>
@@ -309,56 +165,61 @@
     <button class="ctrl" id="shuffleBtn">สุ่ม</button>
     <button class="ctrl" id="resetBtn">เรียงใหม่</button>
   </div>
+  <div class="controls" id="extraRow">
+    <button class="ctrl" id="reverseBtn" style="grid-column:1 / 3">โหมดกลับด้าน (ไทย → จีน)</button>
+    <button class="ctrl" id="matrixBtn">ตารางเสียง</button>
+  </div>
 </div>
 
-<!-- MATRIX VIEW -->
-<div class="matrix-wrap" id="matrixView" style="display:none;">
-  <div class="legend">
-    <span><span class="swatch sw-valid"></span> มีคำนี้จริง</span>
-    <span><span class="swatch sw-empty"></span> ไม่มีเสียงนี้ (ห้ามฟังผิดเป็นคำนี้)</span>
-  </div>
+<div class="matrix-wrap hidden" id="matrixView">
   <div id="matrixContainer"></div>
   <div class="matrix-note">
-    ตารางเต็ม 21 พยัญชนะต้น + ศูนย์พยัญชนะ × 38 สระ (普通话声母韵母拼合总表) เลื่อนซ้าย-ขวาเพื่อดูคอลัมน์ที่เหลือ · <b>-i[ɿ]</b> ใช้เฉพาะหลัง z c s (เช่น zi ci si) และ <b>-i[ʅ]</b> ใช้เฉพาะหลัง zh ch sh r (เช่น zhi chi shi ri) — สองเสียงนี้หน้าตาคำเหมือนกัน (-i) แต่ออกเสียงคนละแบบ ห้ามสับสน
+    แตะช่องเพื่อฟังเสียง · เลื่อนซ้าย-ขวาเพื่อดูคอลัมน์ที่เหลือ · <b>-i[ɿ]</b> ใช้เฉพาะหลัง z c s และ <b>-i[ʅ]</b> ใช้เฉพาะหลัง zh ch sh r
   </div>
+  <div style="margin-top:10px"><button class="ctrl" id="matrixBackBtn">กลับไปหน้าการ์ด</button></div>
 </div>
 
-<footer>ทำไว้ใช้ติวสอบฟังภาษาจีน · อิงตามหนังสือเรียนบทที่ 1-4</footer>
+<footer>ทำโดย นีโม่ · อิงตามหนังสือเรียน</footer>
 
 <script>
-/* ================= DATA ================= */
+// ============================================================
+// 拼音 ระบบเสียงพินอิน (ข้อมูลเดิม)
+// ============================================================
+const pinyinCards = [];
+function addPy(cat, list, opt={}){
+  list.forEach(x=>pinyinCards.push({
+    type:"py", cat, front:x.front,
+    cn: opt.noCn ? "" : (x.cn || x.front.replace(/ \[.*|\s*\(.*/,'')),
+    th:x.th, desc:x.desc,
+    speak: opt.noSpeak ? null : x.front.split(" ")[0]
+  }));
+}
 
-// ---------- Flashcard categories ----------
-const allCards = [];
+addPy("声母 พยัญชนะต้น", [
+  {front:"b", th:"ป (ไม่มีลม)", desc:"ริมฝีปากบน-ล่างประกบกันแน่นแล้วปล่อยลมออกทันที ไม่มีลมพ่นแรง เทียบเสียง ป ไทย"},
+  {front:"p", th:"พ (มีลม)", desc:"ริมฝีปากบน-ล่างประกบกันเหมือน b แต่ปล่อยลมพ่นแรง เทียบเสียง พ ไทย"},
+  {front:"m", th:"ม (นาสิก)", desc:"ริมฝีปากประกบกัน ปล่อยเสียงออกทางจมูก เทียบเสียง ม ไทย"},
+  {front:"f", th:"ฟ (เสียดแทรก)", desc:"ฟันบนแตะริมฝีปากล่าง ปล่อยลมเสียดแทรกออกมา เทียบเสียง ฟ ไทย"},
+  {front:"d", th:"ต (ไม่มีลม)", desc:"ปลายลิ้นแตะปุ่มเหงือก ปล่อยลมออกทันทีไม่มีลมแรง เทียบเสียง ต ไทย"},
+  {front:"t", th:"ท (มีลม)", desc:"ปลายลิ้นแตะปุ่มเหงือกเหมือน d แต่ปล่อยลมพ่นแรง เทียบเสียง ท ไทย"},
+  {front:"n", th:"น (นาสิก)", desc:"ปลายลิ้นแตะปุ่มเหงือก ปล่อยเสียงออกทางจมูก เทียบเสียง น ไทย"},
+  {front:"l", th:"ล", desc:"ปลายลิ้นแตะปุ่มเหงือก ลมออกด้านข้างลิ้นทั้งสองข้าง เทียบเสียง ล ไทย"},
+  {front:"g", th:"ก (ไม่มีลม)", desc:"โคนลิ้นแตะเพดานอ่อน ปล่อยลมออกทันที เทียบเสียง ก ไทย"},
+  {front:"k", th:"ข (มีลม)", desc:"โคนลิ้นแตะเพดานอ่อนเหมือน g แต่ปล่อยลมพ่นแรง เทียบเสียง ข ไทย"},
+  {front:"h", th:"ฮ (เสียดแทรก)", desc:"โคนลิ้นเข้าใกล้เพดานอ่อน ลมเสียดแทรกผ่านออกมา เทียบเสียง ฮ ไทย"},
+  {front:"j", th:"จ (ลิ้นแบน ไม่มีลม)", desc:"กลางลิ้นแตะเพดานแข็ง ลิ้นแบนราบ ไม่ม้วน ไม่มีลมพ่นแรง ใช้กับสระ i/ü เท่านั้น"},
+  {front:"q", th:"ช (ลิ้นแบน มีลม)", desc:"ตำแหน่งลิ้นเหมือน j แต่ปล่อยลมพ่นแรง ใช้กับสระ i/ü เท่านั้น"},
+  {front:"x", th:"ซ/ช (เสียดแทรก)", desc:"กลางลิ้นเข้าใกล้เพดานแข็ง ลมเสียดแทรก ลิ้นแบน ใช้กับสระ i/ü เท่านั้น"},
+  {front:"z", th:"จ (ลิ้นแบน ไม่มีลม)", desc:"ปลายลิ้นแตะหลังฟันบน ลิ้นแบนไม่ม้วน ไม่มีลมพ่นแรง ต่างจาก zh ตรงที่ไม่ม้วนลิ้น"},
+  {front:"c", th:"ช (ลิ้นแบน มีลม)", desc:"ตำแหน่งลิ้นเหมือน z แต่ปล่อยลมพ่นแรง ลิ้นแบนไม่ม้วน"},
+  {front:"s", th:"ซ (เสียดแทรก)", desc:"ปลายลิ้นใกล้หลังฟันบน ลิ้นแบนไม่ม้วน ลมเสียดแทรกออกมา"},
+  {front:"zh", th:"จ ม้วนลิ้น (ไม่มีลม)", desc:"ปลายลิ้นม้วนขึ้นแตะปุ่มเหงือกส่วนหลัง ไม่มีลมพ่นแรง ฟังคล้าย z แต่ลิ้นม้วน"},
+  {front:"ch", th:"ช ม้วนลิ้น (มีลม)", desc:"ตำแหน่งลิ้นเหมือน zh แต่ปล่อยลมพ่นแรง ฟังคล้าย c แต่ลิ้นม้วน"},
+  {front:"sh", th:"ช/ซ ม้วนลิ้น (เสียดแทรก)", desc:"ปลายลิ้นม้วนใกล้ปุ่มเหงือกส่วนหลัง ลมเสียดแทรก ฟังคล้าย s แต่ลิ้นม้วน"},
+  {front:"r", th:"ร ม้วนลิ้น (เสียงก้อง)", desc:"ตำแหน่งลิ้นใกล้เคียง sh แต่เส้นเสียงสั่น (มีเสียงก้อง) ฟังคล้าย sh ที่มีเสียงก้อง"},
+]);
 
-// 声母 Initials
-const initials = [
-  {front:"b", cn:"b", th:"ป (ไม่มีลม)", desc:"ริมฝีปากบน-ล่างประกบกันแน่นแล้วปล่อยลมออกทันที ไม่มีลมพ่นแรง เทียบเสียง ป ไทย"},
-  {front:"p", cn:"p", th:"พ (มีลม)", desc:"ริมฝีปากบน-ล่างประกบกันเหมือน b แต่ปล่อยลมพ่นแรง เทียบเสียง พ ไทย"},
-  {front:"m", cn:"m", th:"ม (นาสิก)", desc:"ริมฝีปากประกบกัน ปล่อยเสียงออกทางจมูก เทียบเสียง ม ไทย"},
-  {front:"f", cn:"f", th:"ฟ (เสียดแทรก)", desc:"ฟันบนแตะริมฝีปากล่าง ปล่อยลมเสียดแทรกออกมา เทียบเสียง ฟ ไทย"},
-  {front:"d", cn:"d", th:"ต (ไม่มีลม)", desc:"ปลายลิ้นแตะปุ่มเหงือก ปล่อยลมออกทันทีไม่มีลมแรง เทียบเสียง ต ไทย"},
-  {front:"t", cn:"t", th:"ท (มีลม)", desc:"ปลายลิ้นแตะปุ่มเหงือกเหมือน d แต่ปล่อยลมพ่นแรง เทียบเสียง ท ไทย"},
-  {front:"n", cn:"n", th:"น (นาสิก)", desc:"ปลายลิ้นแตะปุ่มเหงือก ปล่อยเสียงออกทางจมูก เทียบเสียง น ไทย"},
-  {front:"l", cn:"l", th:"ล", desc:"ปลายลิ้นแตะปุ่มเหงือก ลมออกด้านข้างลิ้นทั้งสองข้าง เทียบเสียง ล ไทย"},
-  {front:"g", cn:"g", th:"ก (ไม่มีลม)", desc:"โคนลิ้นแตะเพดานอ่อน ปล่อยลมออกทันที เทียบเสียง ก ไทย"},
-  {front:"k", cn:"k", th:"ข (มีลม)", desc:"โคนลิ้นแตะเพดานอ่อนเหมือน g แต่ปล่อยลมพ่นแรง เทียบเสียง ข ไทย"},
-  {front:"h", cn:"h", th:"ฮ (เสียดแทรก)", desc:"โคนลิ้นเข้าใกล้เพดานอ่อน ลมเสียดแทรกผ่านออกมา เทียบเสียง ฮ ไทย"},
-  {front:"j", cn:"j", th:"จ (ลิ้นแบน ไม่มีลม)", desc:"กลางลิ้นแตะเพดานแข็ง ลิ้นแบนราบ ไม่ม้วน ไม่มีลมพ่นแรง ใช้กับสระ i/ü เท่านั้น"},
-  {front:"q", cn:"q", th:"ช (ลิ้นแบน มีลม)", desc:"ตำแหน่งลิ้นเหมือน j แต่ปล่อยลมพ่นแรง ใช้กับสระ i/ü เท่านั้น"},
-  {front:"x", cn:"x", th:"ซ/ช (เสียดแทรก)", desc:"กลางลิ้นเข้าใกล้เพดานแข็ง ลมเสียดแทรก ลิ้นแบน ใช้กับสระ i/ü เท่านั้น"},
-  {front:"z", cn:"z", th:"จ (ลิ้นแบน ไม่มีลม)", desc:"ปลายลิ้นแตะหลังฟันบน ลิ้นแบนไม่ม้วน ไม่มีลมพ่นแรง ต่างจาก zh ตรงที่ไม่ม้วนลิ้น"},
-  {front:"c", cn:"c", th:"ช (ลิ้นแบน มีลม)", desc:"ตำแหน่งลิ้นเหมือน z แต่ปล่อยลมพ่นแรง ลิ้นแบนไม่ม้วน"},
-  {front:"s", cn:"s", th:"ซ (เสียดแทรก)", desc:"ปลายลิ้นใกล้หลังฟันบน ลิ้นแบนไม่ม้วน ลมเสียดแทรกออกมา"},
-  {front:"zh", cn:"zh", th:"จ ม้วนลิ้น (ไม่มีลม)", desc:"ปลายลิ้นม้วนขึ้นแตะปุ่มเหงือกส่วนหลัง ไม่มีลมพ่นแรง ฟังคล้าย z แต่ลิ้นม้วน"},
-  {front:"ch", cn:"ch", th:"ช ม้วนลิ้น (มีลม)", desc:"ตำแหน่งลิ้นเหมือน zh แต่ปล่อยลมพ่นแรง ฟังคล้าย c แต่ลิ้นม้วน"},
-  {front:"sh", cn:"sh", th:"ช/ซ ม้วนลิ้น (เสียดแทรก)", desc:"ปลายลิ้นม้วนใกล้ปุ่มเหงือกส่วนหลัง ลมเสียดแทรก ฟังคล้าย s แต่ลิ้นม้วน"},
-  {front:"r", cn:"r", th:"ร ม้วนลิ้น (เสียงก้อง)", desc:"ตำแหน่งลิ้นใกล้เคียง sh แต่เส้นเสียงสั่น (มีเสียงก้อง) ฟังคล้าย sh ที่มีเสียงก้อง"},
-];
-initials.forEach(x=>allCards.push({cat:"声母 พยัญชนะต้น", front:x.front, cn:x.cn, th:x.th, desc:x.desc, viet:x.front}));
-
-// 单韵母 simple finals
-const simpleFinals = [
+addPy("单韵母 สระเดี่ยว", [
   {front:"a", th:"อา", desc:"อ้าปากกว้างที่สุด ลิ้นอยู่ตำแหน่งต่ำ ไม่ห่อปาก"},
   {front:"o", th:"โอ", desc:"ริมฝีปากห่อกลม ลิ้นอยู่ตำแหน่งกึ่งสูงค่อนไปทางหลัง"},
   {front:"e", th:"เออ", desc:"ลิ้นอยู่กลางปาก ไม่ห่อปาก ตำแหน่งกึ่งสูงค่อนไปทางหลัง"},
@@ -368,30 +229,24 @@ const simpleFinals = [
   {front:"-i [ɿ]", th:"(หลัง z c s)", desc:"ไม่ใช่เสียงสระจริง แต่เป็นการยืดเสียงพยัญชนะต้น z/c/s ต่อ ลิ้นแบนไม่ม้วน — ใช้เฉพาะหลัง z c s เท่านั้น"},
   {front:"-i [ʅ]", th:"(หลัง zh ch sh r)", desc:"เหมือน -i[ɿ] แต่ลิ้นม้วน — ใช้เฉพาะหลัง zh ch sh r เท่านั้น"},
   {front:"er", th:"เอ๋อ (ม้วนลิ้น)", desc:"ออกเสียงคล้าย e แล้วม้วนปลายลิ้นขึ้นระหว่างออกเสียง เป็นสระม้วนลิ้นเสียงเดียวที่มีในภาษาจีน"},
-];
-simpleFinals.forEach(x=>allCards.push({cat:"单韵母 สระเดี่ยว", front:x.front, cn:x.front.replace(/ \[.*|\(.*/,''), th:x.th, desc:x.desc, viet:x.front.split(" ")[0]}));
+]);
 
-// 复韵母 compound finals
-const compoundFinals = [
+addPy("复韵母 สระประสม", [
   {front:"ai", th:"อาย", desc:"ลิ้นอยู่หลังก่อน (a) แล้วค่อยๆ ยกสูงขึ้นไปจนถึง i คือ a→i"},
   {front:"ei", th:"เอย", desc:"ลิ้นอยู่หน้าก่อน (e) แล้วค่อยๆ ยกสูงขึ้นพร้อมหุบปากแคบลงจนถึง i คือ e→i"},
   {front:"ao", th:"อาว", desc:"ลิ้นอยู่หลังก่อน (a) แล้วค่อยๆ ยกสูงขึ้นและห่อปากกลมจนถึง o/u คือ a→o"},
   {front:"ou", th:"โอว", desc:"ริมฝีปากห่อกลมเล็กน้อยก่อน (o) แล้วค่อยๆ ห่อกลมมากขึ้นจนถึง u คือ o→u"},
-];
-compoundFinals.forEach(x=>allCards.push({cat:"复韵母 สระประสม", front:x.front, cn:x.front, th:x.th, desc:x.desc, viet:x.front}));
+]);
 
-// 鼻韵母 nasal finals (single vowel + nasal)
-const nasalFinals = [
+addPy("鼻韵母 สระประสมเสียงจมูก", [
   {front:"an", th:"อาน", desc:"ลิ้นอยู่หน้าก่อน (a) แล้วปลายลิ้นยื่นไปแตะปุ่มเหงือกออกเสียงจมูก คือ a→n"},
   {front:"en", th:"เอิน", desc:"ลิ้นอยู่กลางก่อน (e) แล้วปลายลิ้นแตะปุ่มเหงือกออกเสียงจมูก คือ e→n"},
   {front:"ang", th:"อาง", desc:"ลิ้นอยู่หลังก่อน (a) แล้วโคนลิ้นถอยไปแตะเพดานอ่อนออกเสียงจมูก คือ a→ng"},
   {front:"eng", th:"เอิง", desc:"ลิ้นอยู่กลางก่อน (e) แล้วโคนลิ้นแตะเพดานอ่อนออกเสียงจมูก คือ e→ng"},
   {front:"ong", th:"อง", desc:"ริมฝีปากห่อกลมคล้าย u ก่อน แล้วโคนลิ้นแตะเพดานอ่อนออกเสียงจมูก คือ o→ng"},
-];
-nasalFinals.forEach(x=>allCards.push({cat:"鼻韵母 สระประสมเสียงจมูก", front:x.front, cn:x.front, th:x.th, desc:x.desc, viet:x.front}));
+]);
 
-// i-series compound & nasal finals
-const iSeries = [
+addPy("复合韵母 i- สระผสมขึ้นต้นด้วย i", [
   {front:"ia", th:"เอีย", desc:"เริ่มจากลิ้นสูง (i) แล้วค่อยๆ ลดต่ำลงจนถึง a คือ i→a"},
   {front:"ie", th:"เอีย(ะ)", desc:"เริ่มจาก i แล้วลดระดับลิ้นลงจนถึงเสียง ê [ɛ] คือ i→ê — สระ e ในตัวนี้อ่านต่างจาก e เดี่ยว"},
   {front:"iao", th:"เอียว", desc:"เรียง i→a→o ลิ้นสูงก่อนแล้วลดต่ำแล้วห่อปากกลม"},
@@ -401,11 +256,9 @@ const iSeries = [
   {front:"iang", th:"เอียง", desc:"i→ang ลิ้นสูงก่อนแล้วเลื่อนไปเสียง ang ปิดท้ายด้วยจมูก ng"},
   {front:"ing", th:"อิง", desc:"i ตามด้วยเสียงจมูก ng โดยตรง"},
   {front:"iong", th:"อวง", desc:"i ปากห่อกลมเลื่อนไปเสียง ong ปิดท้ายด้วยจมูก ng"},
-];
-iSeries.forEach(x=>allCards.push({cat:"复合韵母 i- สระผสมขึ้นต้นด้วย i", front:x.front, cn:x.front, th:x.th, desc:x.desc, viet:x.front.split(" ")[0]}));
+]);
 
-// u-series compound & nasal finals
-const uSeries = [
+addPy("复合韵母 u- สระผสมขึ้นต้นด้วย u", [
   {front:"ua", th:"วา", desc:"u ปากกลมก่อน แล้วค่อยๆ ลดระดับลิ้นและคลายห่อปากจนถึง a คือ u→a"},
   {front:"uo", th:"วอ", desc:"u แล้วค่อยๆ ลดระดับลิ้นลงจนถึง o คือ u→o"},
   {front:"uai", th:"วาย", desc:"u แล้วตามด้วย ai คือ u→ai"},
@@ -414,33 +267,26 @@ const uSeries = [
   {front:"un (uen)", th:"เวิน", desc:"รูปเต็มคือ uen (u→en) แต่เมื่อมีพยัญชนะต้นนำหน้าจะย่อเขียนเป็น -un"},
   {front:"uang", th:"วาง", desc:"u แล้วตามด้วย ang คือ u→ang"},
   {front:"ueng", th:"เวิง", desc:"u แล้วตามด้วย eng คือ u→eng (ใช้เป็นพยางค์เดี่ยว weng เท่านั้น ไม่ตามพยัญชนะต้น)"},
-];
-uSeries.forEach(x=>allCards.push({cat:"复合韵母 u- สระผสมขึ้นต้นด้วย u", front:x.front, cn:x.front, th:x.th, desc:x.desc, viet:x.front.split(" ")[0]}));
+]);
 
-// ü-series
-const uumlautSeries = [
+addPy("复合韵母 ü- สระผสมขึ้นต้นด้วย ü", [
   {front:"üe", th:"เยว่", desc:"ü แล้วลดระดับลิ้นลงจนถึงเสียง ê [ɛ] คือ ü→ê"},
   {front:"üan", th:"เยวียน", desc:"ü แล้วตามด้วย an (ลิ้นสูงกว่า an ปกติเล็กน้อย) คือ ü→an"},
   {front:"ün", th:"วิน", desc:"ü ตามด้วยเสียงจมูก n โดยตรง คือ ü→n"},
-];
-uumlautSeries.forEach(x=>allCards.push({cat:"复合韵母 ü- สระผสมขึ้นต้นด้วย ü", front:x.front, cn:x.front, th:x.th, desc:x.desc, viet:x.front.split(" ")[0]}));
+]);
 
-// 声调 tones & rules (reference cards, no TTS needed but included anyway)
-const tones = [
+addPy("声调 วรรณยุกต์และการแปรเสียง", [
   {front:"第一声 ˉ", th:"เสียงที่ 1 ระดับสูงคงที่ (55)", desc:"เสียงราบเรียบระดับสูงตลอด เช่น bā (八 แปด)"},
   {front:"第二声 ˊ", th:"เสียงที่ 2 เสียงสูงขึ้น (35)", desc:"เสียงไล่จากกลางขึ้นสูง คล้ายเสียงถามในภาษาไทย เช่น bá (拔 ถอน)"},
   {front:"第三声 ˇ", th:"เสียงที่ 3 เสียงลง-ขึ้น (214)", desc:"เสียงลดต่ำลงก่อนแล้วขึ้นสูง เช่น bǎ (靶 เป้า)"},
   {front:"第四声 ˋ", th:"เสียงที่ 4 เสียงตกลงแรง (51)", desc:"เสียงตกจากสูงลงต่ำอย่างรวดเร็วและหนักแน่น เช่น bà (爸 พ่อ)"},
-  {front:"三声连读", th:"กฎ: เสียง3+เสียง3 ติดกัน", desc:"เมื่อพยางค์เสียงที่ 3 อยู่ติดกัน 2 พยางค์ ให้อ่านพยางค์แรกเป็นเสียงที่ 2 เช่น Nǐ hǎo → อ่านจริงเป็น Ní hǎo"},
-  {front:"不 การแปรเสียง", th:"กฎ: 不 หน้าเสียงที่ 4", desc:"不 ปกติออกเสียงที่ 4 (bù) แต่ถ้าคำถัดไปเป็นเสียงที่ 4 ให้เปลี่ยน 不 เป็นเสียงที่ 2 (bú) เช่น bú xiè (不谢)"},
-  {front:"轻声", th:"เสียงเบา ไม่มีวรรณยุกต์", desc:"บางพยางค์ (มักเป็นคำลงท้าย เช่น 们men, 吗ma) ออกเสียงเบาและสั้น ไม่เน้นเสียง ไม่มีเครื่องหมายวรรณยุกต์ เช่น māma, nǐmen, tāmen"},
-];
-tones.forEach(x=>allCards.push({cat:"声调 วรรณยุกต์และการแปรเสียง", front:x.front, cn:"", th:x.th, desc:x.desc, viet:null}));
+  {front:"三声连读", th:"กฎ: เสียง3+เสียง3 ติดกัน", desc:"เมื่อพยางค์เสียงที่ 3 อยู่ติดกัน 2 พยางค์ ให้อ่านพยางค์แรกเป็นเสียงที่ 2 เช่น Nǐ hǎo → อ่านจริงเป็น Ní hǎo · 可以 kěyǐ → kéyǐ · 水果 shuǐguǒ → shuíguǒ"},
+  {front:"不 การแปรเสียง", th:"กฎ: 不 หน้าเสียงที่ 4", desc:"不 ปกติออกเสียงที่ 4 (bù) แต่ถ้าคำถัดไปเป็นเสียงที่ 4 ให้เปลี่ยน 不 เป็นเสียงที่ 2 (bú) เช่น bú xiè (不谢), búcuò (不错), bú tài (不太)"},
+  {front:"“一”的变调", th:"กฎ: การแปรเสียงของ 一 (บทที่ 9)", desc:"① อ่าน yī เมื่อใช้เดี่ยว นับเลข อยู่ท้ายคำ หรืออยู่ในตัวเลข เช่น 一、二、三 · 第一 · 一百一十一<br>② อ่าน yí เมื่ออยู่หน้าเสียง 4 (หรือเสียงเบาที่มาจากเสียง 4) เช่น 一件衬衫 · 一块钱 · 一个学生 · 一共<br>③ อ่าน yì เมื่ออยู่หน้าเสียง 1, 2, 3 เช่น 一双皮鞋 · 一公斤 · 一条裤子 · 一种水果 · 一百铢"},
+  {front:"轻声", th:"เสียงเบา ไม่มีวรรณยุกต์", desc:"บางพยางค์ (มักเป็นคำลงท้าย เช่น 们men, 吗ma) ออกเสียงเบาและสั้น ไม่เน้นเสียง ไม่มีเครื่องหมายวรรณยุกต์ เช่น māma, nǐmen, tāmen, yīfu, dōngxi"},
+], {noCn:true, noSpeak:true});
 
-
-/* ================= COMBINATION MATRIX DATA ================= */
-// Complete official 普通话声母韵母拼合总表 (38 finals x 22 initials incl. zero-initial)
-// Source: reference chart provided by user, cross-checked against textbook photos.
+// ---------- ตารางประสมเสียง ----------
 const matrixCols = [
   "a","o","e","-i[ɿ]","-i[ʅ]","er","ai","ei","ao","ou","an","en","ang","eng",
   "i","ia","ie","iao","iu","ian","in","iang","ing",
@@ -448,12 +294,7 @@ const matrixCols = [
   "ü","üe","üan","ün","iong"
 ];
 const matrixRows = ["(零声母)","b","p","m","f","d","t","n","l","g","k","h","j","q","x","zh","ch","sh","r","z","c","s"];
-
-function row(obj){
-  // obj: {colName: value} sparse map -> full array aligned to matrixCols
-  return matrixCols.map(c => obj[c] || "");
-}
-
+function row(obj){ return matrixCols.map(c => obj[c] || ""); }
 const matrixData = {
   "(零声母)": row({a:"a",o:"o",e:"e",er:"er",ai:"ai",ei:"ei",ao:"ao",ou:"ou",an:"an",en:"en",ang:"ang",eng:"eng",
     i:"yi",ia:"ya",ie:"ye",iao:"yao",iu:"you",ian:"yan",in:"yin",iang:"yang",ing:"ying",
@@ -474,12 +315,10 @@ const matrixData = {
     u:"tu",uo:"tuo",ui:"tui",uan:"tuan",un:"tun"}),
   n: row({a:"na",e:"ne",ai:"nai",ei:"nei",ao:"nao",ou:"nou",an:"nan",en:"nen",ang:"nang",eng:"neng",ong:"nong",
     i:"ni",ie:"nie",iao:"niao",iu:"niu",ian:"nian",in:"nin",iang:"niang",ing:"ning",
-    u:"nu",uo:"nuo",uan:"nuan",
-    "ü":"nü","üe":"nüe"}),
+    u:"nu",uo:"nuo",uan:"nuan", "ü":"nü","üe":"nüe"}),
   l: row({a:"la",e:"le",ai:"lai",ei:"lei",ao:"lao",ou:"lou",an:"lan",ang:"lang",eng:"leng",ong:"long",
     i:"li",ia:"lia",ie:"lie",iao:"liao",iu:"liu",ian:"lian",in:"lin",iang:"liang",ing:"ling",
-    u:"lu",uo:"luo",uan:"luan",un:"lun",
-    "ü":"lü","üe":"lüe"}),
+    u:"lu",uo:"luo",uan:"luan",un:"lun", "ü":"lü","üe":"lüe"}),
   g: row({a:"ga",e:"ge",ai:"gai",ei:"gei",ao:"gao",ou:"gou",an:"gan",en:"gen",ang:"gang",eng:"geng",ong:"gong",
     u:"gu",ua:"gua",uo:"guo",uai:"guai",ui:"gui",uan:"guan",un:"gun",uang:"guang"}),
   k: row({a:"ka",e:"ke",ai:"kai",ei:"kei",ao:"kao",ou:"kou",an:"kan",en:"ken",ang:"kang",eng:"keng",ong:"kong",
@@ -508,141 +347,537 @@ const matrixData = {
     u:"su",uo:"suo",ui:"sui",uan:"suan",un:"sun"}),
 };
 
+// ============================================================
+// คำศัพท์ แยกตามบท
+// field: hz ตัวจีน | trad ตัวเต็ม | py พินอิน | th คำอ่านไทย | mean คำแปล
+//        pos ชนิดคำ | part ตอน | parts แยกส่วนประกอบตัวอักษร | use วิธีใช้ | ex ตัวอย่าง [[จีน, ไทย]]
+// คำอ่านไทย: เสียง 1 = สามัญ, 2 = จัตวา, 3 = เอก, 4 = โท (โดยประมาณ)
+// ============================================================
+
+const P1 = "ตอน 1 · 红毛丹多少钱一公斤?";
+const P2 = "ตอน 2 · 这套衣服怎么样?";
+const P3 = "ตอน 3 · 裙子便宜了";
+
+const vocabL9 = [
+  // ---------------- ตอน 1 ----------------
+  {part:P1, hz:"请问", trad:"請問", py:"qǐngwèn", th:"ฉิ่ง เวิ่น", mean:"ขอถาม, อยากทราบ", pos:"",
+   parts:"请 = 讠(言 คำพูด) + 青 qīng (ให้เสียง) → ขอร้องด้วยคำพูด<br>问 = 门 (ประตู) + 口 (ปาก) → ยื่นปากมาถามที่ประตู",
+   use:"ใช้ขึ้นต้นก่อนถามคนอื่นอย่างสุภาพ ตรงกับ Excuse me ส่วน 请 ตัวเดียวแปลว่า เชิญ เช่น 请尝尝",
+   ex:[["请问，红毛丹多少钱一公斤？","อยากทราบว่า เงาะกิโลละเท่าไร?"],["请问一公斤红毛丹多少钱？","วางลำดับแบบนี้ก็ได้ ความหมายเหมือนกัน"]]},
+  {part:P1, hz:"红毛丹", trad:"紅毛丹", py:"hóngmáodān", th:"หง เหมา ตาน", mean:"เงาะ", pos:"名",
+   parts:"红 แดง + 毛 ขน + 丹 สีแดงชาด → ผลไม้สีแดงที่มีขน<br>红 = 纟(เส้นไหม) + 工 gōng (ให้เสียง) → ผ้าไหมที่ย้อมสีแดง",
+   use:"ชื่อผลไม้ตั้งตามรูปร่างหน้าตาตรงๆ จำง่าย",
+   ex:[["红毛丹一公斤半四十五铢。","เงาะกิโลครึ่ง 45 บาท"]]},
+  {part:P1, hz:"钱", trad:"錢", py:"qián", th:"เฉียน", mean:"เงิน", pos:"名",
+   parts:"钅(金 โลหะ) + 戋 (ให้เสียง) → เงินสมัยก่อนทำจากโลหะ",
+   use:"ถามราคาด้วย 多少钱? ลำดับที่เจอบ่อย: สินค้า + 多少钱 + 一 + หน่วย",
+   ex:[["多少钱？","เท่าไร?"],["一共多少钱？","รวมทั้งหมดเท่าไร?"]]},
+  {part:P1, hz:"公斤", py:"gōngjīn", th:"กง จิน", mean:"กิโลกรัม", pos:"量",
+   parts:"公 (สากล, มาตรฐาน) + 斤 jīn (ชั่งจีน) → ชั่งแบบสากล<br>斤 เดิมเป็นรูปขวาน ต่อมายืมมาใช้เป็นหน่วยน้ำหนัก",
+   use:"1 公斤 = 2 斤 เพราะ 1 斤 = 500 กรัม (半公斤) ส่วนกรัมคือ 克 kè ตลาดในจีนมักคิดราคาเป็น 斤",
+   ex:[["几公斤？","กี่กิโล?"],["四公斤龙眼","ลำไย 4 กิโลกรัม"]]},
+  {part:P1, hz:"铢", trad:"銖", py:"zhū", th:"จู", mean:"บาท (เงินไทย)", pos:"量",
+   parts:"钅(โลหะ) + 朱 zhū (ให้เสียง) → หน่วยเงิน/น้ำหนักโบราณ",
+   use:"1 铢 = 100 士丁 shìdīng (สตางค์) ถ้าพูด 铢 เฉยๆ แล้วอีกฝ่ายไม่เข้าใจ ให้พูดเต็มว่า 泰铢 Tàizhū (บาทไทย)",
+   ex:[["一百铢 / 一百泰铢","100 บาท"],["两百铢","200 บาท (ใช้ 两 หน้า 百 ได้)"]]},
+  {part:P1, hz:"售货员", trad:"售貨員", py:"shòuhuòyuán", th:"โซ่ว ฮั่ว เหยวียน", mean:"คนขายของ, พนักงานขาย", pos:"名",
+   parts:"售 ขาย + 货 สินค้า + 员 บุคลากร<br>货 และ 员 มี 贝 (เปลือกหอย = เงินสมัยโบราณ) อยู่ข้างล่าง ตัวที่มี 贝 มักเกี่ยวกับเงินหรือทรัพย์ เช่น 贵 买 卖",
+   use:"เป็นคำทางการ/ทางธุรกิจ ภาษาพูดทั่วไปใช้ 卖东西的人 (คนขายของ) ได้ ส่วน 职员 zhíyuán คือพนักงานออฟฟิศ",
+   ex:[["丁秀梅对售货员说……","ติงซิ่วเหมยบอกคนขายของว่า…"]]},
+  {part:P1, hz:"种", trad:"種", py:"zhǒng", th:"จ่ง", mean:"ชนิด, แบบ", pos:"量",
+   parts:"禾 (ต้นข้าว) + 中 zhōng (ให้เสียง) → เดิมหมายถึงเมล็ดพันธุ์ จึงขยายเป็น พันธุ์/ชนิด",
+   use:"เป็นลักษณะนามบอกชนิด: 这种 / 那种 / 一种 + คำนาม ระวัง: อ่าน zhòng (เสียง 4) จะแปลว่า ปลูก",
+   ex:[["这种呢？","ชนิดนี้ล่ะ?"],["我不喜欢那种颜色。","ฉันไม่ชอบสีแบบนั้น"],["妈妈一共买了三种水果。","แม่ซื้อผลไม้รวม 3 ชนิด"]]},
+  {part:P1, hz:"尝", trad:"嘗", py:"cháng", th:"ฉาง", mean:"ชิม, ลิ้มรส", pos:"动",
+   parts:"ตัวเต็ม 嘗 = 尚 (ให้เสียง) + 旨 (รสอร่อย) → ลองรส<br>ระวังสับสนกับ 常 cháng (บ่อยๆ) ที่ข้างล่างเป็น 巾",
+   use:"ซ้ำกริยาเป็น 尝尝 = 尝一下 แปลว่า ชิมหน่อย ทำให้น้ำเสียงนุ่มลง (แบบเดียวกับ 试试 看看 问问)",
+   ex:[["请尝尝。","เชิญชิมดูสิ"],["这种芒果，你尝尝。","มะม่วงพันธุ์นี้ ลองชิมหน่อย"]]},
+  {part:P1, hz:"味道", py:"wèidao", th:"เว่ย เตา", mean:"รสชาติ, กลิ่น", pos:"名",
+   parts:"味 = 口 (ปาก) + 未 wèi (ให้เสียง) → สิ่งที่รับรู้ทางปาก<br>道 = ทาง (อ่านเสียงเบาในคำนี้)",
+   use:"ใช้กับอาหาร/กลิ่น มักตามด้วยคำคุณศัพท์ เช่น 味道不错 味道很好",
+   ex:[["味道不错。","รสชาติไม่เลว"]]},
+  {part:P1, hz:"就", py:"jiù", th:"จิ้ว", mean:"ก็ (…นี่แหละ)", pos:"副",
+   parts:"京 (เมืองหลวง/ที่สูง) + 尤 → เดิมหมายถึง ไปหา/เข้าใกล้",
+   use:"就 ① ใช้เน้นว่าตัดสินใจแล้ว “ก็…นี่แหละ” ต่างจาก 也 yě ที่แปลว่า “ก็…เหมือนกัน”",
+   ex:[["就要这种吧。","เอาชนิดนี้แหละ"],["我就要这件白色的衬衫。","ฉันเอาเสื้อเชิ้ตสีขาวตัวนี้แหละ"],["那个楼就是我们的教学楼。","ตึกหลังนั้นคือตึกเรียนของเรานั่นเอง"]]},
+  {part:P1, hz:"要", py:"yào", th:"เย่า", mean:"เอา, ต้องการ ; จะ", pos:"动、助动",
+   parts:"ข้างบน 覀 + ข้างล่าง 女 เดิมเป็นภาพคนเอามือเท้าเอว (ต่อมาความหมายเอวย้ายไปใช้ 腰)",
+   use:"要 + คำนาม = เอา/ต้องการ<br>要 + กริยา = จะ (ทำ)",
+   ex:[["要多少？","ต้องการสักเท่าไร?"],["还要别的吗？","ยังต้องการอย่างอื่นอีกไหม?"]]},
+  {part:P1, hz:"别的", py:"biéde", th:"เปี๋ย เตอ", mean:"อื่น, อย่างอื่น", pos:"代",
+   parts:"别 = 另 + 刂 (มีด) → เอามีดแยกออกจากกัน จึงแปลว่า อื่น/แยก",
+   use:"ใช้เดี่ยวๆ หรือ 别的 + คำนาม ก็ได้ ถามว่ามีอย่างอื่นอีกไหม: 还要别的吗? / 还有别的吗?",
+   ex:[["别的水果","ผลไม้อื่น"],["别的商场","ห้างอื่น"],["那种衣服有别的颜色的吗？","เสื้อผ้าชนิดนั้นมีสีอื่นไหม?"]]},
+  {part:P1, hz:"再", py:"zài", th:"ไจ้", mean:"อีก", pos:"副",
+   parts:"ภาพไม้สองท่อนซ้อนกัน → ซ้ำ ครั้งที่สอง",
+   use:"再 + กริยา = ทำอีก (เรื่องที่ยังไม่เกิด) ต้องมีกริยาตามหลังเสมอ<br>ไม่พูด 再有 ให้ใช้ 还有 แทน",
+   ex:[["再要一公斤龙眼。","เอาลำไยอีกหนึ่งกิโล"],["我明天再来。","พรุ่งนี้ฉันจะมาอีก"],["我再看一下你的书。","ฉันขอดูหนังสือของคุณอีกหน่อย"],["欢迎再来。","ยินดีต้อนรับที่จะมาอีก"]]},
+  {part:P1, hz:"半", py:"bàn", th:"ปั้น", mean:"ครึ่ง", pos:"数",
+   parts:"八 (แบ่งแยก) + 牛 (วัว) → แบ่งวัวเป็นสองซีก",
+   use:"ไม่มีจำนวนเต็ม: 半 วางหน้าลักษณะนาม → 半公斤<br>มีจำนวนเต็ม: 半 วางหลังลักษณะนาม → 一公斤半<br>一半 = ครึ่งหนึ่ง (ของทั้งหมด) ห้ามพูด 一半公斤",
+   ex:[["一公斤半","หนึ่งกิโลครึ่ง"],["十点半","สิบโมงครึ่ง"]]},
+  {part:P1, hz:"龙眼", trad:"龍眼", py:"lóngyǎn", th:"หลง เหยี่ยน", mean:"ลำไย", pos:"名",
+   parts:"龙 มังกร + 眼 ตา → “ตามังกร” เพราะเมล็ดดำในเนื้อใสเหมือนลูกตา<br>眼 = 目 (ตา) + 艮 (ให้เสียง) ตัวที่มี 目 มักเกี่ยวกับตา เช่น 看 睡",
+   use:"",
+   ex:[["龙眼一公斤三十铢。","ลำไยกิโลละ 30 บาท"]]},
+  {part:P1, hz:"一共", py:"yígòng", th:"อี๋ ก้ง", mean:"รวมทั้งสิ้น, รวมทั้งหมด", pos:"副",
+   parts:"共 เดิมเป็นภาพมือสองข้างประคองของร่วมกัน → ร่วมกัน ทั้งหมด",
+   use:"一共 + จำนวน หรือ 一共 + กริยา + จำนวน (กริยาอยู่ก่อนตัวเลข) 一 อ่านเสียง 2 เพราะ 共 เป็นเสียง 4<br>ต่างจาก 都 dōu / 全 quán (ทั้งหมด) ที่ไม่ได้เน้นการนับรวม",
+   ex:[["一共七十五铢。","รวมทั้งหมด 75 บาท"],["我一共有两个妹妹。","ฉันมีน้องสาวทั้งหมดสองคน"],["我一共借了三本书。","ฉันยืมหนังสือไปรวม 3 เล่ม"]]},
+  {part:P1, hz:"百", py:"bǎi", th:"ป่าย", mean:"ร้อย", pos:"数",
+   parts:"一 + 白 bái (ให้เสียง)",
+   use:"一百 = 100 · 两百/二百 = 200 · 一百一十一 = 111 (一 ท้ายสุดอ่าน yī)",
+   ex:[["给你一百铢。","ให้เธอ 100 บาท"]]},
+  {part:P1, hz:"找", py:"zhǎo", th:"จ่าว", mean:"ทอน (เงิน) ; หา, ตามตัว", pos:"动",
+   parts:"扌(มือ) + 戈 (อาวุธ) → ช่วยจำว่า ใช้มือควานหา",
+   use:"找 + คน + จำนวนเงิน = ทอนเงินให้ใคร<br>找 + คน/ของ = หา, ตามหา",
+   ex:[["找您二十五铢。","ทอนให้คุณ 25 บาท"],["售货员找她二十铢。","คนขายทอนให้เธอ 20 บาท"]]},
+
+  // ---------------- ตอน 2 ----------------
+  {part:P2, hz:"套", py:"tào", th:"เท่า", mean:"ชุด", pos:"量",
+   parts:"大 + 長 (ยาว) → สิ่งที่ครอบคลุม/ครอบทับ จึงหมายถึงชุดที่ครบเซ็ต",
+   use:"ลักษณะนามของของที่มาเป็นเซ็ต 一套衣服 = เสื้อผ้า 1 ชุด (ถ้าตัวเดียวใช้ 件)<br>คำที่เกี่ยวข้อง: 套餐 tàocān อาหารชุด",
+   ex:[["这套衣服怎么样？","เสื้อผ้าชุดนี้เป็นอย่างไร?"],["那套呢？","ชุดนั้นล่ะ?"]]},
+  {part:P2, hz:"衣服", py:"yīfu", th:"อี ฟุ", mean:"เสื้อผ้า", pos:"名",
+   parts:"衣 เป็นภาพคอเสื้อกับชายเสื้อ เวลาอยู่ด้านซ้ายจะเขียนเป็น 衤 → 衬 衫 裙 裤 袜 ล้วนเกี่ยวกับเสื้อผ้า<br>ระวัง: 衤(เสื้อผ้า มี 2 จุด) ≠ 礻(พิธีกรรม มีจุดเดียว)",
+   use:"衣服 เป็นภาษาพูด ส่วน 服装 fúzhuāng เป็นภาษาเขียน/ทางการ<br>一件衣服 = 1 ตัว · 一套衣服 = 1 ชุด",
+   ex:[["买衣服","ซื้อเสื้อผ้า"]]},
+  {part:P2, hz:"样子", trad:"樣子", py:"yàngzi", th:"ย่าง จือ", mean:"แบบ ; ท่าทาง", pos:"名",
+   parts:"样 = 木 (ไม้) + 羊 yáng (ให้เสียง) → เดิมคือแม่พิมพ์ไม้ จึงแปลว่า แบบ<br>子 ต่อท้ายคำนาม อ่านเสียงเบา",
+   use:"ใช้พูดถึงรูปลักษณ์ภายนอกของคนหรือสิ่งของ",
+   ex:[["样子不太好看。","แบบไม่ค่อยสวย"],["那套衣服的样子不错。","แบบของเสื้อผ้าชุดนั้นไม่เลวนะ"]]},
+  {part:P2, hz:"好看", py:"hǎokàn", th:"ห่าว คั่น", mean:"น่าดู, สวย", pos:"形",
+   parts:"好 = 女 (ผู้หญิง) + 子 (ลูก) → ดี<br>看 = 手 (มือ ด้านบน) + 目 (ตา) → ยกมือป้องตามอง",
+   use:"好 + กริยา = …แล้วดี: 好看 (ดูแล้วดี/สวย/สนุก) 好吃 (อร่อย) 好喝 (ดื่มแล้วอร่อย) 好听 (เพราะ) 好玩 (สนุก)<br>ตรงข้ามใช้ 难 nán: 难看 难吃 难喝 难听 หรือ 不好 + กริยา",
+   ex:[["很好看。","สวยมาก"],["这本书很好看。","หนังสือเล่มนี้อ่านสนุก"]]},
+  {part:P2, hz:"喜欢", trad:"喜歡", py:"xǐhuan", th:"สี่ ฮวน", mean:"ชอบ", pos:"动",
+   parts:"喜 = 壴 (กลอง) + 口 (ปาก) → ตีกลองร้องเพลง ดีใจ<br>欢 = 又 + 欠 (คนอ้าปาก) → อ้าปากหัวเราะ",
+   use:"喜欢 + คำนาม หรือ 喜欢 + กริยา ก็ได้",
+   ex:[["我不喜欢那种颜色。","ฉันไม่ชอบสีแบบนั้น"],["丁秀梅喜欢吃山竹和龙眼。","ติงซิ่วเหมยชอบกินมังคุดและลำไย"]]},
+  {part:P2, hz:"颜色", trad:"顏色", py:"yánsè", th:"เหยียน เซ่อ", mean:"สี", pos:"名",
+   parts:"颜 = 彦 (ให้เสียง) + 页 (ศีรษะ/ใบหน้า) → เดิมแปลว่า สีหน้า<br>色 = สี",
+   use:"颜色 คือคำว่า “สี” ทั่วไป ส่วนชื่อสีใช้ ชื่อสี + 色 เช่น 红色 黄色",
+   ex:[["你喜欢什么颜色？","คุณชอบสีอะไร?"],["要什么颜色的？","ต้องการสีอะไร? (的 = ตัวที่เป็นสี…)"]]},
+  {part:P2, hz:"红色", trad:"紅色", py:"hóngsè", th:"หง เซ่อ", mean:"สีแดง", pos:"名",
+   parts:"红 = 纟(ไหม) + 工 (ให้เสียง) → ไหมย้อมแดง",
+   use:"红色的 = อันที่เป็นสีแดง (โครงสร้าง 的 ละคำนามที่รู้กันแล้ว)",
+   ex:[["红色的。","ชุดสีแดง"],["口红 kǒuhóng","ลิปสติก (ปาก + แดง)"]]},
+  {part:P2, hz:"漂亮", py:"piàoliang", th:"เพี่ยว เลียง", mean:"สวย, งาม", pos:"形",
+   parts:"漂 = 氵(น้ำ) + 票 piào (ให้เสียง)<br>亮 = สว่าง",
+   use:"ชมความสวยของคน สิ่งของ เสื้อผ้า ส่วน 好看 กว้างกว่า ใช้กับหนัง/หนังสือว่า “สนุก” ได้ด้วย",
+   ex:[["这套衣服真漂亮！","เสื้อผ้าชุดนี้สวยจังเลย!"]]},
+  {part:P2, hz:"用", py:"yòng", th:"ย่ง", mean:"ใช้", pos:"动",
+   parts:"ภาพถังไม้/ภาชนะที่ใช้งาน",
+   use:"(是) 用 + วัสดุ + 做的 = ทำจาก…<br>用用 = ขอใช้หน่อย",
+   ex:[["这是用名贵的泰丝做的。","ชุดนี้ทำจากผ้าไหมไทยที่มีชื่อเสียง"],["你的汉语书，我用用。","หนังสือภาษาจีนของคุณ ขอใช้หน่อย"]]},
+  {part:P2, hz:"名贵", trad:"名貴", py:"míngguì", th:"หมิง กุ้ย", mean:"มีชื่อเสียงและสูงค่า", pos:"形",
+   parts:"名 = 夕 (ค่ำ) + 口 (ปาก) → กลางคืนมองไม่เห็นต้องร้องเรียกชื่อ<br>贵 มี 贝 (เงิน) → แพง มีค่า",
+   use:"名 (มีชื่อ) + 贵 (แพง) ใช้ขยายของดีราคาแพง: 名贵的 + คำนาม",
+   ex:[["名贵的泰丝","ผ้าไหมไทยที่มีชื่อเสียง"],["名贵的包","กระเป๋าแบรนด์เนม"]]},
+  {part:P2, hz:"泰丝", trad:"泰絲", py:"tàisī", th:"ไท่ ซือ", mean:"ผ้าไหมไทย", pos:"名",
+   parts:"泰 = ไทย (泰国)<br>丝 = ภาพเส้นไหมสองกำ → ไหม",
+   use:"",
+   ex:[["用名贵的泰丝做的","ทำจากผ้าไหมไทยชั้นดี"]]},
+  {part:P2, hz:"做", py:"zuò", th:"จั้ว", mean:"ทำ", pos:"动",
+   parts:"亻(คน) + 故 → คนลงมือทำ",
+   use:"用 A 做的 = ทำจาก A (的 ท้ายประโยคละคำนามไว้ เช่น …做的(衣服))",
+   ex:[["这是用名贵的泰丝做的。","ชุดนี้ตัดจากผ้าไหมไทยที่มีชื่อเสียง"]]},
+  {part:P2, hz:"可以", py:"kěyǐ", th:"เข่อ อี่", mean:"สามารถ, ได้", pos:"助动",
+   parts:"可 = ได้, อนุญาต · 以 = ด้วย/โดย",
+   use:"ขออนุญาต: 我可以 + กริยา + 吗? · ขอร้อง: 你可以 + กริยา + 吗?<br>ตอบว่าได้: 可以 · 行 xíng ใช้ท้ายประโยคก็ได้ เช่น 你帮我，行吗?<br>เสียง 3+3 ติดกัน อ่านจริงเป็น kéyǐ",
+   ex:[["我可以试试吗？","ฉันลองใส่ดูได้ไหม?"],["你可以说慢一点儿吗？","พูดช้าลงหน่อยได้ไหม?"],["可以便宜一点儿吗？","ลดราคาหน่อยได้ไหม?"]]},
+  {part:P2, hz:"试", trad:"試", py:"shì", th:"ซื่อ", mean:"ลอง", pos:"动",
+   parts:"讠(คำพูด) + 式 shì (แบบแผน, ให้เสียง) → ทดลองตามแบบ",
+   use:"试试 = 试一下 = ลองหน่อย (ซ้ำกริยาให้เบาลง)",
+   ex:[["您再试试这套。","คุณลองใส่ชุดนี้อีกหน่อยสิ"],["你试试，合适吗？","เธอลองใส่ดู พอดีไหม?"]]},
+  {part:P2, hz:"一点儿", trad:"一點兒", py:"yìdiǎnr", th:"อี้ เตี่ยร์", mean:"นิดหน่อย", pos:"",
+   parts:"点 = 占 + 灬 (จุดไฟ/จุด) → จุดเล็กๆ<br>儿 = เสียงม้วนลิ้น r ท้ายพยางค์ (สำเนียงเหนือ) n หายไป เหลือ diǎr",
+   use:"คุณศัพท์ + 一点儿 = …ขึ้นอีกหน่อย / …ไปหน่อย: 大一点儿 小一点儿 快一点儿 慢一点儿 便宜一点儿<br>大了一点儿 = ใหญ่ไปหน่อย (了 ตรงนี้ไม่ได้แปลว่า แล้ว)",
+   ex:[["大一点儿。","ใหญ่ไปหน่อย"],["太贵了！便宜点儿，可以吗？","แพงเกินไป! ถูกลงหน่อยได้ไหม?"]]},
+  {part:P2, hz:"正", py:"zhèng", th:"เจิ้ง", mean:"ตรง, พอดี", pos:"副",
+   parts:"一 (เส้นเป้าหมาย) + 止 (เท้า) → เดินตรงไปถึงเป้า",
+   use:"正 + 合适 = พอดีเป๊ะ ไม่มีที่ติ",
+   ex:[["这套不大也不小，正合适。","ชุดนี้ไม่ใหญ่และก็ไม่เล็ก พอดีเลย"]]},
+  {part:P2, hz:"合适", trad:"合適", py:"héshì", th:"เหอ ซื่อ", mean:"พอเหมาะ, พอดี", pos:"形",
+   parts:"合 = ฝาครอบปิดลงบนภาชนะ (口) → เข้ากันพอดี<br>适 = 辶(การเดิน) + 舌 → ไปได้เหมาะ",
+   use:"ใช้กับขนาด/ความเหมาะสม ถามว่า 合适吗?",
+   ex:[["你试试，合适吗？","ลองดูสิ พอดีไหม?"]]},
+  {part:P2, hz:"买", trad:"買", py:"mǎi", th:"หม่าย", mean:"ซื้อ", pos:"动",
+   parts:"ตัวเต็ม 買 = 网 (ตาข่าย) + 贝 (เงิน) → เอาตาข่ายเก็บทรัพย์<br>จำคู่กับ 卖 mài (ขาย เสียง 4) ที่มี 十 เพิ่มด้านบน",
+   use:"买 + ของ · 买东西 = ซื้อของ",
+   ex:[["就买这套吧。","ก็ซื้อชุดนี้เถอะนะ"],["裙子便宜了，快来买。","กระโปรงลดราคาแล้ว รีบมาซื้อเถอะ"]]},
+
+  // ---------------- ตอน 3 ----------------
+  {part:P3, hz:"山竹", py:"shānzhú", th:"ซาน จู๋", mean:"มังคุด", pos:"名",
+   parts:"山 (ภาพยอดเขาสามยอด) + 竹 (ภาพใบไผ่สองกิ่ง) → เป็นชื่อผลไม้ ไม่ได้แปลตามตัว",
+   use:"",
+   ex:[["山竹一公斤三十铢。","มังคุดกิโลละ 30 บาท"]]},
+  {part:P3, hz:"榴莲", trad:"榴蓮", py:"liúlián", th:"หลิว เหลียน", mean:"ทุเรียน", pos:"名",
+   parts:"榴 = 木 (ต้นไม้) + 留 liú (ให้เสียง)<br>莲 = 艹 (พืช) + 连 lián (ให้เสียง)<br>ชื่อทับเสียงมาจาก durian ออกเสียง liú เหมือน 留学生 liúxuéshēng",
+   use:"ผลไม้/ต้นไม้มักมี 木 หรือ 艹 เป็นส่วนประกอบ เช่น 橙 棕 桌 椅",
+   ex:[["一个榴莲","ทุเรียน 1 ลูก (一 อ่าน yí หน้า 个)"]]},
+  {part:P3, hz:"芒果", py:"mángguǒ", th:"หมาง กั่ว", mean:"มะม่วง", pos:"名",
+   parts:"芒 = 艹 (พืช) + 亡 (ให้เสียง) → ทับเสียง mango<br>果 = ภาพผล (田) บนต้นไม้ (木) → ผลไม้",
+   use:"เสียง 2+3 อ่านตามปกติ",
+   ex:[["这种芒果，尝尝。","มะม่วงพันธุ์นี้ ลองชิมหน่อย"]]},
+  {part:P3, hz:"裙子", py:"qúnzi", th:"ฉวิน จือ", mean:"กระโปรง", pos:"名",
+   parts:"衤(เสื้อผ้า) + 君 jūn (ให้เสียง)",
+   use:"ลักษณะนาม 条 · 连衣裙 liányīqún = ชุดเดรส (เสื้อต่อกับกระโปรง)",
+   ex:[["三条裙子","กระโปรง 3 ตัว"],["裙子便宜了。","กระโปรงราคาถูกลงแล้ว"]]},
+  {part:P3, hz:"条", trad:"條", py:"tiáo", th:"เถียว", mean:"ตัว (ใช้กับกางเกง, กระโปรง ฯลฯ)", pos:"量",
+   parts:"夂 + 木 → กิ่งไม้เรียวยาว",
+   use:"ลักษณะนามของของที่ยาวๆ: 裤子 裙子 鱼 (ปลา) 河 (แม่น้ำ) 船 (เรือ) 路 (ถนน)",
+   ex:[["一条裤子","กางเกง 1 ตัว (一 อ่าน yì)"],["一条鱼","ปลา 1 ตัว"]]},
+  {part:P3, hz:"黄色", trad:"黃色", py:"huángsè", th:"หวง เซ่อ", mean:"สีเหลือง", pos:"名",
+   parts:"黄 เดิมเป็นภาพคนห้อยหยกที่เอว ภายหลังใช้แทนสีเหลือง",
+   use:"",
+   ex:[["黄河","แม่น้ำเหลือง (หวงเหอ)"]]},
+  {part:P3, hz:"皮鞋", py:"píxié", th:"ผี เสีย", mean:"รองเท้าหนัง", pos:"名",
+   parts:"皮 = ภาพมือ (又) ถลกหนัง → หนัง<br>鞋 = 革 (หนังสัตว์ฟอกแล้ว) + 圭 (ให้เสียง) → รองเท้า",
+   use:"ลักษณะนาม 双 · รองเท้าทั่วไปคือ 鞋子 xiézi (ถ้ามี 皮 นำหน้าแล้วตัด 子 ทิ้ง)",
+   ex:[["一双皮鞋","รองเท้าหนัง 1 คู่"],["我看看那双皮鞋。","ฉันขอดูรองเท้าหนังคู่นั้น"]]},
+  {part:P3, hz:"双", trad:"雙", py:"shuāng", th:"ซวง", mean:"คู่", pos:"量",
+   parts:"又 + 又 = มือสองข้าง → คู่<br>ตัวเต็ม 雙 = มือ (又) จับนกสองตัว (隹隹)",
+   use:"ลักษณะนามของที่มาเป็นคู่: 一双鞋子 一双袜子 (ถุงเท้า) 一双筷子 (ตะเกียบ)",
+   ex:[["这双不大也不小，正合适。","คู่นี้ไม่ใหญ่ไม่เล็ก พอดีเลย"]]},
+  {part:P3, hz:"棕色", py:"zōngsè", th:"จง เซ่อ", mean:"สีน้ำตาล", pos:"名",
+   parts:"棕 = 木 (ต้นไม้) + 宗 zōng (ให้เสียง) → ต้นปาล์มชนิดหนึ่ง สีของเปลือก/ใยจึงเป็น สีน้ำตาล",
+   use:"",
+   ex:[["是这双棕色的吗？","คู่สีน้ำตาลนี้ใช่ไหม?"]]},
+  {part:P3, hz:"裤子", trad:"褲子", py:"kùzi", th:"คู่ จือ", mean:"กางเกง", pos:"名",
+   parts:"衤(เสื้อผ้า) + 库 kù (ให้เสียง)",
+   use:"ลักษณะนาม 条",
+   ex:[["一条裤子","กางเกง 1 ตัว"]]},
+  {part:P3, hz:"黑色", py:"hēisè", th:"เฮย เซ่อ", mean:"สีดำ", pos:"名",
+   parts:"黑 = ภาพปล่องควัน + 灬 (ไฟ) → เขม่าไฟ สีดำ",
+   use:"",
+   ex:[["我们家的车是黑的。","รถของบ้านเราเป็นสีดำ (黑的 = 黑的车)"],["黑咖啡","กาแฟดำ"]]},
+  {part:P3, hz:"衬衫", trad:"襯衫", py:"chènshān", th:"เชิ่น ซาน", mean:"เสื้อเชิ้ต", pos:"名",
+   parts:"ทั้งสองตัวมี 衤(เสื้อผ้า)<br>衬 = 衤 + 寸 → เสื้อรองใน · 衫 = 衤 + 彡 → เสื้อ",
+   use:"ลักษณะนาม 件",
+   ex:[["一件衬衫","เสื้อเชิ้ต 1 ตัว (一 อ่าน yí)"]]},
+  {part:P3, hz:"件", py:"jiàn", th:"เจี้ยน", mean:"ตัว, ชิ้น", pos:"量",
+   parts:"亻(คน) + 牛 (วัว) → วัวตัวใหญ่แบ่งเป็นชิ้นๆ ได้ จึงแปลว่า ชิ้น",
+   use:"ลักษณะนามของเสื้อท่อนบน และเรื่องราว: 一件衬衫 一件衣服 一件事<br>เดรส 连衣裙 ก็ใช้ 件",
+   ex:[["就要这件白色的衬衫。","เอาเสื้อเชิ้ตสีขาวตัวนี้แหละ"]]},
+  {part:P3, hz:"事儿", trad:"事兒", py:"shìr", th:"ซื่อร์", mean:"ธุระ, เรื่อง", pos:"名",
+   parts:"事 = ภาพมือถือเครื่องมือทำงาน → งาน เรื่อง<br>儿 = เสียงม้วนลิ้นสำเนียงเหนือ ละได้",
+   use:"有事儿 = มีธุระ · 没事儿 = ไม่เป็นไร/ไม่มีปัญหา (ไม่ได้แปลว่าไม่มีธุระ) ถ้าจะบอกว่าไม่มีธุระ ใช้ 没有什么事",
+   ex:[["现在你有事儿吗？","ตอนนี้คุณมีธุระอะไรไหม?"],["我有事儿。","ฉันมีธุระ"]]},
+  {part:P3, hz:"东西", trad:"東西", py:"dōngxi", th:"ตง ซี", mean:"สิ่งของ", pos:"名",
+   parts:"东 ตะวันออก + 西 ตะวันตก → ของ",
+   use:"อ่าน xi เสียงเบา = สิ่งของ · ถ้าอ่าน dōngxī (เสียง 1) = ตะวันออกกับตะวันตก",
+   ex:[["我们一起去耀华力路买东西，好吗？","เราไปซื้อของที่ถนนเยาวราชด้วยกันดีไหม?"],["你买什么东西？","คุณซื้ออะไร?"]]},
+  {part:P3, hz:"了", py:"le", th:"เลอ", mean:"ได้ (คำช่วยบอกกาล) ; แล้ว (คำช่วยทางมาลา)", pos:"助",
+   parts:"ภาพเด็กที่แขนถูกห่อไว้ ใช้เป็นคำช่วยไวยากรณ์",
+   use:"กริยา + 了 = ทำเสร็จแล้ว · ท้ายประโยค = สถานการณ์เปลี่ยนแล้ว<br>太…了 = …เกินไป",
+   ex:[["裙子便宜了。","กระโปรงถูกลงแล้ว"],["太贵了！","แพงเกินไป!"],["妈妈买了三种水果。","แม่ซื้อผลไม้ 3 ชนิด"]]},
+  {part:P3, hz:"快", py:"kuài", th:"ไคว่", mean:"เร็ว", pos:"形",
+   parts:"忄(心 ใจ) + 夬 (ให้เสียง) → ใจโปร่ง เบิกบาน (愉快) แล้วขยายเป็น เร็ว",
+   use:"快 + กริยา = รีบ…: 快吃 快看 快走 快来买<br>快一点儿 = เร็วหน่อย · 快餐 = ฟาสต์ฟู้ด",
+   ex:[["裙子便宜了，快来买。","กระโปรงลดราคาแล้ว รีบมาซื้อเถอะ"]]},
+  {part:P3, hz:"贵", trad:"貴", py:"guì", th:"กุ้ย", mean:"แพง", pos:"形",
+   parts:"ข้างล่างเป็น 贝 (เปลือกหอย = เงิน) → มีค่า แพง",
+   use:"太贵了 = แพงเกินไป · ยังแปลว่า สูงส่ง ใช้ถามแซ่อย่างสุภาพ: 您贵姓? (คุณแซ่อะไรครับ)",
+   ex:[["太贵了，可以便宜一点儿吗？","แพงเกินไป ลดหน่อยได้ไหม?"]]},
+  {part:P3, hz:"水果", py:"shuǐguǒ", th:"สุ่ย กั่ว", mean:"ผลไม้", pos:"名",
+   parts:"水 (ภาพน้ำไหล) + 果 (ผลบนต้นไม้) → ผลไม้ฉ่ำน้ำ",
+   use:"เสียง 3+3 ติดกัน อ่านจริงเป็น shuíguǒ",
+   ex:[["泰国的水果真多，又好吃又便宜。","ผลไม้ไทยเยอะจริงๆ ทั้งอร่อยทั้งถูก"]]},
+  {part:P3, hz:"吃", py:"chī", th:"ชือ", mean:"กิน, รับประทาน", pos:"动",
+   parts:"口 (ปาก) + 乞 (ให้เสียง)",
+   use:"好吃 = อร่อย · 难吃 = ไม่อร่อย",
+   ex:[["好吃吗？","อร่อยไหม?"],["很好吃。","อร่อยมาก"]]},
+  {part:P3, hz:"问", trad:"問", py:"wèn", th:"เวิ่น", mean:"ถาม", pos:"动",
+   parts:"门 (ประตู) + 口 (ปาก) → มาถามที่หน้าประตู",
+   use:"问问 = 问一下 = ถามหน่อย",
+   ex:[["我问问你。","ฉันขอถามคุณหน่อย"]]},
+];
+
+// ============================================================
+// บทที่ 9 เสริม — คำที่อยู่ในบทเรียน/คำอธิบาย/โน้ตในคลาส แต่ไม่อยู่ในตารางคำศัพท์
+// ============================================================
+const PX1 = "เงินจีน";
+const PX2 = "สี";
+const PX3 = "ลักษณะนาม";
+const PX4 = "ช้อปปิ้ง & บทสนทนา";
+
+const vocabL9Extra = [
+  {part:PX1, hz:"元", py:"yuán", th:"เหยวียน", mean:"หยวน (ภาษาเขียน/ทางการ)", pos:"量",
+   parts:"เดิมเป็นภาพคนที่เน้นส่วนหัว → หัว, ต้นกำเนิด",
+   use:"หน่วยเงินจีนคือ 人民币 rénmínbì<br>ทางการ: 元 角 分 · ภาษาพูด: 块 毛 分<br>1元 = 10角 = 100分",
+   ex:[["¥9.85 = 九元八角五分","ภาษาพูด: 九块八毛五"],["¥60.05 = 六十元零五分","มีหลักว่างตรงกลางให้ใส่ 零"]]},
+  {part:PX1, hz:"块", trad:"塊", py:"kuài", th:"ไคว่", mean:"หยวน (ภาษาพูด)", pos:"量",
+   parts:"土 (ดิน) + 夬 (ให้เสียง) → ก้อนดิน ก้อน",
+   use:"ใช้แทน 元 ในการพูด เช่น 一块钱 (一 อ่าน yí)",
+   ex:[["一块钱","เงิน 1 หยวน"]]},
+  {part:PX1, hz:"角", py:"jiǎo", th:"เจี่ยว", mean:"เจี่ยว = 1/10 หยวน (ภาษาเขียน)", pos:"量",
+   parts:"ภาพเขาสัตว์",
+   use:"ภาษาพูดใช้ 毛",
+   ex:[["¥14.10 = 十四元一角","14 หยวน 1 เจี่ยว"]]},
+  {part:PX1, hz:"毛", py:"máo", th:"เหมา", mean:"เหมา = 1/10 หยวน (ภาษาพูด)", pos:"量",
+   parts:"ภาพขนนก/ขนสัตว์ (ตัวเดียวกับใน 红毛丹)",
+   use:"¥0.25 = 两毛五 (ภาษาพูด) = 两角五分 (ภาษาเขียน)",
+   ex:[["¥23.26 = 二十三块两毛六","23 หยวน 2 เหมา 6 เฟิน"]]},
+  {part:PX1, hz:"分", py:"fēn", th:"เฟิน", mean:"เฟิน = 1/100 หยวน", pos:"量",
+   parts:"八 (แยก) + 刀 (มีด) → ใช้มีดแบ่ง",
+   use:"ใช้ทั้งภาษาพูดและภาษาเขียน · ยังแปลว่า นาที ได้ด้วย",
+   ex:[["¥82.60 = 八十二元六角","82 หยวน 6 เจี่ยว"]]},
+  {part:PX1, hz:"斤", py:"jīn", th:"จิน", mean:"ชั่ง (= 500 กรัม)", pos:"量",
+   parts:"เดิมเป็นภาพขวาน",
+   use:"斤 = 半公斤 · 1 公斤 = 2 斤 · กรัม = 克 kè",
+   ex:[["一斤龙眼","ลำไยครึ่งกิโล"]]},
+
+  {part:PX2, hz:"白色", py:"báisè", th:"ป๋าย เซ่อ", mean:"สีขาว", pos:"名",
+   parts:"白 ตีความได้หลายแบบ เช่น ภาพแสงสว่าง → ขาว (เป็นส่วนให้เสียงใน 百 bǎi)",
+   use:"",
+   ex:[["白云","เมฆสีขาว"],["这件白色的衬衫","เสื้อเชิ้ตสีขาวตัวนี้"]]},
+  {part:PX2, hz:"粉红色", py:"fěnhóngsè", th:"เฝิ่น หง เซ่อ", mean:"สีชมพู", pos:"名",
+   parts:"粉 = 米 (ข้าว) + 分 → แป้ง/ผง → แดงที่เจือแป้ง = อ่อนกว่าแดง",
+   use:"พูดสั้นๆ ว่า 粉色 ก็ได้",
+   ex:[]},
+  {part:PX2, hz:"绿色", py:"lǜsè", th:"ลวี่ เซ่อ", mean:"สีเขียว", pos:"名",
+   parts:"绿 = 纟(ไหม) + 录 (ให้เสียง) → ไหมย้อมเขียว",
+   use:"lǜ ต้องมี ü (ห่อปาก)",
+   ex:[["绿茶","ชาเขียว"]]},
+  {part:PX2, hz:"蓝色", py:"lánsè", th:"หลาน เซ่อ", mean:"สีน้ำเงิน, สีฟ้า", pos:"名",
+   parts:"蓝 = 艹 (พืช) + 监 (ให้เสียง) → พืชที่ใช้ทำคราม",
+   use:"深 shēn (เข้ม, ลึก) / 浅 qiǎn (อ่อน, ตื้น) วางหน้าสีได้:<br>深蓝色 = สีน้ำเงินเข้ม · 浅蓝色 = สีฟ้าอ่อน",
+   ex:[]},
+  {part:PX2, hz:"紫色", py:"zǐsè", th:"จื่อ เซ่อ", mean:"สีม่วง", pos:"名",
+   parts:"紫 = 此 (ให้เสียง) + 糸 (ไหม) → ไหมย้อมม่วง",
+   use:"",
+   ex:[]},
+  {part:PX2, hz:"橙色", py:"chéngsè", th:"เฉิง เซ่อ", mean:"สีส้ม", pos:"名",
+   parts:"橙 = 木 (ต้นไม้) + 登 (ให้เสียง) → ต้นส้ม",
+   use:"",
+   ex:[]},
+
+  {part:PX3, hz:"层", trad:"層", py:"céng", th:"เฉิง", mean:"ชั้น", pos:"量",
+   parts:"尸 (หลังคา/บ้าน) + 云 → ชั้นที่ซ้อนกัน",
+   use:"",
+   ex:[["十层楼","ตึก 10 ชั้น"]]},
+  {part:PX3, hz:"本", py:"běn", th:"เปิ่น", mean:"เล่ม", pos:"量",
+   parts:"木 + ขีดที่โคน → ราก ต้นตอ",
+   use:"ใช้กับหนังสือ นิตยสาร",
+   ex:[["一本杂志 zázhì","นิตยสาร 1 เล่ม"],["两种杂志","นิตยสาร 2 ฉบับ (ชนิด)"]]},
+  {part:PX3, hz:"封", py:"fēng", th:"เฟิง", mean:"ฉบับ (จดหมาย)", pos:"量",
+   parts:"圭 + 寸 (มือ) → ปิดผนึก",
+   use:"",
+   ex:[["一封信 xìn","จดหมาย 1 ฉบับ"]]},
+
+  {part:PX4, hz:"便宜", py:"piányi", th:"เผียน อี", mean:"ราคาถูก", pos:"形",
+   parts:"便 = 亻 + 更 → สะดวก (อ่าน biàn) · ในคำนี้อ่าน pián",
+   use:"便宜了 = ถูกลงแล้ว · 便宜一点儿 = ถูกลงหน่อย",
+   ex:[["可以便宜一点儿吗？","ลดราคาหน่อยได้ไหม?"]]},
+  {part:PX4, hz:"不错", trad:"不錯", py:"búcuò", th:"ปู๋ ชั่ว", mean:"ไม่เลว, ดี", pos:"形",
+   parts:"不 ไม่ + 错 ผิด",
+   use:"不 หน้าเสียง 4 อ่านเป็น bú",
+   ex:[["味道不错。","รสชาติไม่เลว"]]},
+  {part:PX4, hz:"怎么样", trad:"怎麼樣", py:"zěnmeyàng", th:"เจิ่น เมอ ย่าง", mean:"เป็นอย่างไร", pos:"代",
+   parts:"怎 = 乍 + 心 · 么 เสียงเบา · 样 แบบ",
+   use:"ถามความเห็น วางท้ายประโยค · 怎么 + กริยา = ทำอย่างไร",
+   ex:[["这套衣服怎么样？","เสื้อผ้าชุดนี้เป็นอย่างไร?"]]},
+  {part:PX4, hz:"太…了", py:"tài…le", th:"ไท่…เลอ", mean:"…เกินไป, …มาก", pos:"",
+   parts:"太 = 大 + จุด → ใหญ่ยิ่งกว่าใหญ่",
+   use:"不太 + คุณศัพท์ = ไม่ค่อย… (不 อ่าน bú)",
+   ex:[["太贵了！","แพงเกินไป!"],["样子不太好看。","แบบไม่ค่อยสวย"]]},
+  {part:PX4, hz:"小姐", py:"xiǎojie", th:"เสี่ยว เจีย", mean:"คุณ (ผู้หญิง), น้อง (เรียกพนักงาน)", pos:"名",
+   parts:"小 เล็ก + 姐 พี่สาว (女 + 且)",
+   use:"ใช้เรียกพนักงานขายผู้หญิง",
+   ex:[["小姐，那种衣服有别的颜色的吗？","น้อง เสื้อชนิดนั้นมีสีอื่นไหม?"]]},
+  {part:PX4, hz:"真", py:"zhēn", th:"เจิน", mean:"จริงๆ, …จังเลย", pos:"副",
+   parts:"",
+   use:"真 + คุณศัพท์ = …จริงๆ",
+   ex:[["这套衣服真漂亮！","เสื้อผ้าชุดนี้สวยจังเลย!"]]},
+  {part:PX4, hz:"给", trad:"給", py:"gěi", th:"เก่ย", mean:"ให้", pos:"动",
+   parts:"纟(ไหม) + 合 (ให้เสียง)",
+   use:"给 + คน + ของ",
+   ex:[["给你一百铢。","ให้เธอ 100 บาท"],["给您这套红色的。","ชุดสีแดงนี้ให้คุณดู"]]},
+  {part:PX4, hz:"欢迎", trad:"歡迎", py:"huānyíng", th:"ฮวน อิ๋ง", mean:"ยินดีต้อนรับ", pos:"动",
+   parts:"欢 ดีใจ + 迎 = 辶(เดิน) + 卬 → ออกไปรับ",
+   use:"",
+   ex:[["再见！欢迎再来。","พบกันใหม่ ยินดีต้อนรับที่คุณจะมาอีก"]]},
+  {part:PX4, hz:"卖", trad:"賣", py:"mài", th:"ม่าย", mean:"ขาย", pos:"动",
+   parts:"十 + 买 → เอาของที่ซื้อมาออกไปขาย",
+   use:"买 mǎi (เสียง 3) = ซื้อ · 卖 mài (เสียง 4) = ขาย ฟังเสียงให้ดี",
+   ex:[["卖东西的人","คนขายของ"],["你一共卖几公斤？","คุณขายไปทั้งหมดกี่กิโล?"]]},
+  {part:PX4, hz:"逛", py:"guàng", th:"กว้าง", mean:"เดินเล่น, เดินชอปปิ้ง", pos:"动",
+   parts:"辶(การเดิน) + 狂 (ให้เสียง)",
+   use:"逛 + สถานที่ ได้เลย เช่น 逛商场 (เดินห้าง) 逛服装市场",
+   ex:[["丁秀梅和李天龙一起逛服装市场。","ติงซิ่วเหมยกับหลี่เทียนหลงเดินชมตลาดเสื้อผ้าด้วยกัน"]]},
+  {part:PX4, hz:"市场", trad:"市場", py:"shìchǎng", th:"ซื่อ ฉ่าง", mean:"ตลาด", pos:"名",
+   parts:"市 ตลาด/เมือง + 场 = 土 + 昜 → ลาน",
+   use:"商场 shāngchǎng = ห้าง · 超级市场 → ย่อเป็น 超市 chāoshì = ซูเปอร์มาร์เก็ต",
+   ex:[["服装市场","ตลาดเสื้อผ้า"]]},
+  {part:PX4, hz:"一起", py:"yìqǐ", th:"อี้ ฉี่", mean:"ด้วยกัน", pos:"副",
+   parts:"起 = 走 (เดิน) + 己 → ลุกขึ้นเดิน",
+   use:"A 跟 gēn B 一起 + กริยา = A ทำ…กับ B ด้วยกัน (跟 = กับ ใช้ 和 hé แทนได้)",
+   ex:[["我们一起去买东西，好吗？","เราไปซื้อของด้วยกันดีไหม?"]]},
+];
+
+const vocabByChapter = [
+  { chapter: "บทที่ 9", data: vocabL9 },
+  { chapter: "บทที่ 9 เสริม", data: vocabL9Extra },
+];
+
+
 /* ================= STATE ================= */
-let currentCards = allCards.slice();
+const vocabCards = [];
+vocabByChapter.forEach(({chapter,data})=>data.forEach(v=>vocabCards.push({type:"vocab", chapter, ...v})));
+
+const pinyinCats = [...new Set(pinyinCards.map(c=>c.cat))];
+const vocabChapters = vocabByChapter.map(v=>v.chapter);
+
+let group = "vocab";
+let sub = "ทั้งหมด";
+let currentCards = [];
 let idx = 0;
-let showingMatrix = false;
+let reverse = false;
 
-/* ================= DOM ================= */
-const categorySelect = document.getElementById('categorySelect');
-const viewToggleBtn = document.getElementById('viewToggleBtn');
-const flashcardView = document.getElementById('flashcardView');
-const matrixView = document.getElementById('matrixView');
+const $ = id => document.getElementById(id);
+const cardEl = $('card');
 
-const cardEl = document.getElementById('card');
-const frontText = document.getElementById('frontText');
-const backCn = document.getElementById('backCn');
-const backThSound = document.getElementById('backThSound');
-const backDesc = document.getElementById('backDesc');
-const catTagFront = document.getElementById('catTagFront');
-const catTagBack = document.getElementById('catTagBack');
-const counterText = document.getElementById('counterText');
-const progressBar = document.getElementById('progressBar');
+function pool(){
+  if(group === "pinyin") return sub==="ทั้งหมด" ? pinyinCards.slice() : pinyinCards.filter(c=>c.cat===sub);
+  return sub==="ทั้งหมด" ? vocabCards.slice() : vocabCards.filter(c=>c.chapter===sub);
+}
 
-// build category dropdown
-const categories = ["ทั้งหมด", ...new Set(allCards.map(c=>c.cat))];
-categorySelect.innerHTML = categories.map(c=>`<option value="${c}">${c}</option>`).join('');
+function renderChips(){
+  const list = ["ทั้งหมด", ...(group==="pinyin" ? pinyinCats : vocabChapters)];
+  $('chips').innerHTML = list.map(name=>{
+    let label = name;
+    const m = name.match(/^([^\sก-๙]+)\s(.+)$/);
+    if(group==="pinyin" && m) label = `<span class="cn">${m[1]}</span>${m[2]}`;
+    return `<button class="chip${name===sub?' active':''}" data-sub="${name}">${label}</button>`;
+  }).join('');
+  $('chips').querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{ sub=b.dataset.sub; load(); }));
+  $('reverseBtn').classList.toggle('hidden', group!=="vocab");
+  $('matrixBtn').classList.toggle('hidden', group!=="pinyin");
+  $('reverseBtn').style.gridColumn = "1 / 4";
+  if(group==="pinyin") $('matrixBtn').style.gridColumn = "1 / 4";
+}
 
-function setCategory(cat){
-  currentCards = (cat === "ทั้งหมด") ? allCards.slice() : allCards.filter(c=>c.cat===cat);
-  idx = 0;
-  render();
+function load(){
+  currentCards = pool(); idx = 0;
+  renderChips(); render();
+}
+
+function frontSize(t){
+  const n = [...t].length;
+  if(n<=2) return 88; if(n<=3) return 72; if(n<=4) return 60; return 46;
+}
+
+function vocabBack(c){
+  const sec = (title, body) => body ? `<div class="sec"><h4>${title}</h4>${body}</div>` : "";
+  const ex = (c.ex||[]).map(([z,t])=>`<div class="ex"><span class="cn">${z}</span><span class="t">${t}</span></div>`).join('');
+  return `
+    <div class="v-top">
+      <div class="v-hz">${c.hz}${c.trad?`<span class="v-trad">繁 ${c.trad}</span>`:""}</div>
+      <div class="v-py">${c.py}</div>
+      <div class="v-th">${c.th}</div>
+      <div class="v-mean">${c.pos?`<span class="pos">${c.pos}</span>`:""}${c.mean}</div>
+    </div>
+    ${sec("ส่วนประกอบตัวอักษร", c.parts)}
+    ${sec("วิธีใช้", c.use)}
+    ${sec("ตัวอย่าง", ex)}`;
 }
 
 function render(){
-  if(currentCards.length===0){ return; }
-  const c = currentCards[idx];
   cardEl.classList.remove('flipped');
-  frontText.textContent = c.front;
-  backCn.textContent = c.cn || "";
-  backThSound.textContent = c.th || "";
-  backDesc.textContent = c.desc || "";
-  catTagFront.textContent = c.cat;
-  catTagBack.textContent = c.cat;
-  counterText.textContent = `${idx+1} / ${currentCards.length}`;
-  progressBar.style.width = `${((idx+1)/currentCards.length)*100}%`;
+  const n = currentCards.length;
+  if(!n){ $('frontText').textContent="ยังไม่มีการ์ดในหมวดนี้"; $('backBody').innerHTML=""; return; }
+  const c = currentCards[idx];
+  const f = $('frontText');
+  cardEl.classList.toggle('short', c.type==="py");
+
+  if(c.type==="vocab"){
+    const tag = `${c.chapter} · ${c.part}`;
+    $('catFront').textContent = tag; $('catBack').textContent = tag;
+    if(reverse){
+      f.className = "front-text"; f.style.fontSize = "30px"; f.style.color = "var(--ink)";
+      f.innerHTML = `${c.mean}${c.pos?`<div style="font-size:14px;color:var(--muted);margin-top:8px">${c.pos}</div>`:""}`;
+    } else {
+      f.className = "front-text hz"; f.style.color = ""; f.style.fontSize = frontSize(c.hz)+"px";
+      f.textContent = c.hz;
+    }
+    $('backBody').className = "scroll";
+    $('backBody').innerHTML = vocabBack(c);
+  } else {
+    $('catFront').textContent = c.cat; $('catBack').textContent = c.cat;
+    f.className = "front-text"; f.style.color=""; f.style.fontSize = ([...c.front].length>6?"34px":"56px");
+    f.textContent = c.front;
+    $('backBody').className = "scroll";
+    $('backBody').innerHTML = `<div style="text-align:center"><div class="b-cn">${c.cn||""}</div><div class="b-th">${c.th||""}</div><div class="b-desc">${c.desc||""}</div></div>`;
+  }
+  $('backBody').scrollTop = 0;
+  $('counterText').textContent = `${idx+1} / ${n}`;
+  $('progressBar').style.width = `${((idx+1)/n)*100}%`;
 }
 
 function flipCard(){ cardEl.classList.toggle('flipped'); }
-function nextCard(){ idx = (idx+1) % currentCards.length; render(); }
-function prevCard(){ idx = (idx-1+currentCards.length) % currentCards.length; render(); }
+function nextCard(){ if(!currentCards.length) return; idx=(idx+1)%currentCards.length; render(); }
+function prevCard(){ if(!currentCards.length) return; idx=(idx-1+currentCards.length)%currentCards.length; render(); }
 function shuffleCards(){
-  for(let i=currentCards.length-1;i>0;i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [currentCards[i],currentCards[j]] = [currentCards[j],currentCards[i]];
-  }
+  for(let i=currentCards.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [currentCards[i],currentCards[j]]=[currentCards[j],currentCards[i]]; }
   idx=0; render();
 }
-function resetOrder(){
-  const cat = categorySelect.value;
-  setCategory(cat);
-}
 
-/* TTS */
+/* ================= TTS ================= */
 let zhVoice = null;
 function loadVoices(){
-  const voices = speechSynthesis.getVoices();
-  zhVoice = voices.find(v=>v.lang === 'zh-CN') || voices.find(v=>v.lang && v.lang.startsWith('zh'));
+  const v = speechSynthesis.getVoices();
+  zhVoice = v.find(x=>x.lang==='zh-CN') || v.find(x=>x.lang && x.lang.replace('_','-').startsWith('zh-CN')) || v.find(x=>x.lang && x.lang.startsWith('zh')) || null;
 }
-loadVoices();
-if('onvoiceschanged' in speechSynthesis){ speechSynthesis.onvoiceschanged = loadVoices; }
-
-function speakWord(){
-  const c = currentCards[idx];
-  const text = c.viet || c.front;
-  if(!text){ alert('การ์ดนี้ไม่มีเสียงให้ฟัง'); return; }
-  const utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'zh-CN';
-  if(zhVoice){ utter.voice = zhVoice; }
-  else {
-    alert('ไม่พบเสียงพากย์ภาษาจีนในอุปกรณ์นี้ อาจฟังเป็นเสียงภาษาอื่นแทน');
-  }
-  speechSynthesis.cancel();
-  speechSynthesis.speak(utter);
+if('speechSynthesis' in window){ loadVoices(); speechSynthesis.onvoiceschanged = loadVoices; }
+function speak(text){
+  if(!text || !('speechSynthesis' in window)) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang='zh-CN'; u.rate=0.8; if(zhVoice) u.voice=zhVoice;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
+function speakCurrent(){
+  const c = currentCards[idx]; if(!c) return;
+  if(c.type==="vocab") speak(c.hz.replace(/…/g,''));
+  else if(c.speak) speak(c.speak);
 }
 
-/* Matrix rendering: one complete table, matching the official reference chart */
+/* ================= MATRIX ================= */
 function renderMatrix(){
-  const container = document.getElementById('matrixContainer');
-  let html = `<table class="pinyin-matrix"><thead><tr><th></th>`;
-  matrixCols.forEach(c=> html += `<th>${c}</th>`);
-  html += `</tr></thead><tbody>`;
+  let html = `<table class="pinyin-matrix"><thead><tr><th></th>${matrixCols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
   matrixRows.forEach(r=>{
-    html += `<tr><th>${r}</th>`;
-    const vals = matrixData[r] || [];
-    matrixCols.forEach((c,i)=>{
-      const v = vals[i] || "";
-      if(v===""){
-        html += `<td class="empty">—</td>`;
-      } else {
-        html += `<td class="valid">${v}</td>`;
-      }
-    });
-    html += `</tr>`;
+    html += `<tr><th>${r}</th>` + (matrixData[r]||[]).map(v=> v?`<td class="valid" data-s="${v}">${v}</td>`:`<td class="empty">—</td>`).join('') + `</tr>`;
   });
-  html += `</tbody></table>`;
-  container.innerHTML = html;
+  $('matrixContainer').innerHTML = html + `</tbody></table>`;
+  $('matrixContainer').querySelectorAll('td.valid').forEach(td=>td.addEventListener('click',()=>speak(td.dataset.s)));
+}
+function showMatrix(on){
+  $('flashcardView').classList.toggle('hidden', on);
+  $('matrixView').classList.toggle('hidden', !on);
+  if(on) renderMatrix();
 }
 
-/* View toggle */
-viewToggleBtn.addEventListener('click', ()=>{
-  showingMatrix = !showingMatrix;
-  if(showingMatrix){
-    flashcardView.style.display = 'none';
-    matrixView.style.display = 'block';
-    viewToggleBtn.textContent = 'กลับไปหน้าการ์ด';
-    viewToggleBtn.classList.add('active');
-    renderMatrix();
-  } else {
-    flashcardView.style.display = 'flex';
-    matrixView.style.display = 'none';
-    viewToggleBtn.textContent = 'ตารางประสมเสียง';
-    viewToggleBtn.classList.remove('active');
-  }
+/* ================= EVENTS ================= */
+$('groupSelect').addEventListener('change', e=>{ group=e.target.value; sub="ทั้งหมด"; showMatrix(false); load(); });
+cardEl.addEventListener('click', flipCard);
+$('flipBtn').addEventListener('click', flipCard);
+$('nextBtn').addEventListener('click', nextCard);
+$('prevBtn').addEventListener('click', prevCard);
+$('shuffleBtn').addEventListener('click', shuffleCards);
+$('resetBtn').addEventListener('click', load);
+$('listenBtn').addEventListener('click', speakCurrent);
+$('reverseBtn').addEventListener('click', ()=>{ reverse=!reverse; $('reverseBtn').classList.toggle('on', reverse); render(); });
+$('matrixBtn').addEventListener('click', ()=>showMatrix(true));
+$('matrixBackBtn').addEventListener('click', ()=>showMatrix(false));
+document.addEventListener('keydown', e=>{
+  if(e.target.tagName==='SELECT') return;
+  if(e.key==='ArrowRight') nextCard();
+  else if(e.key==='ArrowLeft') prevCard();
+  else if(e.key===' '||e.key==='Enter'){ e.preventDefault(); flipCard(); }
+  else if(e.key==='s') speakCurrent();
 });
 
-/* Events */
-categorySelect.addEventListener('change', e=> setCategory(e.target.value));
-cardEl.addEventListener('click', flipCard);
-document.getElementById('flipBtn').addEventListener('click', flipCard);
-document.getElementById('nextBtn').addEventListener('click', nextCard);
-document.getElementById('prevBtn').addEventListener('click', prevCard);
-document.getElementById('shuffleBtn').addEventListener('click', shuffleCards);
-document.getElementById('resetBtn').addEventListener('click', resetOrder);
-document.getElementById('listenBtn').addEventListener('click', speakWord);
-
-/* init */
-setCategory("ทั้งหมด");
+load();
 </script>
 </body>
 </html>
