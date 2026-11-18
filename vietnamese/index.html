@@ -1645,6 +1645,9 @@ let currentCards = [...allCards];
 let idx = 0;
 let flipped = false;
 let currentChapter = "ทั้งหมด";
+let multiSelectMode = false;
+let selectedChapters = new Set();
+let lastSelectedChapters = null;
 let dictationMode = false;
 
 function toggleDictationMode(){
@@ -1689,23 +1692,87 @@ function renderChapterFilter(){
   });
 
   let html = `<div style="display:flex;flex-wrap:wrap;gap:6px;">
-    <button class="chip${currentChapter==="ทั้งหมด"?' active':''}" onclick="filterByChapter('ทั้งหมด')">ทั้งหมด</button>
+    <button class="chip" style="font-weight:700;${multiSelectMode?'background:var(--jade);color:#fff;border-color:var(--jade);':''}" onclick="toggleMultiSelectMode()">
+      ${multiSelectMode ? '✕ ยกเลิกเลือกหลายบท' : '☑ เลือกหลายบทมารวมกัน'}
+    </button>
   </div>`;
 
-  Object.keys(groups).forEach(g=>{
-    html += `<div style="font-size:11px;color:#9b9384;font-weight:600;margin-top:2px;">${g}</div>`;
-    html += `<div style="display:flex;flex-wrap:wrap;gap:6px;">`;
-    html += groups[g].map(ch=>
-      `<button class="chip${ch===currentChapter?' active':''}" onclick="filterByChapter('${ch}')">${ch}</button>`
-    ).join('');
-    html += `</div>`;
-  });
+  if(!multiSelectMode){
+    html += `<div style="display:flex;flex-wrap:wrap;gap:6px;">
+      <button class="chip${currentChapter==="ทั้งหมด"?' active':''}" onclick="filterByChapter('ทั้งหมด')">ทั้งหมด</button>
+    </div>`;
+
+    Object.keys(groups).forEach(g=>{
+      html += `<div style="font-size:11px;color:#9b9384;font-weight:600;margin-top:2px;">${g}</div>`;
+      html += `<div style="display:flex;flex-wrap:wrap;gap:6px;">`;
+      html += groups[g].map(ch=>
+        `<button class="chip${ch===currentChapter?' active':''}" onclick="filterByChapter('${ch}')">${ch}</button>`
+      ).join('');
+      html += `</div>`;
+    });
+  } else {
+    html += `<div style="display:flex;flex-wrap:wrap;gap:6px;">
+      <button class="chip" onclick="selectAllChapters()">เลือก/ยกเลิกทั้งหมด</button>
+    </div>`;
+
+    Object.keys(groups).forEach(g=>{
+      html += `<div style="font-size:11px;color:#9b9384;font-weight:600;margin-top:2px;">${g}</div>`;
+      html += `<div style="display:flex;flex-wrap:wrap;gap:6px;">`;
+      html += groups[g].map(ch=>
+        `<button class="chip${selectedChapters.has(ch)?' active':''}" onclick="toggleChapterSelect('${ch}')">${selectedChapters.has(ch)?'✓ ':''}${ch}</button>`
+      ).join('');
+      html += `</div>`;
+    });
+
+    html += `<button class="chip" style="margin-top:4px;background:var(--lacquer);color:#fff;border-color:var(--lacquer);font-weight:700;${selectedChapters.size===0?'opacity:0.5;pointer-events:none;':''}" onclick="applySelectedChapters()">
+      รวมการ์ด (${selectedChapters.size} บทที่เลือก)
+    </button>`;
+  }
 
   container.innerHTML = html;
 }
 
+function toggleMultiSelectMode(){
+  multiSelectMode = !multiSelectMode;
+  selectedChapters.clear();
+  renderChapterFilter();
+}
+
+function toggleChapterSelect(chapter){
+  if(selectedChapters.has(chapter)){
+    selectedChapters.delete(chapter);
+  } else {
+    selectedChapters.add(chapter);
+  }
+  renderChapterFilter();
+}
+
+function selectAllChapters(){
+  const allChapters = vocabByChapter.map(v=>v.chapter);
+  const allSelected = allChapters.every(ch=>selectedChapters.has(ch));
+  if(allSelected){
+    selectedChapters.clear();
+  } else {
+    allChapters.forEach(ch=>selectedChapters.add(ch));
+  }
+  renderChapterFilter();
+}
+
+function applySelectedChapters(){
+  if(selectedChapters.size===0) return;
+  const vocabCards = allCards.filter(c=>c.cat==="คำศัพท์");
+  lastSelectedChapters = new Set(selectedChapters);
+  currentCards = vocabCards.filter(c=>lastSelectedChapters.has(c.chapter));
+  currentChapter = `กำหนดเอง (${lastSelectedChapters.size} บท)`;
+  idx = 0; flipped = false;
+  multiSelectMode = false;
+  renderChapterFilter();
+  render();
+}
+
 function filterByChapter(chapter){
   currentChapter = chapter;
+  lastSelectedChapters = null;
   const vocabCards = allCards.filter(c=>c.cat==="คำศัพท์");
   currentCards = chapter === "ทั้งหมด" ? vocabCards : vocabCards.filter(c=>c.chapter===chapter);
   idx = 0; flipped = false;
@@ -1913,6 +1980,13 @@ function shuffleCards(){
 function resetOrder(){
   const f = filterSelect.value;
   if(f === "คำศัพท์"){
+    if(lastSelectedChapters){
+      const vocabCards = allCards.filter(c=>c.cat==="คำศัพท์");
+      currentCards = vocabCards.filter(c=>lastSelectedChapters.has(c.chapter));
+      idx = 0; flipped = false;
+      render();
+      return;
+    }
     filterByChapter(currentChapter);
     return;
   }
@@ -1921,8 +1995,10 @@ function resetOrder(){
   render();
 }
 
-renderChapterFilter();
-render();
+// renderChapterFilter();
+// render();
+filterSelect.value = "คำศัพท์";
+filterByChapter('ทั้งหมด');
 // ---------------------------------------------------------------------------
 // ทำโดย นีโม่ ถ้าเขียนตรงไหนผิดก็บอกได้
 // ---------------------------------------------------------------------------
